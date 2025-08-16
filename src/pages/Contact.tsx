@@ -22,60 +22,58 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please fill in all required fields'
-      });
-      return;
-    }
+  e.preventDefault();
 
-    setIsLoading(true);
-    setSubmitStatus({ type: null, message: '' });
-    
-    try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    setSubmitStatus({
+      type: 'error',
+      message: 'Please fill in all required fields'
+    });
+    return;
+  }
+
+  setIsLoading(true);
+  setSubmitStatus({ type: null, message: '' });
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_BACKEND_URL}/contact`,
+      {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSubmitStatus({
-          type: 'success',
-          message: data.message
-        });
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          subject: '',
-          message: '',
-          inquiryType: 'general'
-        });
-      } else {
-        setSubmitStatus({
-          type: 'error',
-          message: data.message || 'Failed to send message'
-        });
       }
-    } catch (error) {
-      console.error('Contact form error:', error);
+    );
+
+    const data = await response.json();
+
+    if (data.success) {
+      setSubmitStatus({ type: 'success', message: data.message });
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        subject: '',
+        message: '',
+        inquiryType: 'general'
+      });
+    } else {
       setSubmitStatus({
         type: 'error',
-        message: 'Unable to connect to server. Please make sure the backend is running on port 5000.'
+        message: data.message || 'Failed to send message'
       });
-    } finally {
-      setIsLoading(false);
     }
-  };
+  } catch (error) {
+    console.error('Contact form error:', error);
+    setSubmitStatus({
+      type: 'error',
+      message: 'Unable to connect to server. Please try again later.'
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   const contactInfo = [
     {

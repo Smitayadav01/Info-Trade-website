@@ -43,30 +43,39 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setIsLoading(true);
-    
-    // Simulate API call and login
-    setTimeout(() => {
-      setIsLoading(false);
-      
-      // Create user object from email
-      const userName = formData.email.split('@')[0];
-      const user = {
-        id: '1',
-        name: userName.charAt(0).toUpperCase() + userName.slice(1),
-        email: formData.email,
-        firstName: userName.charAt(0).toUpperCase() + userName.slice(1),
-        lastName: 'User'
-      };
-      
-      login(user);
-      navigate('/');
-    }, 1500);
-  };
+  e.preventDefault();
+
+  if (!validateForm()) return;
+
+  setIsLoading(true);
+  setErrors({});
+
+  try {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.success) {
+      // Save user + token
+      login(data.user);
+      // You could also save token in localStorage if needed:
+      // localStorage.setItem("token", data.token);
+
+      navigate("/");
+    } else {
+      setErrors({ general: data.message || "Login failed" });
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    setErrors({ general: "Unable to connect to server. Please try again later." });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
