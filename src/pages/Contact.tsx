@@ -81,13 +81,13 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email Us",
-      details: "hello@algotradepro.in",
+      details: "tejtraders@gmail.com",
       description: "Send us an email anytime"
     },
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Call Us",
-      details: "+91 98765 43210",
+      details: "+91-xxx",
       description: "Mon-Fri from 9am to 6pm"
     },
     {
@@ -323,7 +323,7 @@ const Contact = () => {
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-blue-600 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">+91 98765 43210</p>
+                      <p className="font-medium">+91-xxx</p>
                       <p className="text-sm text-gray-600">Mon-Fri, 9:00 AM - 6:00 PM IST (Market Hours)</p>
                     </div>
                   </div>
@@ -331,7 +331,7 @@ const Contact = () => {
                   <div className="flex items-center space-x-3">
                     <Mail className="h-5 w-5 text-blue-600 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">hello@algotradepro.in</p>
+                      <p className="font-medium">tejtraders99@gmail.com</p>
                       <p className="text-sm text-gray-600">We typically respond within 2-4 hours</p>
                     </div>
                   </div>
@@ -346,7 +346,7 @@ const Contact = () => {
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
-                    95% success rate algorithms
+                    85% success rate algorithms
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
