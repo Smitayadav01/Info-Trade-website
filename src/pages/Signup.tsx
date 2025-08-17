@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Building, Zap, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+const API_BASE = import.meta.env.VITE_BACKEND_URL || "https://algotrade-pro.onrender.com";
+
 const Signup = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -19,6 +21,7 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [apiError, setApiError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -26,7 +29,6 @@ const Signup = () => {
       ...prev, 
       [name]: type === 'checkbox' ? checked : value 
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -35,20 +37,13 @@ const Signup = () => {
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
     
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
-    }
-    
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
-    }
-    
+    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 8) {
@@ -56,13 +51,11 @@ const Signup = () => {
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
       newErrors.password = 'Password must contain uppercase, lowercase, and numbers';
     }
-    
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-    
     if (!formData.acceptTerms) {
       newErrors.acceptTerms = 'You must accept the terms and conditions';
     }
@@ -73,27 +66,46 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!validateForm()) return;
     
     setIsLoading(true);
-    
-    // Simulate API call and signup
-    setTimeout(() => {
-      setIsLoading(false);
-      
-      // Create user object
+    setApiError(null);
+
+    try {
+      const response = await fetch(`${API_BASE}/api/register`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          company: formData.company,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Signup failed");
+      }
+
+      // Successful signup → log in user
       const user = {
-        id: '1',
+        id: data.user?.id || "1",
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         firstName: formData.firstName,
-        lastName: formData.lastName
+        lastName: formData.lastName,
       };
-      
+
       login(user);
-      navigate('/');
-    }, 2000);
+      navigate("/");
+    } catch (err: any) {
+      setApiError(err.message || "Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const benefits = [
@@ -107,6 +119,7 @@ const Signup = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          
           {/* Left Side - Benefits */}
           <div className="lg:py-12">
             <div className="text-center lg:text-left mb-8">
@@ -114,13 +127,12 @@ const Signup = () => {
                 <Zap className="h-8 w-8 text-white" />
               </div>
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Start Your Journey with QuickAlpha
+                Start Your Journey with AlgoTrade Pro
               </h1>
               <p className="text-xl text-gray-600">
-                Join thousands of businesses accelerating their growth with our powerful platform.
+                Join thousands of businesses accelerating their growth with our platform.
               </p>
             </div>
-
             <div className="space-y-4">
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center space-x-3">
@@ -131,14 +143,6 @@ const Signup = () => {
                 </div>
               ))}
             </div>
-
-            <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100">
-              <h3 className="font-semibold text-gray-900 mb-2">Get Started in Minutes</h3>
-              <p className="text-gray-600 text-sm">
-                Create your account and start exploring our platform immediately. 
-                No setup fees, no hidden costs, no commitments.
-              </p>
-            </div>
           </div>
 
           {/* Right Side - Signup Form */}
@@ -148,8 +152,14 @@ const Signup = () => {
               <p className="text-gray-600">Get started with your free trial today</p>
             </div>
 
+            {apiError && (
+              <div className="mb-4 text-red-600 text-sm text-center">{apiError}</div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* First + Last Name */}
               <div className="grid grid-cols-2 gap-4">
+                {/* First Name */}
                 <div>
                   <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
                     First Name
@@ -172,7 +182,7 @@ const Signup = () => {
                     <p className="mt-1 text-xs text-red-600">{errors.firstName}</p>
                   )}
                 </div>
-
+                {/* Last Name */}
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
                     Last Name
@@ -197,6 +207,7 @@ const Signup = () => {
                 </div>
               </div>
 
+              {/* Email */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
@@ -220,6 +231,7 @@ const Signup = () => {
                 )}
               </div>
 
+              {/* Company (optional) */}
               <div>
                 <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
                   Company Name <span className="text-gray-400">(optional)</span>
@@ -238,6 +250,7 @@ const Signup = () => {
                 </div>
               </div>
 
+              {/* Password */}
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                   Password
@@ -268,6 +281,7 @@ const Signup = () => {
                 )}
               </div>
 
+              {/* Confirm Password */}
               <div>
                 <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
                   Confirm Password
@@ -298,6 +312,7 @@ const Signup = () => {
                 )}
               </div>
 
+              {/* Terms */}
               <div className="flex items-start space-x-2">
                 <input
                   id="acceptTerms"
@@ -322,6 +337,7 @@ const Signup = () => {
                 <p className="text-xs text-red-600">{errors.acceptTerms}</p>
               )}
 
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={isLoading}
