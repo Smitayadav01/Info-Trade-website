@@ -36,6 +36,26 @@ const Notifications = () => {
       amount: '-₹1,200'
     },
     {
+      id: 4,
+      type: 'system',
+      icon: <CheckCircle className="h-5 w-5" />,
+      title: 'Strategy Optimization Complete',
+      message: 'Your Iron Condor strategy has been optimized for better performance.',
+      time: '2 hours ago',
+      status: 'success',
+      amount: null
+    },
+    {
+      id: 5,
+      type: 'market',
+      icon: <BarChart3 className="h-5 w-5" />,
+      title: 'Market Volatility Alert',
+      message: 'VIX increased by 15%. High volatility detected in NIFTY options.',
+      time: '3 hours ago',
+      status: 'info',
+      amount: null
+    },
+    {
       id: 6,
       type: 'trade',
       icon: <DollarSign className="h-5 w-5" />,
@@ -45,7 +65,16 @@ const Notifications = () => {
       status: 'success',
       amount: '+₹10,000'
     },
-    
+    {
+      id: 7,
+      type: 'system',
+      icon: <Settings className="h-5 w-5" />,
+      title: 'Algorithm Update',
+      message: 'New machine learning model deployed. Expected 3% improvement in accuracy.',
+      time: '1 day ago',
+      status: 'info',
+      amount: null
+    },
     {
       id: 8,
       type: 'alert',
@@ -81,6 +110,8 @@ const Notifications = () => {
     { key: 'all', label: 'All Notifications', count: notifications.length },
     { key: 'trade', label: 'Trades', count: notifications.filter(n => n.type === 'trade').length },
     { key: 'alert', label: 'Alerts', count: notifications.filter(n => n.type === 'alert').length },
+    { key: 'system', label: 'System', count: notifications.filter(n => n.type === 'system').length },
+    { key: 'market', label: 'Market', count: notifications.filter(n => n.type === 'market').length }
   ];
 
   const stats = [
@@ -112,7 +143,7 @@ const Notifications = () => {
         </div>
       </section>
 
-      {/* Stats Cards
+      {/* Stats Cards */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -133,7 +164,7 @@ const Notifications = () => {
             ))}
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Main Content */}
       <section className="pb-12">

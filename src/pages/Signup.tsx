@@ -92,7 +92,7 @@ const Signup = () => {
       };
       
       // Send signup notification email
-      fetch('http://localhost:5000/api/signup-notification', {
+      fetch('https://algotrade-pro.onrender.com/api/signup-notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

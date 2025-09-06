@@ -68,7 +68,7 @@ const Login = () => {
       };
 
       // Send login notification email
-      fetch('http://localhost:5000/api/login-notification', {
+      fetch('https://algotrade-pro.onrender.com/api/login-notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

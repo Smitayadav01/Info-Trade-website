@@ -2,6 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
+import { FaTelegramPlane } from "react-icons/fa";
+
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -20,7 +22,7 @@ const Footer = () => {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/subscribe', {
+      const response = await fetch('https://algotrade-pro.onrender.com/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,8 +48,9 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: <Twitter className="h-5 w-5" />, href: "#", name: "Twitter" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "#", name: "LinkedIn" },
-    { icon: <Github className="h-5 w-5" />, href: "#", name: "GitHub" },
+    // { icon: <Linkedin className="h-5 w-5" />, href: "#", name: "LinkedIn" },
+    { icon: <FaTelegramPlane className="h-5 w-5" />, href: "#", name: "Telegram" },
+    // { icon: <Github className="h-5 w-5" />, href: "#", name: "GitHub" },
     { icon: <Instagram className="h-5 w-5" />, href: "#", name: "Instagram" }
   ];
 
@@ -103,7 +106,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">hello@algotradepro.in</span>
+                <span className="text-gray-400 text-sm">tejtraders99@gmail.com</span>
               </div>
             </div>
 

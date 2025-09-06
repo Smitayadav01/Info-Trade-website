@@ -22,58 +22,60 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-
-  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-    setSubmitStatus({
-      type: 'error',
-      message: 'Please fill in all required fields'
-    });
-    return;
-  }
-
-  setIsLoading(true);
-  setSubmitStatus({ type: null, message: '' });
-
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      }
-    );
-
-    const data = await response.json();
-
-    if (data.success) {
-      setSubmitStatus({ type: 'success', message: data.message });
-      setFormData({
-        name: '',
-        email: '',
-        company: '',
-        subject: '',
-        message: '',
-        inquiryType: 'general'
-      });
-    } else {
+    e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setSubmitStatus({
         type: 'error',
-        message: data.message || 'Failed to send message'
+        message: 'Please fill in all required fields'
       });
+      return;
     }
-  } catch (error) {
-    console.error('Contact form error:', error);
-    setSubmitStatus({
-      type: 'error',
-      message: 'Unable to connect to server. Please try again later.'
-    });
-  } finally {
-    setIsLoading(false);
-  }
-};
 
+    setIsLoading(true);
+    setSubmitStatus({ type: null, message: '' });
+    
+    try {
+      const response = await fetch('https://algotrade-pro.onrender.com/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({
+          type: 'success',
+          message: data.message
+        });
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          subject: '',
+          message: '',
+          inquiryType: 'general'
+        });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.message || 'Failed to send message'
+        });
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'Unable to connect to server. Please make sure the backend is running on port 5000.'
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const contactInfo = [
     {
@@ -85,7 +87,7 @@ const Contact = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Call Us",
-      details: "+91-987654321",
+      details: "+91 98765 43210",
       description: "Mon-Fri from 9am to 6pm"
     },
     {
@@ -309,19 +311,19 @@ const Contact = () => {
                   <div className="flex items-start space-x-3">
                     <MapPin className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
                     <div>
-                      {/* <p className="font-medium">Trading Headquarters</p>
+                      <p className="font-medium">Trading Headquarters</p>
                       <p className="text-sm text-gray-600">
                         Business District, Bandra Kurla Complex<br />
                         Mumbai, Maharashtra 400001<br />
                         India
-                      </p> */}
+                      </p>
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-3">
                     <Phone className="h-5 w-5 text-blue-600 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">+91-xxx</p>
+                      <p className="font-medium">+91 98765 43210</p>
                       <p className="text-sm text-gray-600">Mon-Fri, 9:00 AM - 6:00 PM IST (Market Hours)</p>
                     </div>
                   </div>
@@ -329,7 +331,7 @@ const Contact = () => {
                   <div className="flex items-center space-x-3">
                     <Mail className="h-5 w-5 text-blue-600 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">tejtraders99@gmail.com</p>
+                      <p className="font-medium">tejtraders@gmail.com</p>
                       <p className="text-sm text-gray-600">We typically respond within 2-4 hours</p>
                     </div>
                   </div>
@@ -344,7 +346,7 @@ const Contact = () => {
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
-                    85% success rate algorithms
+                    95% success rate algorithms
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-emerald-500 rounded-full mr-3"></div>
