@@ -43,39 +43,54 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  setIsLoading(true);
-  setErrors({});
+    setIsLoading(true);
+    setErrors({});
 
-  try {
-    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Extract username from email
+      const username = formData.email.split('@')[0];
+      const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1);
+      
+      // Create user object
+      const user = {
+        id: Date.now().toString(),
+        firstName: capitalizedUsername,
+        lastName: 'User',
+        name: `${capitalizedUsername} User`,
+        email: formData.email
+      };
 
-    const data = await response.json();
+      // Send login notification email
+      fetch('http://localhost:5000/api/login-notification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email
+        }),
+      }).catch(error => {
+        console.error('Error sending login notification:', error);
+      });
 
-    if (response.ok && data.success) {
-      // Save user + token
-      login(data.user);
-      // You could also save token in localStorage if needed:
-      // localStorage.setItem("token", data.token);
-
-      navigate("/");
-    } else {
-      setErrors({ general: data.message || "Login failed" });
+      // Login user
+      login(user);
+      navigate('/');
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrors({ general: 'Unable to connect to server. Please try again later.' });
+    } finally {
+      setIsLoading(false);
     }
-  } catch (error) {
-    console.error("Login error:", error);
-    setErrors({ general: "Unable to connect to server. Please try again later." });
-  } finally {
-    setIsLoading(false);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -88,6 +103,12 @@ const Login = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
             <p className="text-gray-600">Sign in to your AlgoTrade Pro account</p>
           </div>
+
+          {errors.general && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-600">{errors.general}</p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>

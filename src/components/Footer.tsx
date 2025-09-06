@@ -1,8 +1,49 @@
 import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TrendingUp, Mail, Phone, MapPin, Twitter, Linkedin, Github, Instagram } from 'lucide-react';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      setMessage('Please enter your email address');
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setMessage('Successfully subscribed! Check your email for confirmation.');
+        setEmail('');
+      } else {
+        setMessage(data.message || 'Failed to subscribe');
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      setMessage('Unable to connect to server. Please try again later.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const socialLinks = [
     { icon: <Twitter className="h-5 w-5" />, href: "#", name: "Twitter" },
     { icon: <Linkedin className="h-5 w-5" />, href: "#", name: "LinkedIn" },
@@ -58,11 +99,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">+91-xxx</span>
+                <span className="text-gray-400 text-sm">+91 98765 43210</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">tejtraders99@gmail.com</span>
+                <span className="text-gray-400 text-sm">hello@algotradepro.in</span>
               </div>
             </div>
 
@@ -142,17 +183,34 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
               <p className="text-gray-400 text-sm">Get the latest updates and insights delivered to your inbox.</p>
             </div>
-            <div className="flex space-x-3 w-full md:w-auto">
+            <form onSubmit={handleSubscribe} className="flex space-x-3 w-full md:w-auto">
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 className="flex-1 md:w-64 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400"
               />
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105">
-                Subscribe
+              <button 
+                type="submit"
+                disabled={isLoading}
+                className={`bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 ${
+                  isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                {isLoading ? 'Subscribing...' : 'Subscribe'}
               </button>
-            </div>
+            </form>
           </div>
+          {message && (
+            <div className={`mt-4 p-3 rounded-lg text-sm ${
+              message.includes('Successfully') 
+                ? 'bg-emerald-900 text-emerald-300 border border-emerald-700' 
+                : 'bg-red-900 text-red-300 border border-red-700'
+            }`}>
+              {message}
+            </div>
+          )}
         </div>
 
         {/* Bottom Bar */}
