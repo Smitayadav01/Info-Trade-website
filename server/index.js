@@ -124,7 +124,7 @@ app.post('/api/contact', async (req, res) => {
             </ul>
             <div style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
               <p style="margin: 0; font-weight: bold;">Ready to start trading?</p>
-              <p style="margin: 5px 0 0 0;">Trading Desk: +91 98765 43210 | Email: hello@algotradepro.in</p>
+              <p style="margin: 5px 0 0 0;">Trading Desk: +91 98765 43210 | Email: tejtraders99@gmail.com</p>
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
@@ -351,8 +351,7 @@ app.post('/api/signup-notification', async (req, res) => {
               <p style="margin: 5px 0 0 0;">Login to your account and explore our trading services!</p>
             </div>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Need help getting started? Our trading desk is available at +91 98765 43210 or email us at hello@algotradepro.in
-            </p>
+              Need help getting started? Our trading desk is available at +91 98765 43210 or email us at tejtraders99@gmail.com
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
             <p style="margin: 0; font-size: 14px;">Best regards,<br>The AlgoTrade Pro Team</p>
