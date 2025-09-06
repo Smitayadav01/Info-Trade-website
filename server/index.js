@@ -1,7 +1,9 @@
-const express = require('express');
-const cors = require('cors');
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,11 +28,10 @@ app.post('/api/contact', async (req, res) => {
   try {
     const { name, email, company, subject, message, inquiryType } = req.body;
 
-    // Validate required fields
     if (!name || !email || !subject || !message) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Please fill in all required fields' 
+      return res.status(400).json({
+        success: false,
+        message: 'Please fill in all required fields'
       });
     }
 
@@ -133,16 +134,16 @@ app.post('/api/contact', async (req, res) => {
     await transporter.sendMail(ownerMailOptions);
     await transporter.sendMail(userMailOptions);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Message sent successfully! Check your email for confirmation.' 
+    res.status(200).json({
+      success: true,
+      message: 'Message sent successfully! Check your email for confirmation.'
     });
 
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Failed to send message. Please try again later.' 
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send message. Please try again later.'
     });
   }
 });
@@ -152,18 +153,17 @@ app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
 
-    // Validate email
     if (!email) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Email is required' 
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required'
       });
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Please enter a valid email address' 
+      return res.status(400).json({
+        success: false,
+        message: 'Please enter a valid email address'
       });
     }
 
@@ -242,16 +242,16 @@ app.post('/api/subscribe', async (req, res) => {
     await transporter.sendMail(ownerMailOptions);
     await transporter.sendMail(userMailOptions);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Successfully subscribed! Check your email for confirmation.' 
+    res.status(200).json({
+      success: true,
+      message: 'Successfully subscribed! Check your email for confirmation.'
     });
 
   } catch (error) {
     console.error('Error sending subscription email:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Failed to subscribe. Please try again later.' 
+    res.status(500).json({
+      success: false,
+      message: 'Failed to subscribe. Please try again later.'
     });
   }
 });
@@ -261,11 +261,10 @@ app.post('/api/signup-notification', async (req, res) => {
   try {
     const { name, email, company } = req.body;
 
-    // Validate required fields
     if (!name || !email) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Name and email are required' 
+      return res.status(400).json({
+        success: false,
+        message: 'Name and email are required'
       });
     }
 
@@ -359,19 +358,19 @@ app.post('/api/signup-notification', async (req, res) => {
     };
 
     // Send emails
-    await transporter.sendMail(ownerMailOptions);
+     await transporter.sendMail(ownerMailOptions);
     await transporter.sendMail(userMailOptions);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Registration notification sent successfully!' 
+    res.status(200).json({
+      success: true,
+      message: 'Registration notification sent successfully!'
     });
 
   } catch (error) {
     console.error('Error sending signup notification:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Failed to send notification. Please try again later.' 
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send notification. Please try again later.'
     });
   }
 });
@@ -381,11 +380,10 @@ app.post('/api/login-notification', async (req, res) => {
   try {
     const { name, email } = req.body;
 
-    // Validate required fields
     if (!name || !email) {
-      return res.status(400).json({ 
-        success: false, 
-        message: 'Name and email are required' 
+      return res.status(400).json({
+        success: false,
+        message: 'Name and email are required'
       });
     }
 
@@ -433,19 +431,20 @@ app.post('/api/login-notification', async (req, res) => {
     // Send email to owner
     await transporter.sendMail(ownerMailOptions);
 
-    res.status(200).json({ 
-      success: true, 
-      message: 'Login notification sent successfully!' 
+    res.status(200).json({
+      success: true,
+      message: 'Login notification sent successfully!'
     });
 
   } catch (error) {
     console.error('Error sending login notification:', error);
-    res.status(500).json({ 
-      success: false, 
-      message: 'Failed to send notification. Please try again later.' 
+    res.status(500).json({
+      success: false,
+      message: 'Failed to send notification. Please try again later.'
     });
   }
 });
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'Server is running!' });
