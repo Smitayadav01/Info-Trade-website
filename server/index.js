@@ -232,7 +232,7 @@ app.post('/api/subscribe', async (req, res) => {
               <p style="margin: 5px 0 0 0;">Get started with our AI-powered algorithms today!</p>
             </div>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Have questions? Reply to this email or contact our trading desk at +91 98765 43210.
+              Have questions? Reply to this email  tejtraders99@gmail.com or contact our trading desk at +91 98765 43210.
             </p>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
