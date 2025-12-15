@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Brain, Target, BarChart3, TrendingUp, CheckCircle, LineChart, Activity, DollarSign } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+  const { isAuthenticated } = useAuth();
+
   const features = [
     {
       icon: <Brain className="h-8 w-8" />,
@@ -26,12 +29,12 @@ const Home = () => {
     }
   ];
 
-  const stats = [
-    { number: "85%", label: "Success Rate" },
-    { number: "₹50L+", label: "Daily Volume" },
-    { number: "0.2ms", label: "Avg Latency" },
-    { number: "24/7", label: "Market Coverage" },
-  ];
+  // const stats = [
+  //   { number: "95%", label: "Success Rate" },
+  //   { number: "₹50L+", label: "Daily Volume" },
+  //   { number: "0.2ms", label: "Avg Latency" },
+  //   { number: "24/7", label: "Market Coverage" }
+  // ];
 
   const benefits = [
     "Algorithmic options trading strategies",
@@ -58,26 +61,28 @@ const Home = () => {
               trades in options and equity markets with our proven strategies and risk management systems.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                to="/signup"
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group"
-              >
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-              <Link
+              {!isAuthenticated && (
+                <Link
+                  to="/signup"
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group"
+                >
+                  Start Free Trial
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+                </Link>
+              )}
+              {/* <Link
                 to="/contact"
                 className="bg-white text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold border border-gray-300 hover:border-blue-300 hover:text-blue-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Get in Touch
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      {/* <section className="py-16 bg-white">
+      {/* Stats Section
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -91,6 +96,77 @@ const Home = () => {
           </div>
         </div>
       </section> */}
+
+      {/* What Are You Looking For Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              What Are You Looking For?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Choose from expert portfolio management, easy-to-learn trading courses, or powerful 
+              subscription-based algo systems — everything you need to trade smarter.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Portfolio Management */}
+            <div className="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 hover:from-blue-100 hover:to-indigo-100 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl border border-blue-100">
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl p-4 w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Shield className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Portfolio Management</h3>
+              <p className="text-gray-600 leading-relaxed mb-8">
+                Smart, expert-managed portfolios designed to grow your wealth with minimal risk.
+              </p>
+              <Link
+                to="/pms"
+                className="inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg"
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </div>
+
+            {/* Courses */}
+            <div className="group bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-8 hover:from-emerald-100 hover:to-green-100 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl border border-emerald-100">
+              <div className="bg-gradient-to-r from-emerald-600 to-green-600 text-white rounded-xl p-4 w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Brain className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Courses</h3>
+              <p className="text-gray-600 leading-relaxed mb-8">
+                Learn trading and investing with easy, practical courses for all skill levels.
+              </p>
+              <Link
+                to="/courses"
+                className="inline-flex items-center bg-gradient-to-r from-emerald-600 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-700 hover:to-green-700 transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg"
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </div>
+
+            {/* Subscription-Based Algo System */}
+            <div className="group bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 hover:from-purple-100 hover:to-pink-100 transition-all duration-500 transform hover:-translate-y-2 hover:shadow-2xl border border-purple-100">
+              <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl p-4 w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Target className="h-8 w-8" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Subscription-Based Algo System</h3>
+              <p className="text-gray-600 leading-relaxed mb-8">
+                Automate your trades with powerful, ready-to-use algorithmic strategies.
+              </p>
+              <Link
+                to="/subscription"
+                className="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg"
+              >
+                Get Started
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="py-20 bg-gray-50">
@@ -141,13 +217,13 @@ const Home = () => {
                   </div>
                 ))}
               </div>
-              <Link
+              {/* <Link
                 to="/signup"
                 className="inline-flex items-center bg-gradient-to-r from-emerald-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-emerald-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105"
               >
                 Start Trading
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              </Link> */}
             </div>
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-3xl p-8 relative overflow-hidden">
@@ -157,7 +233,7 @@ const Home = () => {
                   <LineChart className="h-16 w-16 text-blue-600 mb-6" />
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Proven Performance</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Join group of successful traders who have achieved consistent profits using our 
+                    Join thousands of successful traders who have achieved consistent profits using our 
                     AI-powered algorithms and advanced risk management systems.
                   </p>
                 </div>
@@ -168,32 +244,34 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Start Trading?
-          </h2>
-          <p className="text-xl text-blue-100 mb-10 leading-relaxed">
-            Join group of successfull traders already using AlgoTrade Pro to maximize their profits. 
-            Start your free trial today and experience the power of AI trading.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              to="/signup"
-              className="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group"
-            >
-              Start Free Trial
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
-            <Link
-              to="/contact"
-              className="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-semibold border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
-            >
-              Schedule Demo
-            </Link>
+      {!isAuthenticated && (
+        <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
+          <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Start Trading?
+            </h2>
+            <p className="text-xl text-blue-100 mb-10 leading-relaxed">
+              Join thousands of traders already using AlgoTrade Pro to maximize their profits. 
+              Start your free trial today and experience the power of AI trading.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* <Link
+                to="/signup"
+                className="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group"
+              >
+                Start Free Trial
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link> */}
+              <Link
+                to="/contact"
+                className="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-semibold border-2 border-white hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105"
+              >
+                Schedule Demo
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

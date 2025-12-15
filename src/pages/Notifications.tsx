@@ -5,86 +5,17 @@ const Notifications = () => {
   const [filter, setFilter] = useState('all');
 
   const notifications = [
-    {
-      id: 1,
-      type: 'trade',
-      icon: <TrendingUp className="h-5 w-5" />,
-      title: 'Successful Trade Executed',
-      message: 'NIFTY Call Option bought at ₹125, target reached at ₹145. Profit: +16%',
-      time: '2 minutes ago',
-      status: 'success',
-      amount: '+₹2,400'
-    },
-    {
-      id: 2,
-      type: 'alert',
-      icon: <AlertTriangle className="h-5 w-5" />,
-      title: 'Risk Alert',
-      message: 'Portfolio exposure exceeding 80%. Consider reducing position sizes.',
-      time: '15 minutes ago',
-      status: 'warning',
-      amount: null
-    },
-    {
-      id: 3,
-      type: 'trade',
-      icon: <TrendingDown className="h-5 w-5" />,
-      title: 'Stop Loss Triggered',
-      message: 'BANKNIFTY Put Option sold at ₹89. Stop loss activated to limit losses.',
-      time: '1 hour ago',
-      status: 'error',
-      amount: '-₹1,200'
-    },
-    {
-      id: 4,
-      type: 'system',
-      icon: <CheckCircle className="h-5 w-5" />,
-      title: 'Strategy Optimization Complete',
-      message: 'Your Iron Condor strategy has been optimized for better performance.',
-      time: '2 hours ago',
-      status: 'success',
-      amount: null
-    },
-    {
-      id: 5,
-      type: 'market',
-      icon: <BarChart3 className="h-5 w-5" />,
-      title: 'Market Volatility Alert',
-      message: 'VIX increased by 15%. High volatility detected in NIFTY options.',
-      time: '3 hours ago',
-      status: 'info',
-      amount: null
-    },
-    {
-      id: 6,
-      type: 'trade',
-      icon: <DollarSign className="h-5 w-5" />,
-      title: 'Profit Target Achieved',
-      message: 'Weekly profit target of ₹10,000 achieved. Consider booking profits.',
-      time: '4 hours ago',
-      status: 'success',
-      amount: '+₹10,000'
-    },
-    {
-      id: 7,
-      type: 'system',
-      icon: <Settings className="h-5 w-5" />,
-      title: 'Algorithm Update',
-      message: 'New machine learning model deployed. Expected 3% improvement in accuracy.',
-      time: '1 day ago',
-      status: 'info',
-      amount: null
-    },
-    {
-      id: 8,
-      type: 'alert',
-      icon: <Clock className="h-5 w-5" />,
-      title: 'Market Closing Soon',
-      message: 'NSE will close in 30 minutes. Review open positions.',
-      time: '1 day ago',
-      status: 'warning',
-      amount: null
-    }
+    // {
+    //   id: 1,
+    //   type: 'notification',
+    //   icon: <TrendingUp className="h-5 w-5" />,
+    //   title: 'Successful Trade Executed',
+    //   message: 'NIFTY Call Option bought at ₹125, target reached at ₹145. Profit: +16%',
+    //   time: '2 minutes ago',
+    //   status: 'success',
+    //   amount: '+₹2,400'
+    // },
+    
   ];
 
   const filteredNotifications = filter === 'all' 
@@ -108,18 +39,16 @@ const Notifications = () => {
 
   const filters = [
     { key: 'all', label: 'All Notifications', count: notifications.length },
-    { key: 'trade', label: 'Trades', count: notifications.filter(n => n.type === 'trade').length },
-    { key: 'alert', label: 'Alerts', count: notifications.filter(n => n.type === 'alert').length },
-    { key: 'system', label: 'System', count: notifications.filter(n => n.type === 'system').length },
-    { key: 'market', label: 'Market', count: notifications.filter(n => n.type === 'market').length }
+    { key: 'trade', label: 'Discount Offer', count: notifications.length },
+    { key: 'alert', label: 'Webinar Alert', count: notifications.length },
   ];
 
-  const stats = [
-    { label: 'Today\'s Trades', value: '12', change: '+3', color: 'emerald' },
-    { label: 'Active Alerts', value: '5', change: '-2', color: 'amber' },
-    { label: 'P&L Today', value: '₹8,400', change: '+12%', color: 'emerald' },
-    { label: 'Win Rate', value: '78%', change: '+5%', color: 'blue' }
-  ];
+  // const stats = [
+  //   { label: 'Today\'s Trades', value: '12', change: '+3', color: 'emerald' },
+  //   { label: 'Active Alerts', value: '5', change: '-2', color: 'amber' },
+  //   { label: 'P&L Today', value: '₹8,400', change: '+12%', color: 'emerald' },
+  //   { label: 'Win Rate', value: '78%', change: '+5%', color: 'blue' }
+  // ];
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -136,14 +65,12 @@ const Notifications = () => {
                 <p className="text-gray-600">Stay updated with your trading activities and market alerts</p>
               </div>
             </div>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-              Mark All Read
-            </button>
+            
           </div>
         </div>
       </section>
 
-      {/* Stats Cards */}
+      {/* Stats Cards
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -164,7 +91,7 @@ const Notifications = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Main Content */}
       <section className="pb-12">

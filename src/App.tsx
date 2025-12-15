@@ -2,30 +2,36 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
-import Services from './pages/Services';
-import Notifications from './pages/Notifications';
+// import Services from './pages/Services';
+import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Contact from './pages/Contact';
-import Footer from './components/Footer';
+import Notifications from './pages/Notifications';
+import PMS from './pages/PMS';
+import Courses from './pages/Courses';
+import Subscription from './pages/Subscription';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-white">
           <Navbar />
           <main>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/notifications" element={<Notifications />} />
+              {/* <Route path="/services" element={<Services />} /> */}
+              <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/pms" element={<PMS />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/subscription" element={<Subscription />} />
             </Routes>
           </main>
           <Footer />

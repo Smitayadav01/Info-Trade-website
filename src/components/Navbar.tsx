@@ -49,7 +49,7 @@ const Navbar = () => {
             </Link>
             {isAuthenticated && (
               <>
-                <Link
+                {/* <Link
                   to="/services"
                   className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                     isActive('/services') ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'
@@ -57,7 +57,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   Services
-                </Link>
+                </Link> */}
                 <Link
               to="/contact"
               className={`text-sm font-medium transition-colors duration-200 ${
@@ -76,7 +76,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   <Bell className="h-4 w-4" />
-                  <span>Notifications</span>
+                  {/* <span>Notifications</span> */}
                 </Link>
               </>
             )}

@@ -56,12 +56,7 @@ const Services = () => {
     }
   ];
 
-  const stats = [
-    { number: "95%", label: "Success Rate" },
-    { number: "₹50L+", label: "Daily Volume" },
-    { number: "0.2ms", label: "Avg Latency" },
-    { number: "24/7", label: "Uptime" }
-  ];
+  
 
   return (
     <div className="bg-white min-h-screen">
@@ -83,22 +78,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 group-hover:from-blue-100 group-hover:to-indigo-100 transition-all duration-300">
-                  <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      
       {/* Services Grid */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

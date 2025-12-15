@@ -93,7 +93,7 @@ const Contact = () => {
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Visit Us",
-      details: "Mumbai, Maharashtra",
+      details: "Thane, Maharashtra",
       description: "401105, India"
     },
     {

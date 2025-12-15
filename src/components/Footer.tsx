@@ -47,28 +47,28 @@ const Footer = () => {
   };
 
   const socialLinks = [
-    { icon: <Twitter className="h-5 w-5" />, href: "#", name: "Twitter" },
+    { icon: <Twitter className="h-5 w-5" />, href: "https://x.com/Deltatrader99", name: "Twitter" },
     // { icon: <Linkedin className="h-5 w-5" />, href: "#", name: "LinkedIn" },
-    { icon: <FaTelegramPlane className="h-5 w-5" />, href: "#", name: "Telegram" },
+    { icon: <FaTelegramPlane className="h-5 w-5" />, href: "http://www.telegram.me/Thetalovers99", name: "Telegram" },
     // { icon: <Github className="h-5 w-5" />, href: "#", name: "GitHub" },
-    { icon: <Instagram className="h-5 w-5" />, href: "#", name: "Instagram" }
+    // { icon: <Instagram className="h-5 w-5" />, href: "#", name: "Instagram" }/
   ];
 
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "#" },
-    { name: "Pricing", href: "#" },
+    { name: "Services", href: "/services" },
+    { name: "notification", href: "/notifications" },
     { name: "Contact", href: "/contact" }
   ];
 
-  const resources = [
-    { name: "Documentation", href: "#" },
-    { name: "Help Center", href: "#" },
-    { name: "API Reference", href: "#" },
-    { name: "Community", href: "#" },
-    { name: "Status", href: "#" }
-  ];
+  // const resources = [
+  //   { name: "Documentation", href: "#" },
+  //   { name: "Help Center", href: "#" },
+  //   { name: "API Reference", href: "#" },
+  //   { name: "Community", href: "#" },
+  //   { name: "Status", href: "#" }
+  // ];
 
   const legal = [
     { name: "Privacy Policy", href: "#" },
@@ -98,12 +98,12 @@ const Footer = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm">Mumbai, Maharashtra, India</span>
+                <span className="text-gray-400 text-sm">Thane, Maharashtra, India</span>
               </div>
-              <div className="flex items-center space-x-3">
+              {/* <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-blue-400 flex-shrink-0" />
                 <span className="text-gray-400 text-sm">+91 98765 43210</span>
-              </div>
+              </div> */}
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-blue-400 flex-shrink-0" />
                 <span className="text-gray-400 text-sm">tejtraders99@gmail.com</span>
@@ -144,7 +144,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Resources
           <div>
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-3">
@@ -159,7 +159,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Legal */}
           <div>
@@ -180,41 +180,61 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Signup */}
-        <div className="border-t border-gray-800 pt-8 mt-12">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
-              <p className="text-gray-400 text-sm">Get the latest updates and insights delivered to your inbox.</p>
-            </div>
-            <form onSubmit={handleSubscribe} className="flex space-x-3 w-full md:w-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 md:w-64 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400"
-              />
-              <button 
-                type="submit"
-                disabled={isLoading}
-                className={`bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105 ${
-                  isLoading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                {isLoading ? 'Subscribing...' : 'Subscribe'}
-              </button>
-            </form>
-          </div>
-          {message && (
-            <div className={`mt-4 p-3 rounded-lg text-sm ${
-              message.includes('Successfully') 
-                ? 'bg-emerald-900 text-emerald-300 border border-emerald-700' 
-                : 'bg-red-900 text-red-300 border border-red-700'
-            }`}>
-              {message}
-            </div>
-          )}
-        </div>
+       <div className="border-t border-gray-800 pt-8 mt-12">
+  <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+    <div>
+      <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
+      <p className="text-gray-400 text-sm">
+        Get the latest updates and insights delivered to your inbox.
+      </p>
+    </div>
+
+    <form onSubmit={handleSubscribe} className="w-full md:w-auto">
+      {/* Wrapper */}
+      <div className="relative flex md:static md:flex-row w-full md:w-auto">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          className="w-full md:w-64 px-4 py-2 pr-28 bg-gray-800 border border-gray-700 rounded-lg 
+                     focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                     text-white placeholder-gray-400"
+        />
+
+        {/* Button */}
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`absolute right-1 top-1 bottom-1 
+                      md:static md:ml-3 md:h-auto
+                      bg-gradient-to-r from-blue-600 to-indigo-600 
+                      text-white px-4 md:px-6 rounded-md md:rounded-lg 
+                      font-medium transition-all duration-200
+                      ${
+                        isLoading
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'hover:from-blue-700 hover:to-indigo-700'
+                      }`}
+        >
+          {isLoading ? '...' : 'Subscribe'}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  {message && (
+    <div
+      className={`mt-4 p-3 rounded-lg text-sm ${
+        message.includes('Successfully')
+          ? 'bg-emerald-900 text-emerald-300 border border-emerald-700'
+          : 'bg-red-900 text-red-300 border border-red-700'
+      }`}
+    >
+      {message}
+    </div>
+  )}
+</div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 mt-8">
