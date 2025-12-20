@@ -6,7 +6,7 @@ const courses = [
   {
     id: "1",
     title: "Elite Options Selling Program",
-    level: "Buy TezTraders.in",
+    level: "By TezTraders.in",
     duration: "15 Days",
     price: "₹7,999",
     rating: 4.5,
@@ -23,7 +23,7 @@ const courses = [
   {
     id: "2",
     title: "Algo Trading Mastery Program",
-    level: "Buy TezTraders.in",
+    level: "By TezTraders.in",
     duration: "30 Days",
     price: "₹14,999",
     rating: 4.9,
@@ -40,7 +40,7 @@ const courses = [
   {
     id: "3",
     title: "Options Buying SL Hunting Course",
-    level: "Buy TezTraders.in",
+    level: "By TezTraders.in",
     duration: "20 Days",
     price: "₹3,999",
     rating: 4.7,
