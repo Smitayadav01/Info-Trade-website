@@ -13,6 +13,8 @@ import Notifications from './pages/Notifications';
 import PMS from './pages/PMS';
 import Courses from './pages/Courses';
 import Subscription from './pages/Subscription';
+import CourseDetail from './pages/CourseDetail';
+
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
               <Route path="/pms" element={<PMS />} />
               <Route path="/courses" element={<Courses />} />
               <Route path="/subscription" element={<Subscription />} />
+              <Route path="/courses/:id" element={<CourseDetail />} />
             </Routes>
           </main>
           <Footer />

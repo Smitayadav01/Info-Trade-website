@@ -233,11 +233,15 @@ const Courses = () => {
                       <span className="text-lg text-gray-500 line-through">{course.originalPrice}</span>
                     </div>
                   </div>
+                  <Link
+  to={`/courses/${course.id}`}
+  className={`w-full bg-gradient-to-r ${colors.button} text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg flex items-center justify-center`}
+>
+  Get Started
+  <ArrowRight className="ml-2 h-5 w-5" />
+</Link>
+
                   
-                  <button className={`w-full bg-gradient-to-r ${colors.button} text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg flex items-center justify-center`}>
-                    Enroll Now
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-                  </button>
                 </div>
               );
             })}
