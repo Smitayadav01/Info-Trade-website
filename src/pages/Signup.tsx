@@ -78,13 +78,15 @@ const Signup = () => {
     
     setIsLoading(true);
     
-    // Simulate API call and signup
-    setTimeout(() => {
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
       setIsLoading(false);
       
       // Create user object
       const user = {
-        id: '1',
+        id: Date.now().toString(),
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         firstName: formData.firstName,
@@ -92,23 +94,30 @@ const Signup = () => {
       };
       
       // Send signup notification email
-      fetch('https://algotrade-pro.onrender.com/api/signup-notification', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email,
-          company: formData.company
-        }),
-      }).catch(error => {
-        console.error('Error sending signup notification:', error);
-      });
+      try {
+        await fetch('http://localhost:5000/api/signup-notification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            company: formData.company
+          }),
+        });
+      } catch (error) {
+        console.warn('Signup notification service unavailable:', error);
+        // Continue with signup even if notification fails
+      }
       
-      login(user);
+      // Register the user (this will also log them in)
+      register(user);
       navigate('/');
-    }, 2000);
+    } catch (error) {
+      console.error('Signup error:', error);
+      setIsLoading(false);
+    }
   };
 
   const benefits = [

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { loginWithCredentials, user } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -54,35 +54,33 @@ const Login = () => {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Extract username from email
-      const username = formData.email.split('@')[0];
-      const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1);
+      // Try to login with credentials
+      const loginSuccess = await loginWithCredentials(formData.email, formData.password);
       
-      // Create user object
-      const user = {
-        id: Date.now().toString(),
-        firstName: capitalizedUsername,
-        lastName: 'User',
-        name: `${capitalizedUsername} User`,
-        email: formData.email
-      };
+      if (!loginSuccess) {
+        setErrors({ 
+          general: 'Invalid email or password. Please check your credentials or sign up if you don\'t have an account.' 
+        });
+        return;
+      }
 
       // Send login notification email
-      fetch('https://algotrade-pro.onrender.com/api/login-notification', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: user.name,
-          email: user.email
-        }),
-      }).catch(error => {
-        console.error('Error sending login notification:', error);
-      });
+      try {
+        await fetch('http://localhost:5000/api/login-notification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: user?.name,
+            email: user?.email
+          }),
+        });
+      } catch (error) {
+        console.warn('Login notification service unavailable:', error);
+        // Continue with login even if notification fails
+      }
 
-      // Login user
-      login(user);
       navigate('/');
     } catch (error) {
       console.error('Login error:', error);
