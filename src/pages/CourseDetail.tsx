@@ -69,11 +69,11 @@ const CourseDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-gray-50 ">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
         
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-2">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             {course.title}
           </h1>
