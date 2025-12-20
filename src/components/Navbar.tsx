@@ -23,7 +23,7 @@ const Navbar = () => {
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-lg">
               <TrendingUp className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">AlgoTrade Pro</span>
+            <span className="text-xl font-bold text-gray-900">TezTraders </span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
@@ -76,7 +76,7 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   <Bell className="h-4 w-4" />
-                  {/* <span>Notifications</span> */}
+                  <span>Updates</span>
                 </Link>
               </>
             )}

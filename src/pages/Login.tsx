@@ -99,7 +99,7 @@ const Login = () => {
               <Zap className="h-8 w-8 text-white" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h2>
-            <p className="text-gray-600">Sign in to your AlgoTrade Pro account</p>
+            <p className="text-gray-600">Sign in to your TezTraders Pro account</p>
           </div>
 
           {errors.general && (

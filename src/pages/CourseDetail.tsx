@@ -69,7 +69,7 @@ const CourseDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 ">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
         
         {/* Header */}

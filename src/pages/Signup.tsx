@@ -138,7 +138,7 @@ const Signup = () => {
                 <Zap className="h-8 w-8 text-white" />
               </div>
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Start Your Journey with AlgoTrade Pro
+                Start Your Journey with TezTraders Pro
               </h1>
               <p className="text-xl text-gray-600">
                 Join thousands of businesses accelerating their growth with our powerful platform.

@@ -46,7 +46,7 @@ app.post('/api/contact', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
-      subject: `New AlgoTrade Pro Contact: ${subject}`,
+      subject: `New TezTraders Pro Contact: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -86,7 +86,7 @@ app.post('/api/contact', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">This email was sent from the AlgoTrade Pro contact form</p>
+            <p style="margin: 0; font-size: 14px;">This email was sent from the TezTraders Pro contact form</p>
             <p style="margin: 5px 0 0 0; font-size: 12px;">Received on: ${new Date().toLocaleString()}</p>
           </div>
         </div>
@@ -97,7 +97,7 @@ app.post('/api/contact', async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Thank you for contacting AlgoTrade Pro - We\'ve received your message',
+      subject: 'Thank you for contacting TezTraders Pro - We\'ve received your message',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -106,7 +106,7 @@ app.post('/api/contact', async (req, res) => {
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Thank you for reaching out to AlgoTrade Pro. We have successfully received your trading inquiry and our team will review it shortly.
+              Thank you for reaching out to TezTraders Pro. We have successfully received your trading inquiry and our team will review it shortly.
             </p>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563EB;">
               <h3 style="color: #2563EB; margin: 0 0 15px 0;">Your Message Summary:</h3>
@@ -128,7 +128,7 @@ app.post('/api/contact', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">Best regards,<br>The AlgoTrade Pro Team</p>
+            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Pro Team</p>
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
@@ -178,7 +178,7 @@ app.post('/api/subscribe', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
-      subject: 'New Newsletter Subscription - AlgoTrade Pro',
+      subject: 'New Newsletter Subscription - TezTraders Pro',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -197,7 +197,7 @@ app.post('/api/subscribe', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">AlgoTrade Pro Newsletter System</p>
+            <p style="margin: 0; font-size: 14px;">TezTraders Pro Newsletter System</p>
           </div>
         </div>
       `
@@ -207,11 +207,11 @@ app.post('/api/subscribe', async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Welcome to AlgoTrade Pro Newsletter! 🚀',
+      subject: 'Welcome to TezTraders Pro Newsletter! 🚀',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
-            <h2 style="margin: 0;">🎉 Welcome to AlgoTrade Pro!</h2>
+            <h2 style="margin: 0;">🎉 Welcome to TezTraders Pro!</h2>
           </div>
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
@@ -236,7 +236,7 @@ app.post('/api/subscribe', async (req, res) => {
             </p>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">Best regards,<br>The AlgoTrade Pro Team</p>
+            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Pro Team</p>
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
@@ -279,7 +279,7 @@ app.post('/api/signup-notification', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
-      subject: 'New User Registration - AlgoTrade Pro',
+      subject: 'New User Registration - TezTraders Pro',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -314,7 +314,7 @@ app.post('/api/signup-notification', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">AlgoTrade Pro User Management System</p>
+            <p style="margin: 0; font-size: 14px;">TezTraders Pro User Management System</p>
           </div>
         </div>
       `
@@ -324,16 +324,16 @@ app.post('/api/signup-notification', async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
-      subject: 'Welcome to AlgoTrade Pro - Your Trading Journey Begins! 🚀',
+      subject: 'Welcome to TezTraders Pro - Your Trading Journey Begins! 🚀',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
-            <h2 style="margin: 0;">🎉 Welcome to AlgoTrade Pro!</h2>
+            <h2 style="margin: 0;">🎉 Welcome to TezTraders Pro!</h2>
           </div>
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Congratulations! You've successfully joined AlgoTrade Pro, India's leading algorithmic trading platform. 
+              Congratulations! You've successfully joined TezTraders Pro, India's leading algorithmic trading platform. 
               Your journey to profitable trading starts now.
             </p>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563EB;">
@@ -354,7 +354,7 @@ app.post('/api/signup-notification', async (req, res) => {
               Need help getting started? Our trading desk is available at +91 98765 43210 or email us at tejtraders99@gmail.com
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">Best regards,<br>The AlgoTrade Pro Team</p>
+            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Pro Team</p>
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
@@ -397,7 +397,7 @@ app.post('/api/login-notification', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
-      subject: 'User Login Activity - AlgoTrade Pro',
+      subject: 'User Login Activity - TezTraders Pro',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -421,12 +421,12 @@ app.post('/api/login-notification', async (req, res) => {
             </table>
             <div style="background: #ecfdf5; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #d1fae5;">
               <p style="margin: 0; color: #065f46; font-size: 14px;">
-                <strong>User Activity:</strong> This user has successfully logged into their AlgoTrade Pro account.
+                <strong>User Activity:</strong> This user has successfully logged into their TezTraders Pro account.
               </p>
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">AlgoTrade Pro Activity Monitor</p>
+            <p style="margin: 0; font-size: 14px;">TezTraders Pro Activity Monitor</p>
           </div>
         </div>
       `

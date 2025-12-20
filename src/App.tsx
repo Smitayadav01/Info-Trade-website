@@ -14,12 +14,14 @@ import PMS from './pages/PMS';
 import Courses from './pages/Courses';
 import Subscription from './pages/Subscription';
 import CourseDetail from './pages/CourseDetail';
+import ScrollToTop from './components/ScrollToTop';
 
 
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <div className="min-h-screen bg-white">
           <Navbar />
           <main>

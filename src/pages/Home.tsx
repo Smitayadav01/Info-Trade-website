@@ -173,7 +173,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Why Choose AlgoTrade Pro?
+              Why Choose TezTraders?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Discover the advanced features that make us the preferred choice for algorithmic traders worldwide.
@@ -251,7 +251,7 @@ const Home = () => {
               Ready to Start Trading?
             </h2>
             <p className="text-xl text-blue-100 mb-10 leading-relaxed">
-              Join thousands of traders already using AlgoTrade Pro to maximize their profits. 
+              Join thousands of traders already using TezTraders Pro to maximize their profits. 
               Start your free trial today and experience the power of AI trading.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

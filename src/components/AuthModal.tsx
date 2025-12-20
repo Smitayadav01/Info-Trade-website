@@ -31,7 +31,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, serviceName }) =
         </h3>
         <p className="text-gray-600 mb-6 leading-relaxed">
           To access <span className="font-semibold text-blue-600">{serviceName}</span>, 
-          you need to sign up or log in to your AlgoTrade Pro account.
+          you need to sign up or log in to your TezTraders Pro account.
         </p>
         
         <div className="space-y-3">
@@ -55,7 +55,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, serviceName }) =
         
         <div className="mt-6 pt-6 border-t border-gray-200">
           <p className="text-sm text-gray-500 text-center">
-            Join thousands of successful traders using AlgoTrade Pro
+            Join thousands of successful traders using TezTraders Pro
           </p>
         </div>
       </div>

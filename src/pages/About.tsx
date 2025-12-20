@@ -97,7 +97,7 @@ const About = () => {
               <LineChart className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              About <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">AlgoTrade Pro</span>
+              About <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">TezTraders</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               We're on a mission to democratize algorithmic trading by providing retail investors with 
@@ -107,7 +107,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -121,7 +121,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Our Story */}
       <section className="py-20 bg-gray-50">
@@ -133,7 +133,7 @@ const About = () => {
               </h2>
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p>
-                  Founded in the heart of Mumbai's financial district, AlgoTrade Pro began with a simple yet powerful vision: 
+                  Founded in the heart of Mumbai's financial district, TezTraders Pro began with a simple yet powerful vision: 
                   to democratize access to institutional-grade algorithmic trading for retail investors and traders.
                 </p>
                 <p>
@@ -235,7 +235,7 @@ const About = () => {
               Meet Our Team
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The passionate individuals behind AlgoTrade Pro's success and innovation.
+              The passionate individuals behind TezTraders Pro's success and innovation.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

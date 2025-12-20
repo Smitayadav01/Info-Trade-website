@@ -22,7 +22,7 @@ const Footer = () => {
     setMessage('');
 
     try {
-      const response = await fetch('https://algotrade-pro.onrender.com/api/subscribe', {
+      const response = await fetch('https://TezTraders-pro.onrender.com/api/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,11 +87,11 @@ const Footer = () => {
               <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-lg">
                 <TrendingUp className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold">AlgoTrade Pro</span>
+              <span className="text-xl font-bold">TezTraders</span>
             </Link>
             <p className="text-gray-400 mb-6 max-w-md">
               Master the markets with AI-powered algorithmic trading. 
-              Join thousands of traders already maximizing their profits with AlgoTrade Pro.
+              Join thousands of traders already maximizing their profits with TezTraders Pro.
             </p>
             
             {/* Contact Info */}
@@ -240,7 +240,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} AlgoTrade Pro. All rights reserved.
+              © {new Date().getFullYear()} TezTraders. All rights reserved.
             </p>
             <div className="flex items-center space-x-6">
               <span className="text-gray-400 text-sm">Made with ❤️ in Mumbai</span>

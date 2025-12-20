@@ -37,7 +37,7 @@ const Contact = () => {
     setSubmitStatus({ type: null, message: '' });
     
     try {
-      const response = await fetch('https://algotrade-pro.onrender.com/api/contact', {
+      const response = await fetch('https://TezTraders-pro.onrender.com/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -304,7 +304,7 @@ const Contact = () => {
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-lg mr-3">
                     <TrendingUp className="h-6 w-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">AlgoTrade Pro Mumbai</h3>
+                  <h3 className="text-xl font-bold text-gray-900">TezTraders Mumbai</h3>
                 </div>
                 
                 <div className="space-y-4 text-gray-700">
@@ -341,7 +341,7 @@ const Contact = () => {
               <div className="bg-white border-2 border-gray-100 rounded-2xl p-8">
                 <div className="flex items-center mb-4">
                   <BarChart3 className="h-6 w-6 text-emerald-600 mr-3" />
-                  <h3 className="text-lg font-semibold text-gray-900">Why Choose AlgoTrade Pro?</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Why Choose TezTraders?</h3>
                 </div>
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-center">
@@ -376,7 +376,7 @@ const Contact = () => {
                     Call Trading Desk
                   </a>
                   <a
-                    href="mailto:hello@algotradepro.in"
+                    href="mailto:hello@TezTraderspro.in"
                     className="bg-white text-emerald-600 px-4 py-2 rounded-lg font-medium border border-emerald-200 hover:border-emerald-300 transition-colors duration-200 text-center"
                   >
                     Email Support
