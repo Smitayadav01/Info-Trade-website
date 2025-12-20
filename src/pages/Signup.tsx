@@ -120,13 +120,7 @@ const Signup = () => {
     }
   };
 
-  const benefits = [
-    "14-day free trial",
-    "No credit card required",
-    "24/7 customer support",
-    "Access to all features"
-  ];
-
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -138,32 +132,16 @@ const Signup = () => {
                 <Zap className="h-8 w-8 text-white" />
               </div>
               <h1 className="text-4xl font-bold text-gray-900 mb-4">
-                Start Your Journey with TezTraders Pro
+                Start Your Journey with TezTraders
               </h1>
               <p className="text-xl text-gray-600">
                 Join thousands of businesses accelerating their growth with our powerful platform.
               </p>
             </div>
 
-            <div className="space-y-4">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <div className="bg-emerald-100 rounded-full p-1">
-                    <CheckCircle className="h-5 w-5 text-emerald-600" />
-                  </div>
-                  <span className="text-gray-700 font-medium">{benefit}</span>
-                </div>
-              ))}
-            </div>
+            
 
-            <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100">
-              <h3 className="font-semibold text-gray-900 mb-2">Get Started in Minutes</h3>
-              <p className="text-gray-600 text-sm">
-                Create your account and start exploring our platform immediately. 
-                No setup fees, no hidden costs, no commitments.
-              </p>
-            </div>
-          </div>
+            
 
           {/* Right Side - Signup Form */}
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
