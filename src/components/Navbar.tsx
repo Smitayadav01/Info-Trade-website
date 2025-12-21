@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, TrendingUp, User, LogOut, Bell } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import logo from "../assets/logo.png";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,11 +22,16 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-lg">
-              <TrendingUp className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">TezTraders </span>
-          </Link>
+  <img
+    src={logo}
+    alt="TezTraders Logo"
+    className="h-14 w-auto object-contain"
+  />
+  <span className="text-xl font-bold text-gray-900">
+    TezTraders
+  </span>
+</Link>
+
 
           <div className="hidden md:flex items-center space-x-8">
             <Link

@@ -11,7 +11,8 @@ const courses = [
     title: "Elite Options Selling Program",
     level: "By TezTraders.in",
     duration: "15 Days",
-    price: "₹7,999",
+    price: "₹9,999",
+    originalPrice: "₹12,999",
     rating: 4.5,
     students: 20,
     image: optionsImg,
@@ -30,6 +31,7 @@ const courses = [
     level: "By TezTraders.in",
     duration: "30 Days",
     price: "₹14,999",
+    originalPrice: "₹19,999",
     rating: 4.9,
     students: 15,
     image: algoImg,
@@ -47,7 +49,8 @@ const courses = [
     title: "Options Buying SL Hunting Course",
     level: "By TezTraders.in",
     duration: "20 Days",
-    price: "₹3,999",
+    price: "₹4,999",
+    originalPrice: "₹7,999",
     rating: 4.7,
     students: 50,
     image: slHuntingImg,
@@ -141,7 +144,8 @@ const CourseDetail = () => {
         {/* Price & CTA */}
         <div className="border-t pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-3xl font-bold text-gray-900">
-            {course.price}
+            <span className="text-3xl font-bold text-gray-900">{course.price}</span>
+                      <span className="text-lg text-gray-500 line-through">{course.originalPrice}</span>
           </div>
           <button className="bg-gradient-to-r from-emerald-600 to-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition">
             Enroll Now

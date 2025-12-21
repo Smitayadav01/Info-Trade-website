@@ -10,8 +10,8 @@ const Courses = () => {
       title: "Elite Options Selling Program",
       level: "Theta Edge",
       duration: "15 Days",
-      price: "₹7,999",
-      originalPrice: "₹11,999",
+      price: "₹9,999",
+      originalPrice: "₹12,999",
       rating: 4.5,
       students: 20,
       description: "Advanced options strategies for consistent income generation.",
@@ -38,8 +38,8 @@ const Courses = () => {
       title: "Options Buying-SL Hunting Mastery Course ",
       level: "Delta Edge",
       duration: "20 Days",
-      price: "₹3,999",
-      originalPrice: "₹4,999",
+      price: "₹4,999",
+      originalPrice: "₹7,999",
       rating: 4.7,
       students: 50,
       description: "Learn the art of institutional level buying system",
@@ -74,7 +74,6 @@ const Courses = () => {
 
   const stats = [
     { number: "1000+", label: "Students Trained" },
-    { number: "5", label: "Expert Instructors" },
     { number: "95%", label: "Success Rate" }
   ];
 
@@ -147,20 +146,34 @@ const Courses = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white ml-60">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 ml-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group animate-fade-in" style={{animationDelay: `${index * 0.1}s`}}>
-                <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 group-hover:from-emerald-100 group-hover:to-green-100 transition-all duration-300 transform hover:scale-105">
-                  <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              </div>
-            ))}
+<section className="py-12 sm:py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+      {stats.map((stat, index) => (
+        <div
+          key={index}
+          className="text-center group animate-fade-in"
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
+          <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 sm:p-8 transition-all duration-300 transform hover:scale-105">
+            
+            <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              {stat.number}
+            </div>
+            
+            <div className="text-gray-600 font-medium">
+              {stat.label}
+            </div>
+
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+
+  </div>
+</section>
+
 
       {/* Courses Grid */}
       <section className="py-20 bg-gray-50">

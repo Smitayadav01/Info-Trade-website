@@ -15,6 +15,10 @@ import Courses from './pages/Courses';
 import Subscription from './pages/Subscription';
 import CourseDetail from './pages/CourseDetail';
 import ScrollToTop from './components/ScrollToTop';
+import Legal from "./pages/Legal";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Cookies from "./pages/Cookies";
 
 
 function App() {
@@ -37,6 +41,10 @@ function App() {
               <Route path="/courses" element={<Courses />} />
               <Route path="/subscription" element={<Subscription />} />
               <Route path="/courses/:id" element={<CourseDetail />} />
+              <Route path="/legal" element={<Legal />} />
+  <Route path="/privacy" element={<Privacy />} />
+  <Route path="/terms" element={<Terms />} />
+  <Route path="/cookies" element={<Cookies />} />
             </Routes>
           </main>
           <Footer />
