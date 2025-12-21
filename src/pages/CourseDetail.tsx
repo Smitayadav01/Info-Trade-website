@@ -1,6 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Star, Clock, Users, CheckCircle } from 'lucide-react';
+import optionsImg from '../assets/courses/options-selling.jpg';
+import algoImg from '../assets/courses/algo-trading.jpg';
+import slHuntingImg from '../assets/courses/sl-hunting.jpg';
 
 const courses = [
   {
@@ -11,6 +14,7 @@ const courses = [
     price: "₹7,999",
     rating: 4.5,
     students: 20,
+    image: optionsImg,
     description:
       "The program covers institutional-level options selling setups with an emphasis on Greeks, volatility analysis, and hedging techniques. Traders will learn how to manage drawdowns, control risk, and maintain consistency across different market cycles.",
     features: [
@@ -28,6 +32,7 @@ const courses = [
     price: "₹14,999",
     rating: 4.9,
     students: 15,
+    image: algoImg,
     description:
       "This course teaches how to design rule-based algorithmic trading strategies from scratch. You will learn to backtest strategies using historical data, optimize performance, and deploy them for live market execution with proper risk controls.",
     features: [
@@ -45,6 +50,7 @@ const courses = [
     price: "₹3,999",
     rating: 4.7,
     students: 50,
+    image: slHuntingImg,
     description:
       "This course teaches institutional-style options buying with precise entry and exit rules, focusing on high-momentum trades and optimal risk-to-reward. It also covers SL-hunting setups, helping traders identify liquidity zones, false breakouts, and institutional trap moves for high-probability reversals.",
     features: [
@@ -69,11 +75,11 @@ const CourseDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 py-5">
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
         
         {/* Header */}
-        <div className="mb-2">
+        <div className="mb-4">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             {course.title}
           </h1>
@@ -95,6 +101,21 @@ const CourseDetail = () => {
             {course.students}+ students
           </div>
         </div>
+
+       
+{/* Course Image */}
+<div className="mb-8 rounded-xl overflow-hidden w-full 
+                aspect-[16/10] max-h-[420px] sm:max-h-[480px] md:max-h-[520px] mx-auto">
+  <img
+    src={course.image}
+    alt={course.title}
+    className="w-full h-full object-cover"
+  />
+</div>
+
+
+
+
 
         {/* Description */}
         <div className="mb-8">

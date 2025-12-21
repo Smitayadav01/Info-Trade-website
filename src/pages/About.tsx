@@ -133,7 +133,7 @@ const About = () => {
               </h2>
               <div className="space-y-6 text-gray-600 leading-relaxed">
                 <p>
-                  Founded in the heart of Mumbai's financial district, TezTraders Pro began with a simple yet powerful vision: 
+                  Founded in the heart of Mumbai's financial district, TezTraders began with a simple yet powerful vision: 
                   to democratize access to institutional-grade algorithmic trading for retail investors and traders.
                 </p>
                 <p>
@@ -235,7 +235,7 @@ const About = () => {
               Meet Our Team
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The passionate individuals behind TezTraders Pro's success and innovation.
+              The passionate individuals behind TezTraders success and innovation.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
