@@ -7,28 +7,28 @@ const PMS = () => {
     {
       name: "Conservative Growth",
       risk: "Low Risk",
-      returns: "15-20% Annual",
-      minInvestment: "₹30 Lakhs",
+      returns: "22-25% Annual",
+      minInvestment: "₹50 Lakhs",
       description: "Stable growth with capital protection focus",
-      features: ["Blue-chip stocks", "Government bonds", "Dividend-focused", "Low volatility"],
+      features: ["Max risk 0.8%", "Steady returns", "Suitable for low risk investors", "Low volatility"],
       color: "emerald"
     },
     {
       name: "Balanced Portfolio",
       risk: "Medium Risk",
-      returns: "25-30% Annual",
-      minInvestment: "₹20 Lakhs",
+      returns: "35-40% Annual",
+      minInvestment: "₹30 Lakhs",
       description: "Perfect balance of growth and stability",
-      features: ["Diversified equity", "Corporate bonds", "Sector rotation", "Risk management"],
+      features: ["Max risk 1.2%", "Higher potential returns", "Suitable for balanced investors", "Mid volatility"],
       color: "blue"
     },
     {
       name: "Aggressive Growth",
       risk: "High Risk",
-      returns: "50-70% Annual",
-      minInvestment: "₹15 Lakhs",
+      returns: "60-70% Annual",
+      minInvestment: "₹20 Lakhs",
       description: "Maximum growth potential for risk-tolerant investors",
-      features: ["Growth stocks", "Options strategies", "Momentum trading", "Active management"],
+      features: ["Max risk 1.5-2%", "Highest potential returns", "Suitable for risk-tolerance investors", "High volatility"],
       color: "purple"
     }
   ];
@@ -179,9 +179,19 @@ const PMS = () => {
                     ))}
                   </div>
                   
-                  <button className={`w-full bg-gradient-to-r ${colors.button} text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg`}>
-                    Choose This Portfolio
-                  </button>
+                  <Link
+  to={`/portfolio/${portfolio.name
+    .toLowerCase()
+    .includes("conservative")
+    ? "conservative"
+    : portfolio.name.toLowerCase().includes("balanced")
+    ? "balanced"
+    : "aggressive"}`}
+  className={`block text-center w-full bg-gradient-to-r ${colors.button} text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105`}
+>
+  Choose This Portfolio
+</Link>
+
                 </div>
               );
             })}

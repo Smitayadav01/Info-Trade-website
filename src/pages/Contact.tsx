@@ -81,7 +81,7 @@ const Contact = () => {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email Us",
-      details: "tejtraders@gmail.com",
+      details: "tejtraders99@gmail.com",
       description: "Send us an email anytime"
     },
     {
@@ -299,7 +299,7 @@ const Contact = () => {
 
             {/* Right Side - Additional Info */}
             <div className="space-y-8">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100">
+              {/* <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100">
                 <div className="flex items-center mb-6">
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-2 rounded-lg mr-3">
                     <TrendingUp className="h-6 w-6 text-white" />
@@ -336,7 +336,7 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="bg-white border-2 border-gray-100 rounded-2xl p-8">
                 <div className="flex items-center mb-4">
@@ -375,12 +375,15 @@ const Contact = () => {
                   >
                     Call Trading Desk
                   </a>
-                  <a
-                    href="mailto:hello@TezTraderspro.in"
-                    className="bg-white text-emerald-600 px-4 py-2 rounded-lg font-medium border border-emerald-200 hover:border-emerald-300 transition-colors duration-200 text-center"
-                  >
-                    Email Support
-                  </a>
+                 <a
+  href="https://mail.google.com/mail/?view=cm&fs=1&to=tejtraders99@gmail.com"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="bg-white text-emerald-600 px-4 py-2 rounded-lg font-medium border border-emerald-200 hover:border-emerald-300 transition-colors duration-200 text-center inline-block"
+>
+  Email Support
+</a>
+
                 </div>
               </div>
             </div>

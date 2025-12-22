@@ -49,15 +49,14 @@ const Footer = () => {
   const socialLinks = [
     { icon: <Twitter className="h-5 w-5" />, href: "https://x.com/Deltatrader99", name: "Twitter" },
     // { icon: <Linkedin className="h-5 w-5" />, href: "#", name: "LinkedIn" },
-    { icon: <FaTelegramPlane className="h-5 w-5" />, href: "http://www.telegram.me/Thetalovers99", name: "Telegram" },
+    { icon: <FaTelegramPlane className="h-5 w-5" />, href: "http://www.telegram.me/teztraders", name: "Telegram" },
     // { icon: <Github className="h-5 w-5" />, href: "#", name: "GitHub" },
-    // { icon: <Instagram className="h-5 w-5" />, href: "#", name: "Instagram" }/
+    // { icon: <Instagram className="h-5 w-5" />, href: "#", name: "Instagram" }/a
   ];
 
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
     { name: "notification", href: "/notifications" },
     { name: "Contact", href: "/contact" }
   ];
@@ -90,7 +89,7 @@ const Footer = () => {
             </Link>
             <p className="text-gray-400 mb-6 max-w-md">
               Master the markets with AI-powered algorithmic trading. 
-              Join thousands of traders already maximizing their profits with TezTraders Pro.
+              Join Community of traders already maximizing their profits with TezTraders.
             </p>
             
             {/* Contact Info */}
@@ -179,7 +178,7 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Signup */}
-       <div className="border-t border-gray-800 pt-8 mt-12">
+       {/* <div className="border-t border-gray-800 pt-8 mt-12">
   <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
     <div>
       <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
@@ -189,7 +188,7 @@ const Footer = () => {
     </div>
 
     <form onSubmit={handleSubscribe} className="w-full md:w-auto">
-      {/* Wrapper */}
+    
       <div className="relative flex md:static md:flex-row w-full md:w-auto">
         <input
           type="email"
@@ -201,7 +200,7 @@ const Footer = () => {
                      text-white placeholder-gray-400"
         />
 
-        {/* Button */}
+      
         <button
           type="submit"
           disabled={isLoading}
@@ -233,7 +232,7 @@ const Footer = () => {
       {message}
     </div>
   )}
-</div>
+</div> */}
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 mt-8">

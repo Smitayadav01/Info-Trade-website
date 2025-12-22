@@ -37,12 +37,12 @@ const Home = () => {
   // ];
 
   const benefits = [
-    "Algorithmic options trading strategies",
+    "Expert PMS services",
     "Real-time market data and analysis", 
-    "Multi-exchange connectivity",
+    "Multi diversified systems",
     "Automated risk management",
-    "Custom trading algorithms",
-    "Advanced backtesting tools"
+    "Varied Courses",
+    "Personal mentorship"
   ];
 
   return (
@@ -206,7 +206,7 @@ const Home = () => {
                 <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent"> Trade Profitably</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Our comprehensive trading platform provides all the tools and algorithms you need to execute 
+                Our comprehensive trading platform provides all the programs and services you need to execute 
                 profitable trades, manage risk effectively, and achieve consistent returns in the markets.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">

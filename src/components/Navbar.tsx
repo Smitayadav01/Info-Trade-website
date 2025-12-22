@@ -25,9 +25,9 @@ const Navbar = () => {
   <img
     src={logo}
     alt="TezTraders Logo"
-    className="h-14 w-auto object-contain"
+    className="h-16 w-18 object-contain"
   />
-  <span className="text-xl font-bold text-gray-900">
+  <span className="text-2xl font-bold text-blue-900">
     TezTraders
   </span>
 </Link>
