@@ -245,7 +245,8 @@ const CourseDetail = () => {
     </div>
 
     <div className="w-full md:w-auto">
-  <RazorpayEnrollButton />
+  <RazorpayEnrollButton courseId={course.id} />
+
 </div>
 
   </div>
