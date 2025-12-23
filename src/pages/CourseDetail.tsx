@@ -4,6 +4,8 @@ import { Star, Clock, Users, CheckCircle } from 'lucide-react';
 import optionsImg from '../assets/courses/options-selling.jpg';
 import algoImg from '../assets/courses/algo-trading.jpg';
 import slHuntingImg from '../assets/courses/sl-hunting.jpg';
+import RazorpayEnrollButton from "../components/RazorpayEnrollButton";
+
 
 const courses = [
   {
@@ -242,9 +244,10 @@ const CourseDetail = () => {
       </span>
     </div>
 
-    <button className="w-full md:w-auto bg-gradient-to-r from-emerald-600 to-green-600 text-white px-10 py-3 rounded-lg font-semibold hover:scale-105 transition">
-      Enroll Now
-    </button>
+    <div className="w-full md:w-auto">
+  <RazorpayEnrollButton />
+</div>
+
   </div>
 </div>
 

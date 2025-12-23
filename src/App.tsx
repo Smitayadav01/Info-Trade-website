@@ -20,6 +20,8 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import PortfolioDetails from "./pages/PortfolioDetails";
+import PaymentSuccess from "./pages/PaymentSuccess";
+
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
   <Route path="/terms" element={<Terms />} />
   <Route path="/cookies" element={<Cookies />} />
   <Route path="/portfolio/:type" element={<PortfolioDetails />} />
+  <Route path="/payment-success" element={<PaymentSuccess />} />
+
             </Routes>
           </main>
           <Footer />
