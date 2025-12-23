@@ -23,6 +23,28 @@ const courses = [
       "Greeks analysis",
       "Income generation",
       "Risk hedging"
+    ],
+    faqs: [
+      {
+        question: "Is this course suitable for beginners?",
+        answer:
+          "This program is best suited for traders who have basic knowledge of options. It focuses on institutional-level options selling concepts."
+      },
+      {
+        question: "What kind of strategies are taught?",
+        answer:
+          "You will learn non-directional and hedged options selling strategies designed for consistent income generation."
+      },
+      {
+        question: "How much capital is required?",
+        answer:
+          "A minimum capital of ₹2–3 lakhs is recommended to effectively implement the strategies taught."
+      },
+      {
+        question: "Does it cover risk management?",
+        answer:
+        "Yes, strong emphasis is given to drawdown control, hedging techniques, and risk-to-reward optimization."
+      }
     ]
   },
   {
@@ -42,6 +64,28 @@ const courses = [
       "Back-testing",
       "Risk management",
       "Live trading sessions"
+    ],
+    faqs: [
+      {
+        question: "Do I need coding knowledge?",
+        answer:
+          "Basic programming understanding is helpful, but the course starts from fundamentals and explains concepts step-by-step."
+      },
+      {
+        question: "Will I learn live strategy deployment?",
+        answer:
+          "Yes, the course covers strategy deployment with real-time market execution and risk controls."
+      },
+      {
+        question: "Is backtesting included?",
+        answer:
+          "Yes, you will learn how to backtest strategies using historical data and optimize performance."
+      },
+      {
+        question: "Which markets are covered?",
+        answer:
+          "The program focuses mainly on Indian equity and index markets."
+      }
     ]
   },
   {
@@ -61,6 +105,28 @@ const courses = [
       "Entry modules",
       "Hero-zero strategy",
       "Risk control"
+    ],
+    faqs: [
+      {
+        question: "What is SL hunting?",
+        answer:
+          "SL hunting refers to identifying institutional stop-loss zones and trading high-probability reversals."
+      },
+      {
+        question: "Is this course suitable for intraday traders?",
+        answer:
+          "Yes, the course is ideal for intraday and short-term options buyers."
+      },
+      {
+        question: "What is the Hero-Zero strategy?",
+        answer:
+          "It focuses on controlled risk trades with the potential for high reward while strictly managing losses."
+      },
+      {
+        question: "Will this help improve entry timing?",
+        answer:
+          "Yes, precise entry and exit rules are a core part of this course."
+      }
     ]
   }
 ];
@@ -78,8 +144,8 @@ const CourseDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-5">
-      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen bg-gray-50 py-5 flex flex-col">
+      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8 flex flex-col">
         
         {/* Header */}
         <div className="mb-4">
@@ -140,17 +206,49 @@ const CourseDetail = () => {
             ))}
           </div>
         </div>
+        {/* FAQs */}
+<div className="mb-8">
+  <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
 
-        {/* Price & CTA */}
-        <div className="border-t pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-3xl font-bold text-gray-900">
-            <span className="text-3xl font-bold text-gray-900">{course.price}</span>
-                      <span className="text-lg text-gray-500 line-through">{course.originalPrice}</span>
-          </div>
-          <button className="bg-gradient-to-r from-emerald-600 to-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:scale-105 transition">
-            Enroll Now
-          </button>
-        </div>
+  <div className="space-y-4">
+    {course.faqs.map((faq, index) => (
+      <details
+        key={index}
+        className="group border border-gray-200 rounded-lg p-4 cursor-pointer"
+      >
+        <summary className="flex justify-between items-center font-semibold text-gray-900">
+          {faq.question}
+          <span className="text-emerald-600 group-open:rotate-180 transition">
+            ▼
+          </span>
+        </summary>
+        <p className="mt-3 text-gray-600 leading-relaxed">
+          {faq.answer}
+        </p>
+      </details>
+    ))}
+  </div>
+</div>
+
+
+        {/* Sticky Price & CTA (Stops before footer) */}
+<div className="sticky bottom-0 bg-white border-t shadow-md mt-10">
+  <div className="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+
+    <div className="text-2xl font-bold text-gray-900">
+      <span>{course.price}</span>
+      <span className="ml-3 text-lg text-gray-500 line-through">
+        {course.originalPrice}
+      </span>
+    </div>
+
+    <button className="w-full md:w-auto bg-gradient-to-r from-emerald-600 to-green-600 text-white px-10 py-3 rounded-lg font-semibold hover:scale-105 transition">
+      Enroll Now
+    </button>
+  </div>
+</div>
+
+
       </div>
     </div>
   );

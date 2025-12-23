@@ -1,5 +1,7 @@
 import React from 'react';
 import { Users, Target, Award, TrendingUp, CheckCircle, Brain, Shield, Globe, Heart, BarChart3, LineChart } from 'lucide-react';
+import logo from "../assets/logo.png";
+
 
 const About = () => {
   const values = [
@@ -93,8 +95,14 @@ const About = () => {
       <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl w-fit mx-auto mb-6">
-              <LineChart className="h-8 w-8 text-white" />
+            <div className=" p-3 rounded-xl w-fit mx-auto mb-6">
+              
+  <img
+    src={logo}
+    className="h-16 w-18 object-contain"
+  />
+  
+
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               About <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">TezTraders</span>
