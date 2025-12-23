@@ -7,14 +7,14 @@ const PaymentSuccess = () => {
 
         {/* Success Icon */}
         <div className="flex justify-center mb-4">
-          <CheckCircle className="text-blue-600 w-16 h-16" />
+          <CheckCircle className="text-emerald-600 w-16 h-16" />
         </div>
 
         {/* Heading */}
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Thank You! 🎉
         </h1>
-        <p className="text-lg text-blue-600 font-semibold mb-6">
+        <p className="text-lg text-emerald-600 font-semibold mb-6">
           Payment Successful
         </p>
 
@@ -27,14 +27,14 @@ const PaymentSuccess = () => {
         {/* Steps */}
         <div className="text-left space-y-4 mb-8">
           <div className="flex items-start gap-3">
-            <span className="font-bold text-blue-600">Step 1.</span>
+            <span className="font-bold text-emerald-600">Step 1.</span>
             <p className="text-gray-700">
               Click the WhatsApp button below and open chat with our team.
             </p>
           </div>
 
           <div className="flex items-start gap-3">
-            <span className="font-bold text-blue-600">Step 2.</span>
+            <span className="font-bold text-emerald-600">Step 2.</span>
             <p className="text-gray-700">
               Send your <strong>payment screenshot</strong> along with your
               <strong> registered name and telegram id</strong>.
@@ -42,7 +42,7 @@ const PaymentSuccess = () => {
           </div>
 
           <div className="flex items-start gap-3">
-            <span className="font-bold text-blue-600">Step 3.</span>
+            <span className="font-bold text-emerald-600">Step 3.</span>
             <p className="text-gray-700">
               Our team will verify your payment and you will be instantly
               <strong> added to the official course group</strong>.
