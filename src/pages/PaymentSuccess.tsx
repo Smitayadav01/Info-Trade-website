@@ -1,4 +1,4 @@
-import { CheckCircle } from "lucide-react";
+import { CheckCircle,AlertTriangle } from "lucide-react";
 
 const PaymentSuccess = () => {
   return (
@@ -23,6 +23,21 @@ const PaymentSuccess = () => {
           Your payment has been received successfully.  
           Please complete the steps below to get access to your course.
         </p>
+
+
+        {/* ⚠ Alert Box */}
+        <div className="flex items-start gap-3 bg-yellow-50 border border-yellow-300 rounded-lg p-4 mb-8 text-left">
+          <AlertTriangle className="text-yellow-600 w-6 h-6 mt-0.5" />
+          <div>
+            <p className="font-semibold text-yellow-800">
+              Read Carefully
+            </p>
+            <p className="text-sm text-yellow-700">
+              Course access is provided <strong>only after manual verification</strong>.
+              Please follow all the steps below correctly to avoid delays.
+            </p>
+          </div>
+        </div>
 
         {/* Steps */}
         <div className="text-left space-y-4 mb-8">
