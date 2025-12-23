@@ -1,28 +1,37 @@
 import { CheckCircle } from "lucide-react";
 import { useLocation, Navigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 
 const PaymentSuccess = () => {
-     const location = useLocation();
-  const params = new URLSearchParams(location.search);
+  const location = useLocation();
+  const [allowed, setAllowed] = useState(false);
 
-  const paymentId = params.get("razorpay_payment_id");
-  const paymentStatus = params.get("razorpay_payment_link_status");
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
 
-  // 🚫 Block random access
-  if (!paymentId || paymentStatus !== "paid") {
+    const paymentId =
+      params.get("razorpay_payment_id") ||
+      params.get("payment_id");
+
+    // ✅ Allow page if user came via Razorpay redirect
+    if (paymentId || document.referrer.includes("razorpay")) {
+      setAllowed(true);
+    }
+  }, [location]);
+
+  // ⏳ Wait before decision
+  if (!allowed) {
     return <Navigate to="/" replace />;
   }
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-xl w-full bg-white rounded-xl shadow-lg p-8 text-center">
 
-        {/* Success Icon */}
         <div className="flex justify-center mb-4">
           <CheckCircle className="text-emerald-600 w-16 h-16" />
         </div>
 
-        {/* Heading */}
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Thank You! 🎉
         </h1>
@@ -30,39 +39,23 @@ const PaymentSuccess = () => {
           Payment Successful
         </p>
 
-        {/* Info */}
         <p className="text-gray-600 mb-6">
-          Your payment has been received successfully.  
+          Your payment has been received successfully.
           Please complete the steps below to get access to your course.
         </p>
 
-        {/* Steps */}
         <div className="text-left space-y-4 mb-8">
-          <div className="flex items-start gap-3">
-            <span className="font-bold text-emerald-600">Step 1.</span>
-            <p className="text-gray-700">
-              Click the WhatsApp button below and open chat with our team.
-            </p>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <span className="font-bold text-emerald-600">Step 2.</span>
-            <p className="text-gray-700">
-              Send your <strong>payment screenshot</strong> along with your
-              <strong> registered name and telegram id</strong>.
-            </p>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <span className="font-bold text-emerald-600">Step 3.</span>
-            <p className="text-gray-700">
-              Our team will verify your payment and you will be instantly
-              <strong> added to the official course group</strong>.
-            </p>
-          </div>
+          <p><strong>Step 1:</strong> Click the WhatsApp button below.</p>
+          <p>
+            <strong>Step 2:</strong> Send your <b>payment screenshot</b>,
+            registered name and <b>Telegram ID</b>.
+          </p>
+          <p>
+            <strong>Step 3:</strong> Our team will verify and add you to the
+            <b> official course group</b>.
+          </p>
         </div>
 
-        {/* WhatsApp Button */}
         <a
           href="https://wa.me/919453980510"
           target="_blank"
@@ -72,7 +65,6 @@ const PaymentSuccess = () => {
           Go to WhatsApp
         </a>
 
-        {/* Footer Note */}
         <p className="text-sm text-gray-500 mt-6">
           ⚠ Please do not refresh or close this page before contacting us.
         </p>
