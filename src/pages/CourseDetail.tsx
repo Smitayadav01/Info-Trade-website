@@ -175,14 +175,29 @@ const CourseDetail = () => {
 
        
 {/* Course Image */}
-<div className="mb-8 rounded-xl overflow-hidden w-full 
-                aspect-[16/10] max-h-[420px] sm:max-h-[480px] md:max-h-[520px] mx-auto">
+<div
+  className="
+    mb-8 
+    rounded-xl 
+    overflow-hidden 
+    w-full 
+    bg-white-100 
+    flex 
+    items-center 
+    justify-center
+    h-[220px] 
+    sm:h-[300px] 
+    md:h-[380px] 
+    lg:h-[450px]
+  "
+>
   <img
     src={course.image}
     alt={course.title}
-    className="w-full h-full object-cover"
+    className="max-w-full max-h-full object-contain"
   />
 </div>
+
 
 
 
