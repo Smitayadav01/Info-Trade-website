@@ -40,7 +40,7 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
-    const transporter = createTransporter();
+    const transporter = createTransport();
 
     // Email to website owner
     const ownerMailOptions = {

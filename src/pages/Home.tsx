@@ -233,7 +233,7 @@ const Home = () => {
                   <LineChart className="h-16 w-16 text-blue-600 mb-6" />
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">Proven Performance</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Join thousands of successful traders who have achieved consistent profits using our 
+                    Join community of successful traders who have achieved consistent profits using our 
                     AI-powered algorithms and advanced risk management systems.
                   </p>
                 </div>

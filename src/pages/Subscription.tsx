@@ -174,10 +174,10 @@ const Subscription = () => {
               Let AI handle your trades while you focus on what matters most.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
-              <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group">
+              {/* <button className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group">
                 Start Free Trial
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
+              </button> */}
               <button className="bg-white text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold border border-gray-300 hover:border-purple-300 hover:text-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                 View Live Performance
               </button>
@@ -186,7 +186,7 @@ const Subscription = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -202,7 +202,6 @@ const Subscription = () => {
         </div>
       </section>
 
-      {/* Algorithms Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -245,7 +244,6 @@ const Subscription = () => {
         </div>
       </section>
 
-      {/* Pricing Plans */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -309,7 +307,22 @@ const Subscription = () => {
             })}
           </div>
         </div>
+      </section> */}
+
+
+
+
+<section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold italic text-gray-900 mb-4 animate-fade-in ">
+            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">COMING SOON....</span>  
+            </h2>
+          </div>
+        </div>
       </section>
+
+
 
       {/* Features Section */}
       <section className="py-20 bg-gray-50">
@@ -350,14 +363,14 @@ const Subscription = () => {
             Ready to Automate Your Trading?
           </h2>
           <p className="text-xl text-purple-100 mb-10 leading-relaxed animate-slide-up">
-            Join thousands of traders who have automated their success with our algorithmic trading platform. 
+            Join community of traders who have automated their success with our algorithmic trading platform. 
             Start your free trial today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
-            <button className="bg-white text-purple-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group">
+            {/* <button className="bg-white text-purple-600 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group">
               Start 14-Day Free Trial
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
+            </button> */}
             <Link
               to="/contact"
               className="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-semibold border-2 border-white hover:bg-white hover:text-purple-600 transition-all duration-300 transform hover:scale-105"

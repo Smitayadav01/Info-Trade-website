@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Star, Clock, Users, CheckCircle } from 'lucide-react';
 import optionsImg from '../assets/courses/options-selling.jpg';
 import algoImg from '../assets/courses/algo-trading.jpg';
 import slHuntingImg from '../assets/courses/sl-hunting.jpg';
 import RazorpayEnrollButton from "../components/RazorpayEnrollButton";
-
+import { Plus, Minus } from "lucide-react";
 
 const courses = [
   {
@@ -47,7 +47,18 @@ const courses = [
         answer:
         "Yes, strong emphasis is given to drawdown control, hedging techniques, and risk-to-reward optimization."
       }
-    ]
+    ],
+    modules:[
+  "Basics of Option Selling",
+"Option Greeks",
+"Non-Directional Selling-1",
+"Non-Directional Selling-2",
+"Directional Options Selling-1",
+"Directional Options Selling-2",
+"Expiry Day Best Setup",
+"Positional Strategy-1",
+"Positional Strategy-2",
+]
   },
   {
     id: "2",
@@ -87,8 +98,104 @@ const courses = [
         question: "Which markets are covered?",
         answer:
           "The program focuses mainly on Indian equity and index markets."
-      }
-    ]
+      },
+      {
+  question: "Is this options program suitable for both buyers and sellers?",
+  answer: (
+    <>
+      <p>
+        Yes! Our in-depth options trading program is designed to teach both
+        major approaches to options trading.
+      </p>
+
+      <p className="mt-4 font-semibold">For Options Buyers:</p>
+      <ul className="list-disc ml-6">
+        <li>Practical call and put buying techniques</li>
+        <li>Identifying the right entry and exit points</li>
+        <li>Managing risk while trading option premiums</li>
+      </ul>
+
+      <p className="mt-4 font-semibold">For Options Sellers:</p>
+      <ul className="list-disc ml-6">
+        <li>Smart premium-earning methods</li>
+        <li>Advanced option selling setups such as iron condors</li>
+      </ul>
+
+      <p className="mt-4">
+        No matter whether your focus is on buying or selling options, this
+        course equips you with the skills you need to trade confidently.
+      </p>
+    </>
+  )
+},
+  {
+  question: "How much time do I need to commit each week for this course?",
+  answer: (
+    <>
+      <p>
+        This course is designed with busy professionals in mind, requiring a flexible commitment of just 3–4 hours per week.
+      </p>
+
+      <p className="mt-4 font-semibold">Time Breakdown:</p>
+      <ul className="list-disc ml-6">
+        <li>1–2 hours: Live weekend sessions or recorded classes</li>
+        <li>1 hour: Hands-on practice</li>
+        <li>30–60 minutes: Community participation and Q&A</li>
+        <li>Optional: Extra practice time for faster progress</li>
+      </ul>
+
+      <p className="mt-4 font-semibold">Flexible Scheduling Features:</p>
+      <ul className="list-disc ml-6">
+        <li>Self-paced video modules</li>
+        <li>Weekend-focused live sessions</li>
+        <li>Mobile-friendly platform for learning on the go</li>
+        <li>Lifetime access, so there’s no pressure to rush through the content</li>
+      </ul>
+
+      <p className="mt-4">
+        This options trading course respects your time while ensuring consistent learning and real results.
+      </p>
+    </>
+  )
+},
+{
+  question: "Why is this course rated as one of the best options trading programs?",
+  answer: (
+    <>
+      <p>
+        Our results truly speak for themselves, which is why students consistently rate us among the top options trading courses.
+      </p>
+
+      <p className="mt-4 font-semibold">What Makes Us Different:</p>
+      <ul className="list-disc ml-6">
+        <li>Live trading sessions with real market examples</li>
+        <li>Personalized feedback on your individual trades</li>
+        <li>Access to a strong community of successful options traders</li>
+        <li>Lifetime support along with continuous course updates</li>
+      </ul>
+
+      <p className="mt-4">
+        Join one of the best options trading courses online and experience firsthand why traders trust and recommend this program.
+      </p>
+    </>
+  )
+}
+
+],
+    modules:[
+  "Introduction to Algo Trading",
+  "Importance of diversified systems",
+  "Non-directional systems",
+  "Directional systems",
+  "Semi-directional systems",
+  "Cascading systems",
+  "Mean reversion",
+  "Positional systems",
+  "STBT & BTST's",
+  "Buying systems",
+  "Do's & Don'ts of systematic trading",
+
+]
   },
   {
     id: "3",
@@ -129,13 +236,33 @@ const courses = [
         answer:
           "Yes, precise entry and exit rules are a core part of this course."
       }
-    ]
+    ],
+    modules:[
+  "Introduction to Options Trading",
+"Price Action",
+"Fibonacci Trading Setup",
+"Indicators Trading Setup",
+"Advance Scalping Strategies",
+"Introduction to SL Hunting",
+"Basics of SL Hunting",
+"SL Hunting Masterclass",
+"Entry Module Using SL Hunting",
+"How to Trade Gap Up & Gap Down Using SL Hunting",
+"Hero Zero Using SL Hunting",
+"Breakout Failure Using SL Hunting",
+"Complete Entry Using SL Hunting"
+]
   }
 ];
+
+
+
 
 const CourseDetail = () => {
   const { id } = useParams();
   const course = courses.find(c => c.id === id);
+  const [showAllModules, setShowAllModules] = useState(false);
+
 
   if (!course) {
     return (
@@ -223,6 +350,52 @@ const CourseDetail = () => {
             ))}
           </div>
         </div>
+{/* Modules */}
+<div className="mb-10">
+  <h2 className="text-2xl font-bold mb-6">Course Modules</h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {(showAllModules ? course.modules : course.modules.slice(0, 4)).map(
+      (module, index) => (
+        <div
+          key={index}
+          className="flex items-center gap-4 p-4 border rounded-lg bg-gray-50"
+        >
+          <div className="w-7 h-7 flex items-center justify-center rounded-full bg-emerald-600 text-white font-bold">
+            {index + 1}
+          </div>
+          <span className="font-medium text-gray-800">{module}</span>
+        </div>
+      )
+    )}
+  </div>
+
+  {/* Read More / Read Less */}
+  {course.modules.length > 4 && (
+    <div className="mt-6 text-center">
+      <button
+  onClick={() => setShowAllModules(!showAllModules)}
+  className="flex items-center gap-2 text-emerald-600 font-semibold hover:underline"
+>
+  {showAllModules ? (
+    <>
+      <Minus size={18} />
+      Read Less Modules
+    </>
+  ) : (
+    <>
+      <Plus size={18} />
+      Read Full Modules
+    </>
+  )}
+</button>
+    </div>
+  )}
+</div>
+
+
+
+
         {/* FAQs */}
 <div className="mb-8">
   <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
