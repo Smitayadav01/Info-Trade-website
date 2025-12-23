@@ -49,8 +49,10 @@ function App() {
   <Route path="/terms" element={<Terms />} />
   <Route path="/cookies" element={<Cookies />} />
   <Route path="/portfolio/:type" element={<PortfolioDetails />} />
-  <Route path="/payment-success" element={<PaymentSuccess />} />
-
+  <Route
+  path="/payment-success-9fA7xQ2LmP81ZkR4T6WcA2025"
+  element={<PaymentSuccess />}
+/>
             </Routes>
           </main>
           <Footer />
