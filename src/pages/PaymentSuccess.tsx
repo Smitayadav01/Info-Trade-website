@@ -1,6 +1,18 @@
 import { CheckCircle } from "lucide-react";
+import { useLocation, Navigate } from "react-router-dom";
+
 
 const PaymentSuccess = () => {
+     const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  const paymentId = params.get("razorpay_payment_id");
+  const paymentStatus = params.get("razorpay_payment_link_status");
+
+  // 🚫 Block random access
+  if (!paymentId || paymentStatus !== "paid") {
+    return <Navigate to="/" replace />;
+  }
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-xl w-full bg-white rounded-xl shadow-lg p-8 text-center">
