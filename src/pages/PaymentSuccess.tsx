@@ -37,15 +37,15 @@ const PaymentSuccess = () => {
             <span className="font-bold text-emerald-600">Step 2.</span>
             <p className="text-gray-700">
               Send your <strong>payment screenshot</strong> along with your
-              <strong> registered name and course name</strong>.
+              <strong> registered name and telegram id</strong>.
             </p>
           </div>
 
           <div className="flex items-start gap-3">
             <span className="font-bold text-emerald-600">Step 3.</span>
             <p className="text-gray-700">
-              Our team will verify your payment and you will be
-              <strong> added to the official course WhatsApp group</strong>.
+              Our team will verify your payment and you will be instantly
+              <strong> added to the official course group</strong>.
             </p>
           </div>
         </div>
