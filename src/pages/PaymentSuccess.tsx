@@ -7,14 +7,14 @@ const PaymentSuccess = () => {
 
         {/* Success Icon */}
         <div className="flex justify-center mb-4">
-          <CheckCircle className="text-emerald-600 w-16 h-16" />
+          <CheckCircle className="text-blue-600 w-16 h-16" />
         </div>
 
         {/* Heading */}
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Thank You! 🎉
         </h1>
-        <p className="text-lg text-emerald-600 font-semibold mb-6">
+        <p className="text-lg text-blue-600 font-semibold mb-6">
           Payment Successful
         </p>
 
