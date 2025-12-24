@@ -158,12 +158,15 @@ app.post('/api/contact', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to send message. Please try again later.'
-    });
-  }
+  console.error("CONTACT API ERROR ↓↓↓");
+  console.error(error.message);
+  console.error(error.stack);
+
+  res.status(500).json({
+    success: false,
+    message: error.message || "Server error",
+  });
+}
 });
 
 // Newsletter subscription endpoint
