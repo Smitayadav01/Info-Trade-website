@@ -43,52 +43,50 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!validateForm()) return;
+  if (!validateForm()) return;
 
-    setIsLoading(true);
-    setErrors({});
+  setIsLoading(true);
+  setErrors({});
 
-    try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Try to login with credentials
-      const loginSuccess = await loginWithCredentials(formData.email, formData.password);
-      
-      if (!loginSuccess) {
-        setErrors({ 
-          general: 'Invalid email or password. Please check your credentials or sign up if you don\'t have an account.' 
-        });
-        return;
-      }
+  try {
+    const loginSuccess = await loginWithCredentials(
+      formData.email,
+      formData.password
+    );
 
-      // Send login notification email
-      try {
-        await fetch('http://localhost:5000/api/login-notification', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: user?.name,
-            email: user?.email
-          }),
-        });
-      } catch (error) {
-        console.warn('Login notification service unavailable:', error);
-        // Continue with login even if notification fails
-      }
-
-      navigate('/');
-    } catch (error) {
-      console.error('Login error:', error);
-      setErrors({ general: 'Unable to connect to server. Please try again later.' });
-    } finally {
-      setIsLoading(false);
+    if (!loginSuccess) {
+      setErrors({
+        general: "Invalid email or password.",
+      });
+      return;
     }
-  };
+
+    // Send login notification (non-blocking)
+    fetch("https://algotrade-pro.onrender.com/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.email.split("@")[0],
+        email: formData.email,
+      }),
+    }).catch(() => {
+      console.warn("Login notification failed");
+    });
+
+    navigate("/");
+  } catch (error) {
+    setErrors({
+      general: "Unable to connect to server.",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">

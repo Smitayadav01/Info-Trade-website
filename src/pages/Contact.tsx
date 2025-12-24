@@ -22,60 +22,62 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      setSubmitStatus({
-        type: 'error',
-        message: 'Please fill in all required fields'
-      });
-      return;
-    }
+  e.preventDefault();
 
-    setIsLoading(true);
-    setSubmitStatus({ type: null, message: '' });
-    
-    try {
-      const response = await fetch('https://TezTraders-pro.onrender.com/api/contact', {
-        method: 'POST',
+  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    setSubmitStatus({
+      type: 'error',
+      message: 'Please fill in all required fields'
+    });
+    return;
+  }
+
+  setIsLoading(true);
+  setSubmitStatus({ type: null, message: '' });
+
+  try {
+    const response = await fetch(
+      "https://algotrade-pro.onrender.com/api/contact", // ✅ lowercase
+      {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSubmitStatus({
-          type: 'success',
-          message: data.message
-        });
-        setFormData({
-          name: '',
-          email: '',
-          company: '',
-          subject: '',
-          message: '',
-          inquiryType: 'general'
-        });
-      } else {
-        setSubmitStatus({
-          type: 'error',
-          message: data.message || 'Failed to send message'
-        });
       }
-    } catch (error) {
-      console.error('Contact form error:', error);
-      setSubmitStatus({
-        type: 'error',
-        message: 'Unable to connect to server. Please make sure the backend is running on port 5000.'
-      });
-    } finally {
-      setIsLoading(false);
+    );
+
+    if (!response.ok) {
+      throw new Error("Server error");
     }
-  };
+
+    const data = await response.json();
+
+    setSubmitStatus({
+      type: 'success',
+      message: data.message || 'Message sent successfully!'
+    });
+
+    setFormData({
+      name: '',
+      email: '',
+      company: '',
+      subject: '',
+      message: '',
+      inquiryType: 'general'
+    });
+
+  } catch (error) {
+    console.error("Contact form error:", error);
+    setSubmitStatus({
+      type: 'error',
+      message: 'Server is unreachable. Please try again in a few seconds.'
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   const contactInfo = [
     {

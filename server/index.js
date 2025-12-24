@@ -6,14 +6,18 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173",process.env.FRONTEND_URL],
+  origin: [
+    "https://teztraders.in",
+    "https://www.teztraders.in",
+    process.env.FRONTEND_URL
+  ].filter(Boolean),
   methods: ["GET", "POST"],
   credentials: true
 }));
+
 
 app.use(express.json());
 
@@ -40,7 +44,7 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
-    const transporter = createTransport();
+    const transporter = createTransporter();
 
     // Email to website owner
     const ownerMailOptions = {
@@ -262,7 +266,7 @@ app.post('/api/subscribe', async (req, res) => {
 });
 
 // User signup notification endpoint
-app.post('/api/signup-notification', async (req, res) => {
+app.post('/api/signup', async (req, res) => {
   try {
     const { name, email, company } = req.body;
 
@@ -380,7 +384,7 @@ app.post('/api/signup-notification', async (req, res) => {
 });
 
 // User login notification endpoint
-app.post('/api/login-notification', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   try {
     const { name, email } = req.body;
 
@@ -454,6 +458,7 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'Server is running!' });
 });
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
