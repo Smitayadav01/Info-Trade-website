@@ -24,21 +24,16 @@ app.use(express.json());
 // Create transporter for sending emails
 const createTransporter = () => {
   return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true only for 465
+    host: process.env.SMTP_HOST, 
+    port: Number(process.env.SMTP_PORT), 
+    secure: false,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // App Password
+      user: process.env.SMTP_USER, 
+      pass: process.env.SMTP_PASS, 
     },
-    tls: {
-      rejectUnauthorized: false,
-    },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 10000,
   });
 };
+
 
 
 // Contact form endpoint
@@ -57,8 +52,8 @@ app.post('/api/contact', async (req, res) => {
 
     // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM, // ✅ FIXED
+  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
       subject: `New TezTraders Pro Contact: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
@@ -108,7 +103,7 @@ app.post('/api/contact', async (req, res) => {
 
     // Confirmation email to user
     const userMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM,
       to: email,
       subject: 'Thank you for contacting TezTraders Pro - We\'ve received your message',
       html: `
@@ -192,8 +187,8 @@ app.post('/api/subscribe', async (req, res) => {
 
     // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM, // ✅ FIXED
+  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
       subject: 'New Newsletter Subscription - TezTraders Pro',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
@@ -221,7 +216,7 @@ app.post('/api/subscribe', async (req, res) => {
 
     // Confirmation email to subscriber
     const userMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM,
       to: email,
       subject: 'Welcome to TezTraders Pro Newsletter! 🚀',
       html: `
@@ -293,8 +288,8 @@ app.post('/api/signup', async (req, res) => {
 
     // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM, // ✅ FIXED
+  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
       subject: 'New User Registration - TezTraders Pro',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
@@ -338,7 +333,7 @@ app.post('/api/signup', async (req, res) => {
 
     // Welcome email to new user
     const userMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM,
       to: email,
       subject: 'Welcome to TezTraders Pro - Your Trading Journey Begins! 🚀',
       html: `
@@ -411,8 +406,8 @@ app.post('/api/login', async (req, res) => {
 
     // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.OWNER_EMAIL || process.env.EMAIL_USER,
+      from: process.env.EMAIL_FROM, // ✅ FIXED
+  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
       subject: 'User Login Activity - TezTraders Pro',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
