@@ -57,18 +57,22 @@ const Home = () => {
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> AI Trading</span>
             </h1>
             <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Advanced algorithmic trading platform powered by artificial intelligence. Execute profitable 
-              trades in options and equity markets with our proven strategies and risk management systems.
+              Empowering your wealth with data-driven precision. From expert PMS and personalized guidance to cutting-edge Algo systems and trading education, TezTraders is your partner in financial growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               {!isAuthenticated && (
                 <Link
-                  to="/signup"
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group"
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-                </Link>
+  to="/signup"
+  className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-10 py-2 rounded-xl text-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex flex-col items-center group"
+>
+  <span>Login / Sign-up</span>
+
+  <span className="flex items-center text-sm font-normal opacity-90 mt-1">
+    (Get full access)
+    <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+  </span>
+</Link>
+
               )}
               {/* <Link
                 to="/contact"

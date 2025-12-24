@@ -54,13 +54,13 @@ const PortfolioDetails = () => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen py-20">
+    <div className="bg-gray-50 min-h-screen py-8">
       <div className="max-w-5xl mx-auto px-4">
         
         {/* Header Summary */}
-        <div className="bg-white rounded-2xl shadow-md p-8 mb-12 text-center">
+        <div className="bg-white rounded-2xl shadow-md p-8 mb-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl w-fit mx-auto mb-6">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl w-fit mx-auto mb-3">
               <LineChart className="h-8 w-8 text-white" />
             </div>
             {portfolio.name}
@@ -81,7 +81,7 @@ const PortfolioDetails = () => {
         </div>
 
         {/* Details Section */}
-        <div className="bg-white rounded-2xl shadow-md p-8 mb-12">
+        <div className=" p-6 mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             Portfolio Highlights
           </h2>

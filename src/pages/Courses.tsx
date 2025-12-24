@@ -74,7 +74,9 @@ const Courses = () => {
 
   const stats = [
     { number: "1000+", label: "Students Trained" },
-    { number: "95%", label: "Success Rate" }
+    { number: "95%", label: "Success Rate" },
+    { number: "24/7", label: "Community Support" },
+    { number: "Lifetime", label: "Course Access" },
   ];
 
   const getColorClasses = (color: string) => {
@@ -117,7 +119,7 @@ const Courses = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="bg-gradient-to-r from-emerald-600 to-green-600 p-3 rounded-xl w-fit mx-auto mb-6 animate-pulse">
@@ -136,9 +138,12 @@ const Courses = () => {
                 to="/contact"
                 className="bg-white text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold border border-gray-300 hover:border-emerald-300 hover:text-emerald-600 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-xxl"
               >
-                Get Course Consultation 
+                
+                <span className="flex items-center text-xl mt-1 border-black">
+                  Get Course Consultants
+                  <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                </span>
               </Link>
-              <ArrowRight className=" h-5 w-5" />
               
             </div>
           </div>

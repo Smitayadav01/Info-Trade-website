@@ -92,14 +92,14 @@ const About = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className=" p-3 rounded-xl w-fit mx-auto mb-6">
               
   <img
     src={logo}
-    className="h-16 w-18 object-contain"
+    className="h-24 w-22 object-contain"
   />
   
 

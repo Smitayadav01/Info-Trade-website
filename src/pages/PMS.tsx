@@ -99,7 +99,7 @@ const PMS = () => {
   return (
     <div className="bg-white min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20">
+      <section className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-3 rounded-xl w-fit mx-auto mb-6 animate-pulse">
@@ -197,7 +197,7 @@ const PMS = () => {
             })}
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up mt-5">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up mt-14">
               <Link
                 to="/contact"
                 className="bg-gradient-to-r text-blue px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center group border-blue-700"
@@ -211,10 +211,10 @@ const PMS = () => {
             
 
       {/* Benefits Section */}
-      <section className="py-20 bg-white">
+      <section className="py-1 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2 animate-fade-in">
               Why Choose Our PMS?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-up">
