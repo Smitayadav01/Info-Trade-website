@@ -315,7 +315,7 @@ const Courses = () => {
               to="/contact"
               className="bg-transparent text-white px-8 py-4 rounded-xl text-lg font-semibold border-2 border-white hover:bg-white hover:text-emerald-600 transition-all duration-300 transform hover:scale-105"
             >
-              Get Free Consultation
+              Book Consultation
             </Link>
           </div>
         </div>
