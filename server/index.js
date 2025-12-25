@@ -26,7 +26,7 @@ const sendBrevoEmail = async ({ to, subject, html }) => {
     "https://api.brevo.com/v3/smtp/email",
     {
       sender: {
-        name: "TezTraders Pro",
+        name: "TezTraders",
         email: "tejtraders99@gmail.com",
       },
       to: [{ email: to }],
@@ -62,7 +62,7 @@ app.post('/api/contact', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_FROM, // ✅ FIXED
   to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: `New TezTraders Pro Contact: ${subject}`,
+      subject: `New TezTraders Contact: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -102,7 +102,7 @@ app.post('/api/contact', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">This email was sent from the TezTraders Pro contact form</p>
+            <p style="margin: 0; font-size: 14px;">This email was sent from the TezTraders contact form</p>
             <p style="margin: 5px 0 0 0; font-size: 12px;">Received on: ${new Date().toLocaleString()}</p>
           </div>
         </div>
@@ -113,7 +113,7 @@ app.post('/api/contact', async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Thank you for contacting TezTraders Pro - We\'ve received your message',
+      subject: 'Thank you for contacting TezTraders- We\'ve received your message',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -134,17 +134,17 @@ app.post('/api/contact', async (req, res) => {
               <strong>What happens next?</strong>
             </p>
             <ul style="color: #555; line-height: 1.8;">
-              <li>Our trading experts will review your inquiry within 24 hours</li>
+              <li>Our trading experts will review your inquiry within 6 hours</li>
               <li>You'll receive a personalized response about our trading solutions</li>
-              <li>For urgent trading matters, call our trading desk at +91 98765 43210</li>
+              // <li>For urgent trading matters, call our trading desk at +91 98765 43210</li>
             </ul>
             <div style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
               <p style="margin: 0; font-weight: bold;">Ready to start trading?</p>
-              <p style="margin: 5px 0 0 0;">Trading Desk: +91 98765 43210 | Email: tejtraders99@gmail.com</p>
+              <p style="margin: 5px 0 0 0;">Twitter: https://x.com/Deltatrader99 | Email: tejtraders99@gmail.com</p>
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Pro Team</p>
+            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Team</p>
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
@@ -153,7 +153,7 @@ app.post('/api/contact', async (req, res) => {
 
    await sendBrevoEmail({
   to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
-  subject: `New TezTraders Pro Contact: ${subject}`,
+  subject: `New TezTraders Contact: ${subject}`,
   html: ownerMailOptions.html,
 });
 
@@ -205,7 +205,7 @@ app.post('/api/subscribe', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_FROM, // ✅ FIXED
   to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: 'New Newsletter Subscription - TezTraders Pro',
+      subject: 'New Newsletter Subscription - TezTraders',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -224,7 +224,7 @@ app.post('/api/subscribe', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">TezTraders Pro Newsletter System</p>
+            <p style="margin: 0; font-size: 14px;">TezTraders Newsletter System</p>
           </div>
         </div>
       `
@@ -234,11 +234,11 @@ app.post('/api/subscribe', async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Welcome to TezTraders Pro Newsletter! 🚀',
+      subject: 'Welcome to TezTraders Newsletter! 🚀',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
-            <h2 style="margin: 0;">🎉 Welcome to TezTraders Pro!</h2>
+            <h2 style="margin: 0;">🎉 Welcome to TezTraders!</h2>
           </div>
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
@@ -259,11 +259,11 @@ app.post('/api/subscribe', async (req, res) => {
               <p style="margin: 5px 0 0 0;">Get started with our AI-powered algorithms today!</p>
             </div>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Have questions? Reply to this email  tejtraders99@gmail.com or contact our trading desk at +91 98765 43210.
+              Have questions? Reply to this email  tejtraders99@gmail.com.
             </p>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Pro Team</p>
+            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Team</p>
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
@@ -315,7 +315,7 @@ app.post('/api/signup', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_FROM, // ✅ FIXED
   to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: 'New User Registration - TezTraders Pro',
+      subject: 'New User Registration - TezTraders',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -360,16 +360,16 @@ app.post('/api/signup', async (req, res) => {
     const userMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Welcome to TezTraders Pro - Your Trading Journey Begins! 🚀',
+      subject: 'Welcome to TezTraders - Your Trading Journey Begins! 🚀',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
-            <h2 style="margin: 0;">🎉 Welcome to TezTraders Pro!</h2>
+            <h2 style="margin: 0;">🎉 Welcome to TezTraders!</h2>
           </div>
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Congratulations! You've successfully joined TezTraders Pro, India's leading algorithmic trading platform. 
+              Congratulations! You've successfully joined TezTraders, India's leading stock markets learning & algorithmic PMS platform. 
               Your journey to profitable trading starts now.
             </p>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563EB;">
@@ -387,10 +387,10 @@ app.post('/api/signup', async (req, res) => {
               <p style="margin: 5px 0 0 0;">Login to your account and explore our trading services!</p>
             </div>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Need help getting started? Our trading desk is available at +91 98765 43210 or email us at tejtraders99@gmail.com
+              Need help getting started? Our trading desk is available at email us at tejtraders99@gmail.com
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Pro Team</p>
+            <p style="margin: 0; font-size: 14px;">Best regards,<br>The TezTraders Team</p>
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
