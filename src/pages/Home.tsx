@@ -4,6 +4,23 @@ import { ArrowRight, Shield, Brain, Target, BarChart3, TrendingUp, CheckCircle, 
 import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+  const words = [
+    "AI Trading",
+  "Specialized Courses",
+  "Pre-built Trading Systems",
+  "Expert PMS Services"
+];
+
+const [currentWord, setCurrentWord] = React.useState(0);
+
+React.useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentWord((prev) => (prev + 1) % words.length);
+  }, 2500);
+
+  return () => clearInterval(interval);
+}, []);
+
   const { isAuthenticated } = useAuth();
 
   const features = [
@@ -48,15 +65,29 @@ const Home = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 ">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
           <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              Master the Markets with
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> AI Trading</span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+  Master the Markets with
+  <span
+    key={currentWord}
+    className="block
+    mt-2
+    text-6xl
+    leading-[1.3]
+    bg-gradient-to-r from-blue-600 to-purple-600
+    bg-clip-text text-transparent
+    transition-all duration-700 ease-in-out
+    animate-slide
+    will-change-transform"
+  >
+    {words[currentWord]}
+  </span>
+</h1>
+
+            <p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto leading-relaxed">
               Empowering your wealth with data-driven precision. From expert PMS and personalized guidance to cutting-edge Algo systems and trading education, TezTraders is your partner in financial growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

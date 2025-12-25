@@ -25,6 +25,26 @@
   }
 }
 
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide {
+  animation: slide 0.8s ease-in-out;
+}
+
+
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
 }

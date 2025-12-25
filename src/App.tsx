@@ -30,16 +30,6 @@ function App() {
       <Router>
         <ScrollToTop />
         <div className="min-h-screen bg-white">
-          <div className="flex justify-center py-4">
-  <img
-    src={Logo}
-    alt="TezTraders Logo"
-    className="h-12 w-auto"
-  />
-</div>
-
-<Navbar />
-
           <Navbar />
           <main>
             <Routes>
