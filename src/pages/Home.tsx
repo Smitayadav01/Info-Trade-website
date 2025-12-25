@@ -255,7 +255,7 @@ const Home = () => {
               Ready to Start Trading?
             </h2>
             <p className="text-xl text-blue-100 mb-10 leading-relaxed">
-              Join thousands of traders already using TezTraders Pro to maximize their profits. 
+              Join thousands of traders already using TezTraders to maximize their profits. 
               Start your free trial today and experience the power of AI trading.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

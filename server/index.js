@@ -122,7 +122,7 @@ app.post('/api/contact', async (req, res) => {
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Thank you for reaching out to TezTraders Pro. We have successfully received your trading inquiry and our team will review it shortly.
+              Thank you for reaching out to TezTraders. We have successfully received your trading inquiry and our team will review it shortly.
             </p>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563EB;">
               <h3 style="color: #2563EB; margin: 0 0 15px 0;">Your Message Summary:</h3>
@@ -136,7 +136,6 @@ app.post('/api/contact', async (req, res) => {
             <ul style="color: #555; line-height: 1.8;">
               <li>Our trading experts will review your inquiry within 6 hours</li>
               <li>You'll receive a personalized response about our trading solutions</li>
-              // <li>For urgent trading matters, call our trading desk at +91 98765 43210</li>
             </ul>
             <div style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center;">
               <p style="margin: 0; font-weight: bold;">Ready to start trading?</p>
@@ -350,7 +349,7 @@ app.post('/api/signup', async (req, res) => {
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">TezTraders Pro User Management System</p>
+            <p style="margin: 0; font-size: 14px;">TezTraders User Management System</p>
           </div>
         </div>
       `
@@ -442,7 +441,7 @@ app.post('/api/login', async (req, res) => {
     const ownerMailOptions = {
       from: process.env.EMAIL_FROM, // ✅ FIXED
   to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: 'User Login Activity - TezTraders Pro',
+      subject: 'User Login Activity - TezTraders',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -466,12 +465,12 @@ app.post('/api/login', async (req, res) => {
             </table>
             <div style="background: #ecfdf5; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #d1fae5;">
               <p style="margin: 0; color: #065f46; font-size: 14px;">
-                <strong>User Activity:</strong> This user has successfully logged into their TezTraders Pro account.
+                <strong>User Activity:</strong> This user has successfully logged into their TezTraders account.
               </p>
             </div>
           </div>
           <div style="background: #f1f5f9; padding: 15px; border-radius: 0 0 10px 10px; text-align: center; color: #666;">
-            <p style="margin: 0; font-size: 14px;">TezTraders Pro Activity Monitor</p>
+            <p style="margin: 0; font-size: 14px;">TezTraders Activity Monitor</p>
           </div>
         </div>
       `
