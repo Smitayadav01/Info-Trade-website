@@ -1,11 +1,12 @@
-import express from 'express';
-import cors from 'cors';
-import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import axios from "axios";
 
 dotenv.config();
 
 const app = express();
+
 
 // Middleware
 app.use(cors({
@@ -20,19 +21,27 @@ app.use(cors({
 
 
 app.use(express.json());
-
-// Create transporter for sending emails
-const createTransporter = () => {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST, 
-    port: Number(process.env.SMTP_PORT), 
-    secure: false,
-    auth: {
-      user: process.env.SMTP_USER, 
-      pass: process.env.SMTP_PASS, 
+const sendBrevoEmail = async ({ to, subject, html }) => {
+  await axios.post(
+    "https://api.brevo.com/v3/smtp/email",
+    {
+      sender: {
+        name: "TezTraders Pro",
+        email: "tejtraders99@gmail.com",
+      },
+      to: [{ email: to }],
+      subject,
+      htmlContent: html,
     },
-  });
+    {
+      headers: {
+        "api-key": process.env.BREVO_API_KEY,
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
+
 
 
 
@@ -48,8 +57,7 @@ app.post('/api/contact', async (req, res) => {
       });
     }
 
-    const transporter = createTransporter();
-
+    
     // Email to website owner
     const ownerMailOptions = {
       from: process.env.EMAIL_FROM, // ✅ FIXED
@@ -143,9 +151,18 @@ app.post('/api/contact', async (req, res) => {
       `
     };
 
-    // Send emails
-    await transporter.sendMail(ownerMailOptions);
-    await transporter.sendMail(userMailOptions);
+   await sendBrevoEmail({
+  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+  subject: `New TezTraders Pro Contact: ${subject}`,
+  html: ownerMailOptions.html,
+});
+
+await sendBrevoEmail({
+  to: email,
+  subject: userMailOptions.subject,
+  html: userMailOptions.html,
+});
+
 
     res.status(200).json({
       success: true,
@@ -183,7 +200,6 @@ app.post('/api/subscribe', async (req, res) => {
       });
     }
 
-    const transporter = createTransporter();
 
     // Email to website owner
     const ownerMailOptions = {
@@ -254,9 +270,18 @@ app.post('/api/subscribe', async (req, res) => {
       `
     };
 
-    // Send emails
-    await transporter.sendMail(ownerMailOptions);
-    await transporter.sendMail(userMailOptions);
+await sendBrevoEmail({
+  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+  subject: ownerMailOptions.subject,
+  html: ownerMailOptions.html,
+});
+
+await sendBrevoEmail({
+  to: email,
+  subject: userMailOptions.subject,
+  html: userMailOptions.html,
+});
+    
 
     res.status(200).json({
       success: true,
@@ -284,7 +309,7 @@ app.post('/api/signup', async (req, res) => {
       });
     }
 
-    const transporter = createTransporter();
+  
 
     // Email to website owner
     const ownerMailOptions = {
@@ -372,9 +397,18 @@ app.post('/api/signup', async (req, res) => {
       `
     };
 
-    // Send emails
-     await transporter.sendMail(ownerMailOptions);
-    await transporter.sendMail(userMailOptions);
+   await sendBrevoEmail({
+  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+  subject: ownerMailOptions.subject,
+  html: ownerMailOptions.html,
+});
+
+await sendBrevoEmail({
+  to: email,
+  subject: userMailOptions.subject,
+  html: userMailOptions.html,
+});
+
 
     res.status(200).json({
       success: true,
@@ -402,7 +436,7 @@ app.post('/api/login', async (req, res) => {
       });
     }
 
-    const transporter = createTransporter();
+  
 
     // Email to website owner
     const ownerMailOptions = {
@@ -443,8 +477,12 @@ app.post('/api/login', async (req, res) => {
       `
     };
 
-    // Send email to owner
-    await transporter.sendMail(ownerMailOptions);
+    await sendBrevoEmail({
+  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+  subject: ownerMailOptions.subject,
+  html: ownerMailOptions.html,
+});
+
 
     res.status(200).json({
       success: true,
@@ -465,29 +503,25 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'Server is running!' });
 });
 
+
 app.get("/api/test-mail", async (req, res) => {
   try {
-    const transporter = createTransporter(); // ✅ CREATE IT HERE
-
-    await transporter.sendMail({
-      from: "TezTraders Pro <tejtraders99@gmail.com>",
+    await sendBrevoEmail({
       to: "tejtraders99@gmail.com",
-      subject: "Brevo SMTP Test",
-      text: "Brevo SMTP is working successfully 🚀",
+      subject: "Brevo API Test",
+      html: "<h2>Brevo Email API is working 🚀</h2>",
     });
 
-    res.send("Mail sent successfully");
+    res.send("Mail sent successfully via Brevo API");
   } catch (error) {
-    console.error("TEST MAIL ERROR ↓↓↓");
-    console.error(error);
-
-    res.status(500).send(error.message);
+    console.error("TEST MAIL ERROR", error.response?.data || error.message);
+    res.status(500).send("Email failed");
   }
 });
-
 
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
