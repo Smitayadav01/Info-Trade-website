@@ -465,6 +465,23 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'Server is running!' });
 });
 
+app.get("/api/test-mail", async (req, res) => {
+  try {
+    await transporter.sendMail({
+      from: "TezTraders Pro <tejtraders99@gmail.com>",
+      to: "tejtraders99@gmail.com",
+      subject: "Brevo Test",
+      text: "Brevo SMTP working",
+    });
+
+    res.send("Mail sent");
+  } catch (e) {
+    console.error(e);
+    res.status(500).send(e.message);
+  }
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
