@@ -467,19 +467,24 @@ app.get('/api/health', (req, res) => {
 
 app.get("/api/test-mail", async (req, res) => {
   try {
+    const transporter = createTransporter(); // ✅ CREATE IT HERE
+
     await transporter.sendMail({
       from: "TezTraders Pro <tejtraders99@gmail.com>",
       to: "tejtraders99@gmail.com",
-      subject: "Brevo Test",
-      text: "Brevo SMTP working",
+      subject: "Brevo SMTP Test",
+      text: "Brevo SMTP is working successfully 🚀",
     });
 
-    res.send("Mail sent");
-  } catch (e) {
-    console.error(e);
-    res.status(500).send(e.message);
+    res.send("Mail sent successfully");
+  } catch (error) {
+    console.error("TEST MAIL ERROR ↓↓↓");
+    console.error(error);
+
+    res.status(500).send(error.message);
   }
 });
+
 
 
 const PORT = process.env.PORT || 5000;
