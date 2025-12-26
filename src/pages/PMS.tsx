@@ -7,7 +7,7 @@ const PMS = () => {
     {
       name: "Conservative Growth",
       risk: "Low Risk",
-      returns: "22-25% Annual",
+      returns: "40-45% Annual",
       minInvestment: "₹50 Lakhs",
       description: "Stable growth with capital protection focus",
       features: ["Max risk 0.8%", "Steady returns", "Suitable for low risk investors", "Low volatility"],
@@ -16,8 +16,8 @@ const PMS = () => {
     {
       name: "Balanced Portfolio",
       risk: "Medium Risk",
-      returns: "35-40% Annual",
-      minInvestment: "₹30 Lakhs",
+      returns: "60-65% Annual",
+      minInvestment: "₹20 Lakhs",
       description: "Perfect balance of growth and stability",
       features: ["Max risk 1.2%", "Higher potential returns", "Suitable for balanced investors", "Mid volatility"],
       color: "blue"
@@ -25,7 +25,7 @@ const PMS = () => {
     {
       name: "Aggressive Growth",
       risk: "High Risk",
-      returns: "60-70% Annual",
+      returns: "100-110% Annual",
       minInvestment: "₹20 Lakhs",
       description: "Maximum growth potential for risk-tolerant investors",
       features: ["Max risk 1.5-2%", "Highest potential returns", "Suitable for risk-tolerance investors", "High volatility"],
