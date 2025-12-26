@@ -145,7 +145,6 @@ const PortfolioDetails = () => {
 {selectedImage && (
   <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
 
-    {/* Background close */}
     <div
       className="absolute inset-0"
       onClick={() => {
@@ -154,7 +153,6 @@ const PortfolioDetails = () => {
       }}
     />
 
-    {/* Controls */}
     <div className="absolute top-6 right-6 flex gap-3 z-50">
       <button
         onClick={() => setZoom(z => Math.min(z + 0.2, 3))}
@@ -170,21 +168,11 @@ const PortfolioDetails = () => {
       </button>
     </div>
 
-    {/* Image */}
     <img
       src={selectedImage}
       alt="Preview"
-      onLoad={(e) => {
-        const img = e.currentTarget;
-        setIsLandscape(img.naturalWidth > img.naturalHeight);
-      }}
-      style={{
-        transform: `
-          scale(${zoom})
-          rotate(${isLandscape && window.innerWidth < window.innerHeight ? 90 : 0}deg)
-        `,
-      }}
-      className="max-w-full max-h-full object-contain transition-transform duration-300"
+      style={{ transform: `scale(${zoom})` }}
+      className="max-w-full max-h-[90vh] object-contain transition-transform duration-300"
     />
   </div>
 )}
