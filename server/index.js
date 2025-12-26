@@ -81,7 +81,7 @@ app.post('/api/contact', async (req, res) => {
               </tr>
               ${number ? `
               <tr style="border-bottom: 1px solid #ddd;">
-                <td style="padding: 10px; font-weight: bold; color: #555;">Company:</td>
+                <td style="padding: 10px; font-weight: bold; color: #555;">Number:</td>
                 <td style="padding: 10px; color: #333;">${number}</td>
               </tr>
               ` : ''}
@@ -128,7 +128,7 @@ app.post('/api/contact', async (req, res) => {
               <h3 style="color: #2563EB; margin: 0 0 15px 0;">Your Message Summary:</h3>
               <p style="margin: 5px 0; color: #555;"><strong>Subject:</strong> ${subject}</p>
               <p style="margin: 5px 0; color: #555;"><strong>Inquiry Type:</strong> ${inquiryType}</p>
-              ${number? `<p style="margin: 5px 0; color: #555;"><strong>Company:</strong> ${number}</p>` : ''}
+              ${number? `<p style="margin: 5px 0; color: #555;"><strong>Number:</strong> ${number}</p>` : ''}
             </div>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
               <strong>What happens next?</strong>
