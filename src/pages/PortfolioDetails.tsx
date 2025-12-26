@@ -1,6 +1,13 @@
-import React from "react";
+import React,{useState} from "react";
 import { useParams, Link } from "react-router-dom";
 import { CheckCircle, ArrowRight,LineChart } from "lucide-react";
+import conservative1 from '../assets/portfolio/conservative1.jpeg';
+import conservative2 from '../assets/portfolio/conservative2.jpeg';
+import conservative3 from '../assets/portfolio/conservative3.jpeg';
+import Balanced1 from '../assets/portfolio/balanced1.jpeg';
+import Balanced2 from '../assets/portfolio/balanced2.jpeg';
+
+
 
 const portfolioData: any = {
   conservative: {
@@ -16,6 +23,7 @@ const portfolioData: any = {
       "Regular portfolio monitoring and rebalancing",
       "Ideal for long-term conservative investors",
     ],
+    image:[conservative1,conservative2,conservative3],
   },
   balanced: {
     name: "Balanced Portfolio",
@@ -29,6 +37,7 @@ const portfolioData: any = {
       "Risk-managed portfolio construction",
       "Suitable for medium-term investors",
     ],
+    image:[Balanced1,Balanced2],
   },
   aggressive: {
     name: "Aggressive Growth",
@@ -42,6 +51,7 @@ const portfolioData: any = {
       "Higher volatility with higher return potential",
       "Suitable for risk-tolerant investors",
     ],
+    
   },
 };
 
@@ -52,6 +62,12 @@ const PortfolioDetails = () => {
   if (!portfolio) {
     return <div className="text-center py-20">Portfolio not found</div>;
   }
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [isLandscape, setIsLandscape] = useState(false);
+
+
 
   return (
     <div className="bg-gray-50 min-h-screen py-8">
@@ -96,17 +112,100 @@ const PortfolioDetails = () => {
           </div>
         </div>
 
+{/* Images Section */}
+{portfolio.image && (
+  <div className="mb-12">
+    <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+      Portfolio Performance
+    </h2>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {portfolio.image.map((img: string, index: number) => (
+        <div
+          key={index}
+          onClick={() => {
+            setSelectedImage(img);
+            setZoom(1);
+          }}
+          className="cursor-pointer bg-white rounded-xl shadow-md overflow-hidden 
+                     flex items-center justify-center h-[220px] sm:h-[260px] md:h-[300px]
+                     hover:scale-[1.02] transition"
+        >
+          <img
+            src={img}
+            alt={`${portfolio.name} ${index + 1}`}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{selectedImage && (
+  <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+
+    {/* Background close */}
+    <div
+      className="absolute inset-0"
+      onClick={() => {
+        setSelectedImage(null);
+        setZoom(1);
+      }}
+    />
+
+    {/* Controls */}
+    <div className="absolute top-6 right-6 flex gap-3 z-50">
+      <button
+        onClick={() => setZoom(z => Math.min(z + 0.2, 3))}
+        className="bg-white px-4 py-2 rounded-lg font-bold"
+      >
+        +
+      </button>
+      <button
+        onClick={() => setZoom(z => Math.max(z - 0.2, 1))}
+        className="bg-white px-4 py-2 rounded-lg font-bold"
+      >
+        −
+      </button>
+    </div>
+
+    {/* Image */}
+    <img
+      src={selectedImage}
+      alt="Preview"
+      onLoad={(e) => {
+        const img = e.currentTarget;
+        setIsLandscape(img.naturalWidth > img.naturalHeight);
+      }}
+      style={{
+        transform: `
+          scale(${zoom})
+          rotate(${isLandscape && window.innerWidth < window.innerHeight ? 90 : 0}deg)
+        `,
+      }}
+      className="max-w-full max-h-full object-contain transition-transform duration-300"
+    />
+  </div>
+)}
+
+
+             
+
         {/* CTA */}
         <div className="text-center">
           <Link
             to="/contact"
             className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition"
           >
+
             Schedule Consultation
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>
 
+         
+            
       </div>
     </div>
   );

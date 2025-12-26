@@ -5,7 +5,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
+    number: '',
     subject: '',
     message: '',
     inquiryType: 'general'
@@ -24,7 +24,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
-  if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+  if (!formData.name || !formData.email  || !formData.number || !formData.subject || !formData.message) {
     setSubmitStatus({
       type: 'error',
       message: 'Please fill in all required fields'
@@ -61,7 +61,7 @@ const Contact = () => {
     setFormData({
       name: '',
       email: '',
-      company: '',
+      number: '',
       subject: '',
       message: '',
       inquiryType: 'general'
@@ -88,9 +88,9 @@ const Contact = () => {
     },
     {
       icon: <Phone className="h-6 w-6" />,
-      title: "Call Us",
-      details: "+91 98765 43210",
-      description: "Mon-Fri from 9am to 6pm"
+      title: "WhatsApp Us",
+      details: "+91 9453980510",
+      description: "Mon-Fri from 9am to 3pm"
     },
     {
       icon: <MapPin className="h-6 w-6" />,
@@ -108,10 +108,11 @@ const Contact = () => {
 
   const inquiryTypes = [
     { value: 'general', label: 'General Inquiry' },
-    { value: 'trading', label: 'Trading Services' },
-    { value: 'support', label: 'Technical Support' },
-    { value: 'algorithms', label: 'Custom Algorithms' },
-    { value: 'demo', label: 'Request Demo' }
+    { value: 'demo', label: 'Personal Consultation' },
+    { value: 'trading', label: 'Portfolio Management Services' },
+    { value: 'support', label: 'Courses/Learnings' },
+    { value: 'algorithms', label: 'Subscription Based Algo' },
+    
   ];
 
   return (
@@ -214,16 +215,17 @@ const Contact = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                      Company
+                      Mobile No *
                     </label>
                     <input
-                      id="company"
-                      name="company"
-                      type="text"
-                      value={formData.company}
+                      id="number"
+                      name="number"
+                      type="number"
+                      required
+                      value={formData.number}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 hover:border-gray-400"
-                      placeholder="Your company"
+                      placeholder="Your mobile no."
                     />
                   </div>
 

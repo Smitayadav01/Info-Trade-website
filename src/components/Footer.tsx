@@ -75,6 +75,13 @@ const Footer = () => {
     { name: "Cookie Policy", href: "/cookies" },
   ];
 
+  const services=[
+    {name:"Portfolio Management",href:"/pms"},
+    {name:"Courses/Learning",href:"/courses"},
+    {name:"Subscription",href:"/subscription"},
+
+  ];
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -142,6 +149,24 @@ const Footer = () => {
             </ul>
           </div>
 
+            {/* Services Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Services</h3>
+            <ul className="space-y-3">
+              {services.map((services, index) => (
+                <li key={index}>
+                  <Link 
+                    to={services.href}
+                    className="text-gray-400 hover:text-white transition-colors duration-200 text-sm"
+                  >
+                    {services.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+            
           {/* Resources
           <div>
             <h3 className="text-lg font-semibold mb-4">Resources</h3>

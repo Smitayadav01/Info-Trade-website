@@ -48,9 +48,9 @@ const sendBrevoEmail = async ({ to, subject, html }) => {
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, company, subject, message, inquiryType } = req.body;
+    const { name, email, number, subject, message, inquiryType } = req.body;
 
-    if (!name || !email || !subject || !message) {
+    if (!name || !email  || !number|| !subject || !message) {
       return res.status(400).json({
         success: false,
         message: 'Please fill in all required fields'

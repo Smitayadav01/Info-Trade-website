@@ -213,13 +213,19 @@ const Login = () => {
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
             By signing in, you agree to our{' '}
-            <button className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
-              Terms of Service
-            </button>{' '}
-            and{' '}
-            <button className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
-              Privacy Policy
-            </button>
+            <Link
+                to="/terms"
+                className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline"
+              >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                to="/privacy"
+                className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline"
+              >
+                Privacy Policy
+              </Link>
           </p>
         </div>
       </div>

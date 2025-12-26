@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Building, Zap, CheckCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+
 const Signup = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
@@ -332,15 +333,21 @@ const Signup = () => {
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-0.5"
                 />
                 <label htmlFor="acceptTerms" className="text-sm text-gray-700 flex-1">
-                  I agree to the{' '}
-                  <button type="button" className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
-                    Terms of Service
-                  </button>{' '}
-                  and{' '}
-                  <button type="button" className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
-                    Privacy Policy
-                  </button>
-                </label>
+  I agree to the{" "}
+  <Link
+    to="/terms"
+    className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline"
+  >
+    Terms of Service
+  </Link>{" "}
+  and{" "}
+  <Link
+    to="/privacy"
+    className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline"
+  >
+    Privacy Policy
+  </Link>
+</label>
               </div>
               {errors.acceptTerms && (
                 <p className="text-xs text-red-600">{errors.acceptTerms}</p>
