@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import { useParams, Link } from "react-router-dom";
 import { CheckCircle, ArrowRight,LineChart } from "lucide-react";
-import conservative1 from '../assets/portfolio/conservative1.jpeg';
-import conservative2 from '../assets/portfolio/conservative2.jpeg';
-import conservative3 from '../assets/portfolio/conservative3.jpeg';
+import Conservative1 from '../assets/portfolio/conservative1.jpeg';
+import Conservative2 from '../assets/portfolio/conservative2.jpeg';
+import Conservative3 from '../assets/portfolio/conservative3.jpeg';
 import Balanced1 from '../assets/portfolio/balanced1.jpeg';
 import Balanced2 from '../assets/portfolio/balanced2.jpeg';
 
@@ -23,7 +23,7 @@ const portfolioData: any = {
       "Regular portfolio monitoring and rebalancing",
       "Ideal for long-term conservative investors",
     ],
-    image:[conservative1,conservative2,conservative3],
+    image:[Conservative1,Conservative2,Conservative3],
   },
   balanced: {
     name: "Balanced Portfolio",
