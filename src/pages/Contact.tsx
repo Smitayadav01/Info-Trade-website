@@ -96,7 +96,7 @@ const Contact = () => {
       icon: <MapPin className="h-6 w-6" />,
       title: "Visit Us",
       details: "Mumbai, Maharashtra",
-      description: "401105, India"
+      description: "400001, India"
     },
     {
       icon: <Clock className="h-6 w-6" />,
