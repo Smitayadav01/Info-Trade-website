@@ -127,7 +127,7 @@ const Privacy = () => {
         <p className="leading-relaxed">
           <strong>Grievance Officer:</strong> Nikhil <br />
           <strong>Email:</strong> tejtraders99@gmail.com <br />
-          <strong>Address:</strong> Thane, Maharashtra, India
+          <strong>Address:</strong> Mumbai, Maharashtra, India
         </p>
 
       </div>
