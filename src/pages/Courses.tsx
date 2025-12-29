@@ -58,7 +58,7 @@ const Courses = () => {
     {
       icon: <Users className="h-8 w-8" />,
       title: "Expert Instructors",
-      description: "Learn from professional traders with 15+ years of market experience."
+      description: "Learn from professional traders with 7+ years of market experience."
     },
     {
       icon: <BookOpen className="h-8 w-8" />,

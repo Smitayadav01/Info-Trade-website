@@ -37,7 +37,7 @@ const PMS = () => {
     {
       icon: <Shield className="h-8 w-8" />,
       title: "Expert Management",
-      description: "Professional fund managers with 15+ years of market experience managing your investments."
+      description: "Professional fund managers with 7+ years of market experience managing your investments."
     },
     {
       icon: <BarChart3 className="h-8 w-8" />,
