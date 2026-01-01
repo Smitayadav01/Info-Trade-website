@@ -65,7 +65,7 @@ const courses = [
     title: "Algo Trading Mastery Program",
     level: "By TezTraders.in",
     duration: "30 Days",
-    price: "₹11,999",
+    price: "₹7,999",
     originalPrice: "₹19,999",
     rating: 4.9,
     students: 15,
