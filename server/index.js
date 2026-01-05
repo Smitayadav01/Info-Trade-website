@@ -1,26 +1,51 @@
 import express from "express";
+import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import axios from "axios";
+import authRoutes from "./routes/authRoutes.js";
+import courseRoutes from "./routes/courseRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
+import pmsImageRoutes from "./routes/pmsImageRoutes.js";
 
 dotenv.config();
 
+const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      dbName: "teztraders",
+    });
+    console.log("✅ MongoDB Atlas Connected");
+  } catch (error) {
+    console.error("❌ MongoDB Connection Failed");
+    console.error(error.message);
+    process.exit(1);
+  }
+};
+
+connectDB();
+
 const app = express();
 
-
-// Middleware
-app.use(cors({
-  origin: [
-    "https://teztraders.in",
-    "https://www.teztraders.in",
-    process.env.FRONTEND_URL
-  ].filter(Boolean),
-  methods: ["GET", "POST"],
-  credentials: true
-}));
-
+app.use(
+  cors({
+    origin: [
+      "https://teztraders.in",
+      "https://www.teztraders.in",
+      process.env.FRONTEND_URL,
+    ].filter(Boolean),
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/pms-images", pmsImageRoutes);
+
 const sendBrevoEmail = async ({ to, subject, html }) => {
   await axios.post(
     "https://api.brevo.com/v3/smtp/email",
@@ -42,26 +67,20 @@ const sendBrevoEmail = async ({ to, subject, html }) => {
   );
 };
 
-
-
-
-// Contact form endpoint
-app.post('/api/contact', async (req, res) => {
+app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, number, subject, message, inquiryType } = req.body;
 
-    if (!name || !email  || !number|| !subject || !message) {
+    if (!name || !email || !number || !subject || !message) {
       return res.status(400).json({
         success: false,
-        message: 'Please fill in all required fields'
+        message: "Please fill in all required fields",
       });
     }
 
-    
-    // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_FROM, // ✅ FIXED
-  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
+      from: process.env.EMAIL_FROM,
+      to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
       subject: `New TezTraders Contact: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
@@ -79,12 +98,16 @@ app.post('/api/contact', async (req, res) => {
                 <td style="padding: 10px; font-weight: bold; color: #555;">Email:</td>
                 <td style="padding: 10px; color: #333;">${email}</td>
               </tr>
-              ${number ? `
+              ${
+                number
+                  ? `
               <tr style="border-bottom: 1px solid #ddd;">
                 <td style="padding: 10px; font-weight: bold; color: #555;">Number:</td>
                 <td style="padding: 10px; color: #333;">${number}</td>
               </tr>
-              ` : ''}
+              `
+                  : ""
+              }
               <tr style="border-bottom: 1px solid #ddd;">
                 <td style="padding: 10px; font-weight: bold; color: #555;">Inquiry Type:</td>
                 <td style="padding: 10px; color: #333;">${inquiryType}</td>
@@ -97,7 +120,7 @@ app.post('/api/contact', async (req, res) => {
             <div style="margin-top: 20px;">
               <h4 style="color: #2563EB; margin-bottom: 10px;">Message:</h4>
               <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #2563EB;">
-                ${message.replace(/\n/g, '<br>')}
+                ${message.replace(/\n/g, "<br>")}
               </div>
             </div>
           </div>
@@ -106,14 +129,14 @@ app.post('/api/contact', async (req, res) => {
             <p style="margin: 5px 0 0 0; font-size: 12px;">Received on: ${new Date().toLocaleString()}</p>
           </div>
         </div>
-      `
+      `,
     };
 
-    // Confirmation email to user
     const userMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Thank you for contacting TezTraders- We\'ve received your message',
+      subject:
+        "Thank you for contacting TezTraders- We've received your message",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -128,7 +151,7 @@ app.post('/api/contact', async (req, res) => {
               <h3 style="color: #2563EB; margin: 0 0 15px 0;">Your Message Summary:</h3>
               <p style="margin: 5px 0; color: #555;"><strong>Subject:</strong> ${subject}</p>
               <p style="margin: 5px 0; color: #555;"><strong>Inquiry Type:</strong> ${inquiryType}</p>
-              ${number? `<p style="margin: 5px 0; color: #555;"><strong>Number:</strong> ${number}</p>` : ''}
+              ${number ? `<p style="margin: 5px 0; color: #555;"><strong>Number:</strong> ${number}</p>` : ""}
             </div>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
               <strong>What happens next?</strong>
@@ -147,64 +170,59 @@ app.post('/api/contact', async (req, res) => {
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
-      `
+      `,
     };
 
-   await sendBrevoEmail({
-  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
-  subject: `New TezTraders Contact: ${subject}`,
-  html: ownerMailOptions.html,
-});
+    await sendBrevoEmail({
+      to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+      subject: `New TezTraders Contact: ${subject}`,
+      html: ownerMailOptions.html,
+    });
 
-await sendBrevoEmail({
-  to: email,
-  subject: userMailOptions.subject,
-  html: userMailOptions.html,
-});
-
+    await sendBrevoEmail({
+      to: email,
+      subject: userMailOptions.subject,
+      html: userMailOptions.html,
+    });
 
     res.status(200).json({
       success: true,
-      message: 'Message sent successfully! Check your email for confirmation.'
+      message: "Message sent successfully! Check your email for confirmation.",
     });
-
   } catch (error) {
-  console.error("CONTACT API ERROR ↓↓↓");
-  console.error(error.message);
-  console.error(error.stack);
+    console.error("CONTACT API ERROR ↓↓↓");
+    console.error(error.message);
+    console.error(error.stack);
 
-  res.status(500).json({
-    success: false,
-    message: error.message || "Server error",
-  });
-}
+    res.status(500).json({
+      success: false,
+      message: error.message || "Server error",
+    });
+  }
 });
 
-// Newsletter subscription endpoint
-app.post('/api/subscribe', async (req, res) => {
+app.post("/api/subscribe", async (req, res) => {
   try {
     const { email } = req.body;
 
     if (!email) {
       return res.status(400).json({
         success: false,
-        message: 'Email is required'
+        message: "Email is required",
       });
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
       return res.status(400).json({
         success: false,
-        message: 'Please enter a valid email address'
+        message: "Please enter a valid email address",
       });
     }
 
-
-    // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_FROM, // ✅ FIXED
-  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: 'New Newsletter Subscription - TezTraders',
+      from: process.env.EMAIL_FROM,
+      to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
+      subject: "New Newsletter Subscription - TezTraders",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #10B981, #059669); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -226,14 +244,13 @@ app.post('/api/subscribe', async (req, res) => {
             <p style="margin: 0; font-size: 14px;">TezTraders Newsletter System</p>
           </div>
         </div>
-      `
+      `,
     };
 
-    // Confirmation email to subscriber
     const userMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Welcome to TezTraders Newsletter! 🚀',
+      subject: "Welcome to TezTraders Newsletter! 🚀",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -266,55 +283,49 @@ app.post('/api/subscribe', async (req, res) => {
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
-      `
+      `,
     };
 
-await sendBrevoEmail({
-  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
-  subject: ownerMailOptions.subject,
-  html: ownerMailOptions.html,
-});
+    await sendBrevoEmail({
+      to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+      subject: ownerMailOptions.subject,
+      html: ownerMailOptions.html,
+    });
 
-await sendBrevoEmail({
-  to: email,
-  subject: userMailOptions.subject,
-  html: userMailOptions.html,
-});
-    
+    await sendBrevoEmail({
+      to: email,
+      subject: userMailOptions.subject,
+      html: userMailOptions.html,
+    });
 
     res.status(200).json({
       success: true,
-      message: 'Successfully subscribed! Check your email for confirmation.'
+      message: "Successfully subscribed! Check your email for confirmation.",
     });
-
   } catch (error) {
-    console.error('Error sending subscription email:', error);
+    console.error("Error sending subscription email:", error);
     res.status(500).json({
       success: false,
-      message: 'Failed to subscribe. Please try again later.'
+      message: "Failed to subscribe. Please try again later.",
     });
   }
 });
 
-// User signup notification endpoint
-app.post('/api/signup', async (req, res) => {
+app.post("/api/signup", async (req, res) => {
   try {
     const { name, email, company } = req.body;
 
     if (!name || !email) {
       return res.status(400).json({
         success: false,
-        message: 'Name and email are required'
+        message: "Name and email are required",
       });
     }
 
-  
-
-    // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_FROM, // ✅ FIXED
-  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: 'New User Registration - TezTraders',
+      from: process.env.EMAIL_FROM,
+      to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
+      subject: "New User Registration - TezTraders",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -331,12 +342,16 @@ app.post('/api/signup', async (req, res) => {
                 <td style="padding: 10px; font-weight: bold; color: #555;">Email:</td>
                 <td style="padding: 10px; color: #333;">${email}</td>
               </tr>
-              ${company ? `
+              ${
+                company
+                  ? `
               <tr style="border-bottom: 1px solid #ddd;">
                 <td style="padding: 10px; font-weight: bold; color: #555;">Company:</td>
                 <td style="padding: 10px; color: #333;">${company}</td>
               </tr>
-              ` : ''}
+              `
+                  : ""
+              }
               <tr style="border-bottom: 1px solid #ddd;">
                 <td style="padding: 10px; font-weight: bold; color: #555;">Registration Date:</td>
                 <td style="padding: 10px; color: #333;">${new Date().toLocaleString()}</td>
@@ -352,14 +367,13 @@ app.post('/api/signup', async (req, res) => {
             <p style="margin: 0; font-size: 14px;">TezTraders User Management System</p>
           </div>
         </div>
-      `
+      `,
     };
 
-    // Welcome email to new user
     const userMailOptions = {
       from: process.env.EMAIL_FROM,
       to: email,
-      subject: 'Welcome to TezTraders - Your Trading Journey Begins! 🚀',
+      subject: "Welcome to TezTraders - Your Trading Journey Begins! 🚀",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #2563EB, #4F46E5); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -368,7 +382,7 @@ app.post('/api/signup', async (req, res) => {
           <div style="padding: 20px;">
             <p style="color: #333; font-size: 16px; line-height: 1.6;">Dear ${name},</p>
             <p style="color: #333; font-size: 16px; line-height: 1.6;">
-              Congratulations! You've successfully joined TezTraders, India's leading stock markets learning & algorithmic PMS platform. 
+              Congratulations! You've successfully joined TezTraders, India's leading stock markets learning & algorithmic PMS platform.
               Your journey to profitable trading starts now.
             </p>
             <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #2563EB;">
@@ -393,55 +407,49 @@ app.post('/api/signup', async (req, res) => {
             <p style="margin: 10px 0 0 0; font-size: 12px;">Mumbai, Maharashtra, India</p>
           </div>
         </div>
-      `
+      `,
     };
 
-   await sendBrevoEmail({
-  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
-  subject: ownerMailOptions.subject,
-  html: ownerMailOptions.html,
-});
+    await sendBrevoEmail({
+      to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+      subject: ownerMailOptions.subject,
+      html: ownerMailOptions.html,
+    });
 
-await sendBrevoEmail({
-  to: email,
-  subject: userMailOptions.subject,
-  html: userMailOptions.html,
-});
-
+    await sendBrevoEmail({
+      to: email,
+      subject: userMailOptions.subject,
+      html: userMailOptions.html,
+    });
 
     res.status(200).json({
       success: true,
-      message: 'Registration notification sent successfully!'
+      message: "Registration notification sent successfully!",
     });
-
   } catch (error) {
-    console.error('Error sending signup notification:', error);
+    console.error("Error sending signup notification:", error);
     res.status(500).json({
       success: false,
-      message: 'Failed to send notification. Please try again later.'
+      message: "Failed to send notification. Please try again later.",
     });
   }
 });
 
-// User login notification endpoint
-app.post('/api/login', async (req, res) => {
+app.post("/api/login", async (req, res) => {
   try {
     const { name, email } = req.body;
 
     if (!name || !email) {
       return res.status(400).json({
         success: false,
-        message: 'Name and email are required'
+        message: "Name and email are required",
       });
     }
 
-  
-
-    // Email to website owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_FROM, // ✅ FIXED
-  to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
-      subject: 'User Login Activity - TezTraders',
+      from: process.env.EMAIL_FROM,
+      to: process.env.OWNER_EMAIL || process.env.EMAIL_FROM,
+      subject: "User Login Activity - TezTraders",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
           <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 20px; border-radius: 10px 10px 0 0; text-align: center;">
@@ -473,35 +481,31 @@ app.post('/api/login', async (req, res) => {
             <p style="margin: 0; font-size: 14px;">TezTraders Activity Monitor</p>
           </div>
         </div>
-      `
+      `,
     };
 
     await sendBrevoEmail({
-  to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
-  subject: ownerMailOptions.subject,
-  html: ownerMailOptions.html,
-});
-
+      to: process.env.OWNER_EMAIL || "tejtraders99@gmail.com",
+      subject: ownerMailOptions.subject,
+      html: ownerMailOptions.html,
+    });
 
     res.status(200).json({
       success: true,
-      message: 'Login notification sent successfully!'
+      message: "Login notification sent successfully!",
     });
-
   } catch (error) {
-    console.error('Error sending login notification:', error);
+    console.error("Error sending login notification:", error);
     res.status(500).json({
       success: false,
-      message: 'Failed to send notification. Please try again later.'
+      message: "Failed to send notification. Please try again later.",
     });
   }
 });
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'Server is running!' });
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ status: "Server is running!" });
 });
-
 
 app.get("/api/test-mail", async (req, res) => {
   try {
@@ -518,9 +522,7 @@ app.get("/api/test-mail", async (req, res) => {
   }
 });
 
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-

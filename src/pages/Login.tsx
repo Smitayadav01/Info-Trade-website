@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginWithCredentials, user } = useAuth();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -17,7 +17,6 @@ const Login = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -25,68 +24,41 @@ const Login = () => {
 
   const validateForm = () => {
     const newErrors: {[key: string]: string} = {};
-    
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
+    if (!validateForm()) return;
 
-  if (!validateForm()) return;
+    setIsLoading(true);
+    setErrors({});
 
-  setIsLoading(true);
-  setErrors({});
-
-  try {
-    const loginSuccess = await loginWithCredentials(
-      formData.email,
-      formData.password
-    );
-
-    if (!loginSuccess) {
+    try {
+      await login(formData.email, formData.password);
+      navigate('/');
+    } catch (err: any) {
       setErrors({
-        general: "Invalid email or password.",
+        general: err.message || 'Invalid email or password.'
       });
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    // Send login notification (non-blocking)
-    fetch("https://algotrade-pro.onrender.com/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.email.split("@")[0],
-        email: formData.email,
-      }),
-    }).catch(() => {
-      console.warn("Login notification failed");
-    });
-
-    navigate("/");
-  } catch (error) {
-    setErrors({
-      general: "Unable to connect to server.",
-    });
-  } finally {
-    setIsLoading(false);
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -126,7 +98,7 @@ const Login = () => {
                 />
               </div>
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600 animate-pulse">{errors.email}</p>
+                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
               )}
             </div>
 
@@ -156,7 +128,7 @@ const Login = () => {
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600 animate-pulse">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
               )}
             </div>
 
@@ -171,10 +143,7 @@ const Login = () => {
                   Remember me
                 </label>
               </div>
-              <button
-                type="button"
-                className="text-sm text-blue-600 hover:text-blue-800 transition-colors duration-200"
-              >
+              <button type="button" className="text-sm text-blue-600 hover:text-blue-800 transition-colors duration-200">
                 Forgot password?
               </button>
             </div>
@@ -200,8 +169,8 @@ const Login = () => {
           <div className="mt-8 pt-6 border-t border-gray-200">
             <p className="text-center text-gray-600">
               Don't have an account?{' '}
-              <Link 
-                to="/signup" 
+              <Link
+                to="/signup"
                 className="text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200"
               >
                 Sign up now
@@ -213,19 +182,13 @@ const Login = () => {
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
             By signing in, you agree to our{' '}
-            <Link
-                to="/terms"
-                className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline"
-              >
-                Terms of Service
-              </Link>{" "}
-              and{" "}
-              <Link
-                to="/privacy"
-                className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline"
-              >
-                Privacy Policy
-              </Link>
+            <Link to="/terms" className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline">
+              Terms of Service
+            </Link>{" "}
+            and{" "}
+            <Link to="/privacy" className="text-blue-600 hover:text-blue-800 transition-colors duration-200 underline">
+              Privacy Policy
+            </Link>
           </p>
         </div>
       </div>
