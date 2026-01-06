@@ -11,11 +11,12 @@ interface User {
 interface AuthContextType {
   user: User | null;
   token: string | null;
-  setUser: (user: User) => void;
-  setToken: (token: string) => void;
+  setUser: (user: User | null) => void;
+  setToken: (token: string | null) => void;
   login: (email: string, password: string) => Promise<{ user: User; token: string }>;
   signup: (data: SignupData) => Promise<{ user: User; token: string }>;
   logout: () => void;
+  authFetch: (url: string, options?: RequestInit) => Promise<Response>;
   isAuthenticated: boolean;
   isAdmin: boolean;
 }
@@ -98,6 +99,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return data.data;
   };
 
+const authFetch = (url: string, options: RequestInit = {}) => {
+  return fetch(url, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token ? `Bearer ${token}` : '',
+      ...options.headers,
+    },
+  });
+};
+
+  
   const logout = () => {
     setUser(null);
     setToken(null);
@@ -115,6 +128,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     logout,
     isAuthenticated: !!user && !!token,
     isAdmin: user?.role === 'admin',
+    authFetch,
   };
 
   if (isLoading) {

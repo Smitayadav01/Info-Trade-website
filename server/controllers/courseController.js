@@ -1,8 +1,5 @@
 import Course from "../models/Course.js";
 
-/**
- * USER – Get all active courses
- */
 export const getAllCourses = async (req, res) => {
   try {
     const courses = await Course.find({ isActive: true }).sort({
@@ -22,15 +19,9 @@ export const getAllCourses = async (req, res) => {
   }
 };
 
-/**
- * USER – Get single active course
- */
 export const getCourseById = async (req, res) => {
   try {
-    const course = await Course.findOne({
-      _id: req.params.id,
-      isActive: true,
-    });
+    const course = await Course.findById(req.params.id);
 
     if (!course) {
       return res.status(404).json({
@@ -47,6 +38,73 @@ export const getCourseById = async (req, res) => {
     res.status(500).json({
       success: false,
       message: error.message || "Error fetching course",
+    });
+  }
+};
+
+export const createCourse = async (req, res) => {
+  try {
+    const course = await Course.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Course created successfully",
+      data: course,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Error creating course",
+    });
+  }
+};
+
+export const updateCourse = async (req, res) => {
+  try {
+    const course = await Course.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Course updated successfully",
+      data: course,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Error updating course",
+    });
+  }
+};
+
+export const deleteCourse = async (req, res) => {
+  try {
+    const course = await Course.findByIdAndDelete(req.params.id);
+
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Course deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message || "Error deleting course",
     });
   }
 };
