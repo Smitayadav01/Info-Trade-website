@@ -13,7 +13,8 @@ export const authenticate = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
+
+    const user = await User.findById(decoded.id).select("-password");
 
     if (!user || !user.isActive) {
       return res.status(401).json({
@@ -33,7 +34,7 @@ export const authenticate = async (req, res, next) => {
 };
 
 export const authorizeAdmin = (req, res, next) => {
-  if (req.user.role !== "admin") {
+  if (!req.user || req.user.role !== "admin") {
     return res.status(403).json({
       success: false,
       message: "Access denied. Admin privileges required.",

@@ -1,7 +1,5 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import axios from "axios";
-
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -11,9 +9,9 @@ const generateToken = (id) => {
 
 export const signup = async (req, res) => {
   try {
-    const { firstName,lastName,email,password, company } = req.body;
+    const { name, email, password, company } = req.body;
 
-    if (!firstName || !lastName|| !email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "Please provide name, email and password",
@@ -43,8 +41,7 @@ export const signup = async (req, res) => {
       data: {
         user: {
           id: user._id,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          name: user.name,
           email: user.email,
           role: user.role,
           company: user.company,
@@ -113,19 +110,16 @@ export const login = async (req, res) => {
   }
 };
 
-// Send login notification (non-blocking)
-axios.post(`${process.env.BASE_URL}/api/login`, {
-  name: user.name,
-  email: user.email,
-  role: user.role,
-}).catch(() => {
-  console.warn("Login notification failed");
-});
-
-
 export const getProfile = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
     res.status(200).json({
       success: true,
@@ -147,3 +141,4 @@ export const getProfile = async (req, res) => {
     });
   }
 };
+
