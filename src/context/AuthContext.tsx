@@ -100,15 +100,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
 const authFetch = (url: string, options: RequestInit = {}) => {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...(options.headers as Record<string, string> || {}),
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   return fetch(url, {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: token ? `Bearer ${token}` : '',
-      ...options.headers,
-    },
+    headers,
   });
 };
+
 
   
   const logout = () => {

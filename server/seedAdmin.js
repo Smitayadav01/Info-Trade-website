@@ -5,16 +5,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const ADMIN_EMAIL = "teztraders@gmail.com";
+
 const createAdmin = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
     console.log("✅ Connected to MongoDB");
 
-    // Check if admin already exists by email (since phone is not in schema)
-    const existingAdmin = await User.findOne({ email: "admin@teztraders.com" });
+    const existingAdmin = await User.findOne({ email: ADMIN_EMAIL });
 
     if (existingAdmin) {
-      console.log("Admin already exists");
+      console.log("⚠️ Admin already exists. Delete it first if you want to reseed.");
       process.exit();
     }
 
@@ -22,7 +23,7 @@ const createAdmin = async () => {
 
     await User.create({
       name: "Admin",
-      email: "teztraders@gmail.com",
+      email: ADMIN_EMAIL,
       password: hashedPassword,
       role: "admin",
     });
