@@ -20,6 +20,7 @@ import CourseDetail from "./pages/CourseDetail";
 import Subscription from "./pages/Subscription";
 import PortfolioDetails from "./pages/PortfolioDetails";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 // Legal
 import Legal from "./pages/Legal";
@@ -28,10 +29,9 @@ import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 
 // Admin
-import AdminRoute from "./routes/AdminRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminCourses from "./pages/admin/Courses";
-import CourseForm from "./pages/admin/CourseForm";
+import AdminCourses from "./pages/admin/AdminCourses";
+import CourseForm from "./pages/admin/CourseForm"; // create / edit course form
 
 function App() {
   return (
@@ -74,36 +74,36 @@ function App() {
               <Route
                 path="/admin"
                 element={
-                  <AdminRoute>
+                  <ProtectedRoute requireAdmin>
                     <AdminDashboard />
-                  </AdminRoute>
+                  </ProtectedRoute>
                 }
               />
 
               <Route
                 path="/admin/courses"
                 element={
-                  <AdminRoute>
+                  <ProtectedRoute requireAdmin>
                     <AdminCourses />
-                  </AdminRoute>
+                  </ProtectedRoute>
                 }
               />
 
               <Route
                 path="/admin/courses/new"
                 element={
-                  <AdminRoute>
+                  <ProtectedRoute requireAdmin>
                     <CourseForm />
-                  </AdminRoute>
+                  </ProtectedRoute>
                 }
               />
 
               <Route
-                path="/admin/courses/edit/:id"
+                path="/admin/courses/:id"
                 element={
-                  <AdminRoute>
+                  <ProtectedRoute requireAdmin>
                     <CourseForm />
-                  </AdminRoute>
+                  </ProtectedRoute>
                 }
               />
             </Routes>

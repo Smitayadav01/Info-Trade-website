@@ -3,23 +3,33 @@ import User from "../models/User.js";
 
 export const authenticate = async (req, res, next) => {
   try {
-    const token = req.headers.authorization?.replace("Bearer ", "");
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
-        message: "Authentication required. Please login.",
+        message: "Authentication required. Token missing.",
       });
     }
+
+    const token = authHeader.split(" ")[1];
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     const user = await User.findById(decoded.id).select("-password");
 
-    if (!user || !user.isActive) {
+    if (!user) {
       return res.status(401).json({
         success: false,
-        message: "User not found or inactive",
+        message: "User not found",
+      });
+    }
+
+    // OPTIONAL: keep only if isActive exists in schema
+    if (user.isActive === false) {
+      return res.status(401).json({
+        success: false,
+        message: "User account is inactive",
       });
     }
 
@@ -40,5 +50,6 @@ export const authorizeAdmin = (req, res, next) => {
       message: "Access denied. Admin privileges required.",
     });
   }
+
   next();
 };

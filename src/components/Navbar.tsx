@@ -71,7 +71,7 @@ const Navbar = () => {
             {/* Admin Dashboard */}
             {isAuthenticated && user?.role === 'admin' && (
               <Link
-                to="/admin/dashboard"
+                to="/admin"
                 className={`flex items-center space-x-1 text-sm font-semibold transition-colors duration-200 ${
                   isActive('/admin/dashboard') ? 'text-red-600 border-b-2 border-red-600 pb-1' : 'text-red-500 hover:text-red-600'
                 }`}

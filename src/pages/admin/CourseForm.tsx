@@ -32,10 +32,11 @@ const CourseForm = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (id) {
-      fetchCourse();
-    }
-  }, [id]);
+  if (id && token) {
+    fetchCourse();
+  }
+}, [id, token]);
+
 
   const fetchCourse = async () => {
     try {
@@ -43,7 +44,11 @@ const CourseForm = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      if (!response.ok) throw new Error("Failed to fetch course");
+      if (!response.ok) {
+  const err = await response.json();
+  throw new Error(err.message || "Failed to fetch course");
+}
+
 
       const data = await response.json();
       setForm({
