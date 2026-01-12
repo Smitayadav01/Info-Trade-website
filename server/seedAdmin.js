@@ -19,14 +19,14 @@ const createAdmin = async () => {
       process.exit();
     }
 
-    const hashedPassword = await bcrypt.hash("Admin@123", 12);
+    
+await User.create({
+  name: "Admin",
+  email: "teztraders@gmail.com",
+  password: "Admin@123", // ✅ plain password
+  role: "admin",
+});
 
-    await User.create({
-      name: "Admin",
-      email: ADMIN_EMAIL,
-      password: hashedPassword,
-      role: "admin",
-    });
 
     console.log("✅ Admin created successfully");
     process.exit();

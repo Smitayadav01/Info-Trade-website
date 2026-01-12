@@ -71,6 +71,11 @@ export const login = async (req, res) => {
 
     const user = await User.findOne({ email }).select("+password");
 
+        //  / 🔍 DEBUG LOGS (TEMPORARY)
+    console.log("Password from request:", password);
+    console.log("Password from DB (hashed):", user?.password);
+
+
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({
         success: false,
