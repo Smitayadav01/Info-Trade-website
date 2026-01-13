@@ -190,9 +190,15 @@ const Contact = () => {
         </div>
       </section>
 
-      
+      {/* Toast Popup */}
+      {toast && (
+        <div className={`fixed bottom-4 right-4 px-6 py-4 rounded-lg shadow-lg text-white transition-all duration-300 z-50
+          ${toast.type === 'success' ? 'bg-emerald-500' : 'bg-red-500'}`}>
+          {toast.message}
+        </div>
+      )}
     </div>
   );
 };
-
+    
 export default Contact;

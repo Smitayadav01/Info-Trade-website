@@ -6,7 +6,9 @@ import Conservative2 from '../assets/portfolio/conservative2.jpeg';
 import Conservative3 from '../assets/portfolio/conservative3.jpeg';
 import Balanced1 from '../assets/portfolio/balanced1.jpeg';
 import Balanced2 from '../assets/portfolio/balanced2.jpeg';
-
+import Aggresive1 from "../assets/portfolio/Aggressive1.jpeg";
+import Aggresive2 from "../assets/portfolio/Aggressive2.jpeg";
+import Aggresive3 from "../assets/portfolio/Aggressive3.jpeg";
 
 
 const portfolioData: any = {
@@ -71,7 +73,7 @@ const portfolioData: any = {
       "Capital For Non-Expiry Days: 20L",
       "Historical Max DD: 3-4%",
     ],
-    
+    image:[Aggresive1,Aggresive2,Aggresive3],
   },
 };
 

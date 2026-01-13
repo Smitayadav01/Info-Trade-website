@@ -4,49 +4,70 @@ const courseSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "Course title is required"],
+      required: true,
       trim: true,
     },
-    description: {
-      type: String,
-      required: [true, "Course description is required"],
-    },
-    duration: {
-      type: String,
-      required: [true, "Course duration is required"],
-    },
-    price: {
-      type: Number,
-      required: [true, "Course price is required"],
-      min: 0,
-    },
-    level: {
-      type: String,
-      enum: ["beginner", "intermediate", "advanced"],
-      default: "beginner",
-    },
+
     category: {
       type: String,
-      required: [true, "Course category is required"],
+      required: true,
+      trim: true,
     },
-    syllabus: [
-      {
-        topic: String,
-        content: String,
-      },
-    ],
-    isActive: {
-      type: Boolean,
-      default: true,
+
+    image: {
+      type: String,
+      required: true, // URL
     },
+
+    description: {
+      type: String,
+      required: true,
+    },
+
+    duration: {
+      type: String,
+      required: true,
+    },
+
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    originalPrice: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+
+    rating: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 5,
+    },
+
+    students: {
+      type: Number,
+      default: 0,
+    },
+
+provider: {
+  type: String,
+  default: "TezTraders.in",
+},
     enrolledCount: {
       type: Number,
       default: 0,
     },
+
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 export default mongoose.model("Course", courseSchema);

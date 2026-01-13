@@ -1,10 +1,14 @@
 import Course from "../models/Course.js";
 
+/**
+ * @desc    Get all active courses
+ * @route   GET /api/courses
+ * @access  Public
+ */
 export const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find({ isActive: true }).sort({
-      createdAt: -1,
-    });
+    const courses = await Course.find({ isActive: true })
+      .sort({ createdAt: -1 });
 
     res.status(200).json({
       success: true,
@@ -14,16 +18,22 @@ export const getAllCourses = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || "Error fetching courses",
+      message: "Error fetching courses",
+      error: error.message,
     });
   }
 };
 
+/**
+ * @desc    Get single course by ID
+ * @route   GET /api/courses/:id
+ * @access  Public
+ */
 export const getCourseById = async (req, res) => {
   try {
     const course = await Course.findById(req.params.id);
 
-    if (!course) {
+    if (!course || !course.isActive) {
       return res.status(404).json({
         success: false,
         message: "Course not found",
@@ -37,11 +47,17 @@ export const getCourseById = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || "Error fetching course",
+      message: "Error fetching course",
+      error: error.message,
     });
   }
 };
 
+/**
+ * @desc    Create new course
+ * @route   POST /api/courses
+ * @access  Admin
+ */
 export const createCourse = async (req, res) => {
   try {
     const course = await Course.create(req.body);
@@ -54,17 +70,27 @@ export const createCourse = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || "Error creating course",
+      message: "Error creating course",
+      error: error.message,
     });
   }
 };
 
+/**
+ * @desc    Update course
+ * @route   PUT /api/courses/:id
+ * @access  Admin
+ */
 export const updateCourse = async (req, res) => {
   try {
-    const course = await Course.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const course = await Course.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     if (!course) {
       return res.status(404).json({
@@ -81,11 +107,17 @@ export const updateCourse = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || "Error updating course",
+      message: "Error updating course",
+      error: error.message,
     });
   }
 };
 
+/**
+ * @desc    Delete course
+ * @route   DELETE /api/courses/:id
+ * @access  Admin
+ */
 export const deleteCourse = async (req, res) => {
   try {
     const course = await Course.findByIdAndDelete(req.params.id);
@@ -104,7 +136,8 @@ export const deleteCourse = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message || "Error deleting course",
+      message: "Error deleting course",
+      error: error.message,
     });
   }
 };
