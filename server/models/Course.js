@@ -1,71 +1,34 @@
 import mongoose from "mongoose";
 
+const faqSchema = new mongoose.Schema(
+  {
+    question: { type: String, required: true },
+    answer: { type: String, required: true },
+  },
+  { _id: false }
+);
+
 const courseSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    title: { type: String, required: true },
+    category: { type: String, required: true },
+    provider: { type: String },
+    duration: { type: String },
+    image: { type: String },
+    description: { type: String },
 
-    category: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    price: { type: Number, required: true },
+    originalPrice: { type: Number },
 
-    image: {
-      type: String,
-      required: true, // URL
-    },
+    rating: { type: Number, default: 0 },
+    students: { type: Number, default: 0 },
+    enrolledCount: { type: Number, default: 0 },
 
-    description: {
-      type: String,
-      required: true,
-    },
+    features: [{ type: String }],
+    modules: [{ type: String }],
+    faqs: [faqSchema],
 
-    duration: {
-      type: String,
-      required: true,
-    },
-
-    price: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
-
-    originalPrice: {
-      type: Number,
-      required: true,
-      min: 0,
-    },
-
-    rating: {
-      type: Number,
-      default: 0,
-      min: 0,
-      max: 5,
-    },
-
-    students: {
-      type: Number,
-      default: 0,
-    },
-
-provider: {
-  type: String,
-  default: "TezTraders.in",
-},
-    enrolledCount: {
-      type: Number,
-      default: 0,
-    },
-
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );

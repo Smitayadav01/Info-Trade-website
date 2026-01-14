@@ -5,9 +5,9 @@ type RazorpayEnrollButtonProps = {
 };
 
 const razorpayButtonMap: Record<string, string> = {
-  "1": "pl_Rv0ydjtND1Xopy", // Elite Options Selling
-  "2": "pl_RuwGnL8wY1xYvr", // Algo Trading
-  "3": "pl_Rv10YlB3mYoAhQ", // SL Hunting
+  "6965e8db86b727c96cdd5f3a": "pl_Rv0ydjtND1Xopy", // Elite Options Selling
+  "6965e8db86b727c96cdd5f3b": "pl_RuwGnL8wY1xYvr", // Algo Trading
+  "6965e8db86b727c96cdd5f3c": "pl_Rv10YlB3mYoAhQ", // SL Hunting
 };
 
 const RazorpayEnrollButton = ({ courseId }: RazorpayEnrollButtonProps) => {
