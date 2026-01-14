@@ -13,16 +13,17 @@ interface Course {
   duration: string;
   price: number;
   originalPrice: number;
-  rating: number;
-  students: number;
+  rating?: number;
+  students?: number;
   enrolledCount?: number;
+  isActive?: boolean;
   modules?: string[];
   features?: string[];
   faqs?: { question: string; answer: string }[];
 }
 
 const CourseDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -34,9 +35,12 @@ const CourseDetail = () => {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/api/courses/${id}`
         );
+
         const data = await res.json();
 
-        if (!res.ok) throw new Error(data.message || "Course not found");
+        if (!res.ok) {
+          throw new Error(data.message || "Course not found");
+        }
 
         setCourse(data.data);
       } catch (err: any) {
@@ -73,19 +77,21 @@ const CourseDetail = () => {
 
         {/* Header */}
         <h1 className="text-4xl font-bold mb-1">{course.title}</h1>
-        <p className="text-gray-600 mb-4">{course.provider}</p>
+        {course.provider && (
+          <p className="text-gray-600">{course.provider}</p>
+        )}
 
         <img
           src={course.image}
           alt={course.title}
-          className="w-full h-[300px] object-cover rounded-xl mb-6"
+          className="w-full h-[300px] object-cover rounded-xl my-6"
         />
 
         {/* Stats */}
         <div className="flex gap-6 text-gray-600">
           <div className="flex items-center gap-2">
             <Star className="text-yellow-400" />
-            {course.rating}
+            {course.rating ?? 4.5}
           </div>
           <div className="flex items-center gap-2">
             <Clock />
@@ -93,25 +99,27 @@ const CourseDetail = () => {
           </div>
           <div className="flex items-center gap-2">
             <Users />
-            {course.students}+ students
+            {(course.students ?? course.enrolledCount ?? 0)}+ students
           </div>
         </div>
 
         {/* Description */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold mb-3">About this Course</h2>
-          <p className="text-gray-700 leading-relaxed">{course.description}</p>
+          <p className="text-gray-700 leading-relaxed">
+            {course.description}
+          </p>
         </div>
 
         {/* Features */}
-        {course.features?.length > 0 && (
+        {course.features && course.features.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold mb-4">Inside the Course</h2>
             <div className="grid md:grid-cols-2 gap-4">
-              {course.features.map((f, i) => (
-                <div key={i} className="flex gap-3">
+              {course.features.map((feature, index) => (
+                <div key={index} className="flex gap-3">
                   <CheckCircle className="text-emerald-600" />
-                  {f}
+                  <span>{feature}</span>
                 </div>
               ))}
             </div>
@@ -119,7 +127,7 @@ const CourseDetail = () => {
         )}
 
         {/* Modules */}
-        {course.modules?.length > 0 && (
+        {course.modules && course.modules.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold mb-6">Course Modules</h2>
 
@@ -127,15 +135,15 @@ const CourseDetail = () => {
               {(showAllModules
                 ? course.modules
                 : course.modules.slice(0, 4)
-              ).map((m, i) => (
+              ).map((module, index) => (
                 <div
-                  key={i}
+                  key={index}
                   className="flex items-center gap-4 p-4 border rounded-lg bg-gray-50"
                 >
                   <div className="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                    {i + 1}
+                    {index + 1}
                   </div>
-                  {m}
+                  <span>{module}</span>
                 </div>
               ))}
             </div>
@@ -155,11 +163,12 @@ const CourseDetail = () => {
         )}
 
         {/* FAQs */}
-        {course.faqs?.length > 0 && (
+        {course.faqs && course.faqs.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold mb-6">FAQs</h2>
-            {course.faqs.map((faq, i) => (
-              <details key={i} className="border p-4 rounded-lg mb-3">
+
+            {course.faqs.map((faq, index) => (
+              <details key={index} className="border p-4 rounded-lg mb-3">
                 <summary className="font-semibold cursor-pointer">
                   {faq.question}
                 </summary>
@@ -169,7 +178,7 @@ const CourseDetail = () => {
           </div>
         )}
 
-        {/* Price + Razorpay */}
+        {/* Price & Razorpay */}
         <div className="sticky bottom-0 bg-white border-t mt-10 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold">
             ₹{course.price.toLocaleString()}
@@ -178,8 +187,13 @@ const CourseDetail = () => {
             </span>
           </div>
 
-          <RazorpayEnrollButton courseId={course._id} />
+          {/* Razorpay */}
+          <RazorpayEnrollButton
+            courseId={course._id}
+            amount={course.price}
+          />
         </div>
+
       </div>
     </div>
   );
