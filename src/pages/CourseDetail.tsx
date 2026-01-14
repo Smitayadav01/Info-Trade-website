@@ -15,8 +15,7 @@ interface Course {
   originalPrice: number;
   rating: number;
   students: number;
-  enrolledCount: number;
-  isActive: boolean;
+  enrolledCount?: number;
   modules?: string[];
   features?: string[];
   faqs?: { question: string; answer: string }[];
@@ -35,10 +34,10 @@ const CourseDetail = () => {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/api/courses/${id}`
         );
-
-        if (!res.ok) throw new Error("Course not found");
-
         const data = await res.json();
+
+        if (!res.ok) throw new Error(data.message || "Course not found");
+
         setCourse(data.data);
       } catch (err: any) {
         setError(err.message);
@@ -53,7 +52,7 @@ const CourseDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin h-10 w-10 border-b-2 border-emerald-600 rounded-full"></div>
+        <div className="animate-spin h-10 w-10 border-b-2 border-emerald-600 rounded-full" />
       </div>
     );
   }
@@ -73,26 +72,20 @@ const CourseDetail = () => {
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-8">
 
         {/* Header */}
-        <h1 className="text-4xl font-bold mb-2">{course.title}</h1>
-
-<p className="text-gray-600">
-  {course.provider}
-</p>
-
+        <h1 className="text-4xl font-bold mb-1">{course.title}</h1>
+        <p className="text-gray-600 mb-4">{course.provider}</p>
 
         <img
-  src={course.image}
-  alt={course.title}
-  className="w-full h-[300px] object-cover rounded-xl my-6"
-/>
-
-
+          src={course.image}
+          alt={course.title}
+          className="w-full h-[300px] object-cover rounded-xl mb-6"
+        />
 
         {/* Stats */}
-        <div className="flex gap-6 mt-4 text-gray-600">
+        <div className="flex gap-6 text-gray-600">
           <div className="flex items-center gap-2">
             <Star className="text-yellow-400" />
-            {course.rating || 0}
+            {course.rating}
           </div>
           <div className="flex items-center gap-2">
             <Clock />
@@ -100,19 +93,19 @@ const CourseDetail = () => {
           </div>
           <div className="flex items-center gap-2">
             <Users />
-            {course.students || course.enrolledCount}+ students
+            {course.students}+ students
           </div>
         </div>
 
         {/* Description */}
         <div className="mt-8">
           <h2 className="text-2xl font-bold mb-3">About this Course</h2>
-          <p className="text-gray-700">{course.description}</p>
+          <p className="text-gray-700 leading-relaxed">{course.description}</p>
         </div>
 
         {/* Features */}
-        {course.features && (
-          <div className="mt-8">
+        {course.features?.length > 0 && (
+          <div className="mt-10">
             <h2 className="text-2xl font-bold mb-4">Inside the Course</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {course.features.map((f, i) => (
@@ -126,7 +119,7 @@ const CourseDetail = () => {
         )}
 
         {/* Modules */}
-        {course.modules && (
+        {course.modules?.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold mb-6">Course Modules</h2>
 
@@ -162,7 +155,7 @@ const CourseDetail = () => {
         )}
 
         {/* FAQs */}
-        {course.faqs && (
+        {course.faqs?.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold mb-6">FAQs</h2>
             {course.faqs.map((faq, i) => (
@@ -176,18 +169,17 @@ const CourseDetail = () => {
           </div>
         )}
 
-        {/* Price & Razorpay */}
+        {/* Price + Razorpay */}
         <div className="sticky bottom-0 bg-white border-t mt-10 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold">
-            ₹{course.price}
+            ₹{course.price.toLocaleString()}
             <span className="ml-3 text-lg line-through text-gray-500">
-              ₹{course.originalPrice}
+              ₹{course.originalPrice.toLocaleString()}
             </span>
           </div>
 
           <RazorpayEnrollButton courseId={course._id} />
         </div>
-
       </div>
     </div>
   );
