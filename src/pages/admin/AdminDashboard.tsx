@@ -57,7 +57,7 @@ const AdminDashboard = () => {
           </Link>
 
           <Link
-            to="/admin/notifications"
+            to="/admin/notifications/new"
             className="bg-white rounded-lg shadow-lg hover:shadow-xl transition p-8 border-l-4 border-green-600"
           >
             <div className="flex items-center gap-4 mb-4">
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
             </div>
           </Link>
 
-          <Link
+          {/* <Link
             to="/admin/pms-images"
             className="bg-white rounded-lg shadow-lg hover:shadow-xl transition p-8 border-l-4 border-purple-600"
           >
@@ -94,7 +94,7 @@ const AdminDashboard = () => {
                 Go to Images →
               </button>
             </div>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

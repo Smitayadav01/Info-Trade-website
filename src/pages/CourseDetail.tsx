@@ -199,8 +199,9 @@ const CourseDetail = () => {
 
           {/* Razorpay */}
           <RazorpayEnrollButton
-            courseId={course._id}
-          />
+  courseId={course._id}
+  amount={course.price}
+/>
         </div>
 
       </div>
