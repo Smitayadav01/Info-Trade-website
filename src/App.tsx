@@ -32,7 +32,7 @@ import Cookies from "./pages/Cookies";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCourses from "./pages/admin/AdminCourses";
 import CourseForm from "./pages/admin/CourseForm"; // create / edit course form
-import Notifications from './pages/admin/Notifications';
+import AdminNotifications from './pages/admin/Notifications';
 import NotificationForm from './pages/admin/NotificationForm';
 import PMSImages from './pages/admin/PMSImages';
 import PMSImageForm from './pages/admin/PMSImageForm';
@@ -112,13 +112,14 @@ function App() {
               />
 
               <Route
-            path="/admin/notifications"
-            element={
-              <ProtectedRoute requireAdmin>
-                <Notifications />
-              </ProtectedRoute>
-            }
-          />
+  path="/admin/notifications"
+  element={
+    <ProtectedRoute requireAdmin>
+      <Notifications />
+    </ProtectedRoute>
+  }
+/>
+
 
           <Route
             path="/admin/notifications/new"
