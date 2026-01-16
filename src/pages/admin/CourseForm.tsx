@@ -17,7 +17,9 @@ interface CourseForm {
   features: string[];
   modules: string[];
   faqs: { question: string; answer: string }[];
+  isPublished: boolean;   // ✅ NEW FIELD
 }
+
 
 const CourseForm = () => {
   const { id } = useParams();

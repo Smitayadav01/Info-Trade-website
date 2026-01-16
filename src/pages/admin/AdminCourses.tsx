@@ -26,7 +26,7 @@ const Courses = () => {
   const fetchCourses = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/courses`,
+        `${import.meta.env.VITE_API_URL}/api/admin/courses`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -48,7 +48,7 @@ const Courses = () => {
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/courses/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/admin/courses/${id}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },

@@ -36,6 +36,7 @@ import AdminNotifications from './pages/admin/Notifications';
 import NotificationForm from './pages/admin/NotificationForm';
 import PMSImages from './pages/admin/PMSImages';
 import PMSImageForm from './pages/admin/PMSImageForm';
+import AdminCourseDetails from "./pages/admin/AdminCourseDetails";
 
 function App() {
   return (
@@ -102,14 +103,26 @@ function App() {
                 }
               />
 
-              <Route
-                path="/admin/courses/:id"
-                element={
-                  <ProtectedRoute requireAdmin>
-                    <CourseForm />
-                  </ProtectedRoute>
-                }
-              />
+              <Routes>
+  <Route
+    path="/admin/courses/:id/edit"
+    element={
+      <ProtectedRoute requireAdmin>
+        <CourseForm />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/admin/courses/:id"
+    element={
+      <ProtectedRoute requireAdmin>
+        <AdminCourseDetails />
+      </ProtectedRoute>
+    }
+  />
+</Routes>
+
 
               <Route
   path="/admin/notifications"

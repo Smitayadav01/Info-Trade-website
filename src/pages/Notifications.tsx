@@ -21,26 +21,28 @@ const Notifications = () => {
     const fetchNotifications = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/api/notifications'); // your API route
-        const data = await res.json();
+        setError('');
 
-        if (data.success) {
-          // Map backend data to your UI fields
-          const mappedNotifications = data.data.map((n: any) => ({
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`);
+        if (!res.ok) throw new Error('Failed to fetch notifications');
+
+        const data = await res.json();
+        if (!data.success) throw new Error('Server returned error');
+
+        setNotifications(
+          data.data.map((n: any) => ({
             _id: n._id,
             title: n.title,
             message: n.message,
-            type: 'info', // optional: can map based on n.type if available
-            status: 'info', // default for UI coloring
-            amount: null,
+            type: n.type || 'info',
+            status: n.status || 'info',
+            amount: n.amount || null,
             createdAt: n.createdAt,
-          }));
-          setNotifications(mappedNotifications);
-        } else {
-          setError('Failed to load notifications');
-        }
-      } catch (err) {
-        setError('Server error while fetching notifications');
+          }))
+        );
+      } catch (err: any) {
+        console.error(err);
+        setError(err.message || 'Server error while fetching notifications');
       } finally {
         setLoading(false);
       }
@@ -56,16 +58,11 @@ const Notifications = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'success':
-        return 'text-emerald-600 bg-emerald-50 border-emerald-200';
-      case 'error':
-        return 'text-red-600 bg-red-50 border-red-200';
-      case 'warning':
-        return 'text-amber-600 bg-amber-50 border-amber-200';
-      case 'info':
-        return 'text-blue-600 bg-blue-50 border-blue-200';
-      default:
-        return 'text-gray-600 bg-gray-50 border-gray-200';
+      case 'success': return 'text-emerald-600 bg-emerald-50 border-emerald-200';
+      case 'error': return 'text-red-600 bg-red-50 border-red-200';
+      case 'warning': return 'text-amber-600 bg-amber-50 border-amber-200';
+      case 'info': return 'text-blue-600 bg-blue-50 border-blue-200';
+      default: return 'text-gray-600 bg-gray-50 border-gray-200';
     }
   };
 
@@ -82,7 +79,6 @@ const Notifications = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Header */}
       <section className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between">
@@ -99,11 +95,9 @@ const Notifications = () => {
         </div>
       </section>
 
-      {/* Main Content */}
       <section className="pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Filters Sidebar */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 sticky top-8">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Filter Notifications</h3>
@@ -134,7 +128,6 @@ const Notifications = () => {
               </div>
             </div>
 
-            {/* Notifications List */}
             <div className="lg:col-span-3">
               {loading && <p className="text-gray-600">Loading notifications...</p>}
               {error && <p className="text-red-500">{error}</p>}

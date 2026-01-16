@@ -10,8 +10,8 @@ const Courses = () => {
       title: "Elite Options Selling Program",
       level: "Theta Edge",
       duration: "15 Days",
-      price: "7,999",
-      originalPrice: "₹12,999",
+      // price: "7,999",
+      // originalPrice: "₹12,999",
       rating: 4.5,
       students: 20,
       description: "Advanced options strategies for consistent income generation.",
@@ -24,8 +24,8 @@ const Courses = () => {
       title: "Algo Trading Mastery Program",
       level: "Theta + Delta Edge",
       duration: "30 Days",
-      price: "₹11,999",
-      originalPrice: "₹19,999",
+      // price: "₹11,999",
+      // originalPrice: "₹19,999",
       rating: 4.9,
       students: 15,
       description: "Build and deploy your own algorithmic trading systems.",
@@ -38,8 +38,8 @@ const Courses = () => {
       title: "Options Buying-SL Hunting Mastery Course ",
       level: "Delta Edge",
       duration: "20 Days",
-      price: "₹4,999",
-      originalPrice: "₹7,999",
+      // price: "₹4,999",
+      // originalPrice: "₹7,999",
       rating: 4.7,
       students: 50,
       description: "Learn the art of institutional level buying system",
@@ -245,12 +245,12 @@ const Courses = () => {
                     ))}
                   </div>
                   
-                  <div className="mb-6">
+                  {/* <div className="mb-6">
                     <div className="flex items-center space-x-2">
                       <span className="text-3xl font-bold text-gray-900">{course.price}</span>
                       <span className="text-lg text-gray-500 line-through">{course.originalPrice}</span>
                     </div>
-                  </div>
+                  </div> */}
                   <Link
   to={`/courses/${course._id}`}
   className={`w-full bg-gradient-to-r ${colors.button} text-white py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 group-hover:shadow-lg flex items-center justify-center`}
