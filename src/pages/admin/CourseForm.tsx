@@ -17,9 +17,8 @@ interface CourseForm {
   features: string[];
   modules: string[];
   faqs: { question: string; answer: string }[];
-  isPublished: boolean;   // ✅ NEW FIELD
+  isActive: boolean;   // ✅ USING isActive
 }
-
 
 const CourseForm = () => {
   const { id } = useParams();
@@ -40,6 +39,7 @@ const CourseForm = () => {
     features: [""],
     modules: [""],
     faqs: [{ question: "", answer: "" }],
+    isActive: false,   // ✅ NEW COURSE HIDDEN BY DEFAULT
   });
 
   const [loading, setLoading] = useState(false);
@@ -74,6 +74,7 @@ const CourseForm = () => {
         features: json.data.features || [""],
         modules: json.data.modules || [""],
         faqs: json.data.faqs || [{ question: "", answer: "" }],
+        isActive: json.data.isActive ?? false,   // ✅ CORRECT
       });
     } catch (err: any) {
       setError(err.message);
@@ -146,6 +147,7 @@ const CourseForm = () => {
         originalPrice: Number(form.originalPrice),
         rating: Number(form.rating),
         students: Number(form.students),
+        isActive: form.isActive,   // ✅ IMPORTANT
       };
 
       const res = await fetch(
@@ -250,6 +252,18 @@ const CourseForm = () => {
             <button type="button" onClick={addFaq} className="text-blue-600 flex gap-1">
               <Plus size={16} /> Add FAQ
             </button>
+          </div>
+
+          {/* PUBLISH TO USER PAGE */}
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              checked={form.isActive}
+              onChange={e => setForm(prev => ({ ...prev, isActive: e.target.checked }))}
+            />
+            <label className="font-medium">
+              Show on main course page
+            </label>
           </div>
 
           <button
