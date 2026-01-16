@@ -1,13 +1,13 @@
 import Course from "../models/Course.js";
 
 /**
- * @desc    Get all PUBLISHED courses (FOR USERS)
+ * @desc    Get all active courses
  * @route   GET /api/courses
  * @access  Public
  */
 export const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find({ isPublished: true })
+    const courses = await Course.find({ isActive: true })
       .sort({ createdAt: -1 });
 
     res.status(200).json({
@@ -25,38 +25,15 @@ export const getAllCourses = async (req, res) => {
 };
 
 /**
- * @desc    Get ALL courses (FOR ADMIN ONLY)
- * @route   GET /api/courses/admin/all
- * @access  Admin
- */
-export const getAdminCourses = async (req, res) => {
-  try {
-    const courses = await Course.find().sort({ createdAt: -1 });
-
-    res.status(200).json({
-      success: true,
-      count: courses.length,
-      data: courses,
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Error fetching admin courses",
-      error: error.message,
-    });
-  }
-};
-
-/**
  * @desc    Get single course by ID
  * @route   GET /api/courses/:id
- * @access  Public (but only if published)
+ * @access  Public
  */
 export const getCourseById = async (req, res) => {
   try {
     const course = await Course.findById(req.params.id);
 
-    if (!course || !course.isPublished) {
+    if (!course || !course.isActive) {
       return res.status(404).json({
         success: false,
         message: "Course not found",
@@ -83,11 +60,7 @@ export const getCourseById = async (req, res) => {
  */
 export const createCourse = async (req, res) => {
   try {
-    // Ensure new course is NOT visible to users by default
-    const course = await Course.create({
-      ...req.body,
-      isPublished: false,   // IMPORTANT ✅
-    });
+    const course = await Course.create(req.body);
 
     res.status(201).json({
       success: true,

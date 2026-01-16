@@ -28,8 +28,7 @@ const courseSchema = new mongoose.Schema(
     modules: [{ type: String }],
     faqs: [faqSchema],
 
-    // ✅ Admin control
-    isPublished: { type: Boolean, default: false } 
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
