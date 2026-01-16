@@ -1,7 +1,7 @@
 import express from "express";
 import {
-  getAllCourses,      // for USERS
-  getAdminCourses,    // for ADMIN (new)
+  getAllCourses,      
+  getAdminCourses,    
   getCourseById,
   createCourse,
   updateCourse,
@@ -12,13 +12,16 @@ import { authenticate, authorizeAdmin } from "../middleware/auth.js";
 const router = express.Router();
 
 // ---------- USER ROUTES ----------
-router.get("/", getAllCourses);        // 👈 MAIN WEBSITE
+router.get("/", getAllCourses);   // Public courses
 
 // ---------- ADMIN ROUTES ----------
 router.get("/admin/all", authenticate, authorizeAdmin, getAdminCourses);
-router.get("/:id", getCourseById);
+
 router.post("/", authenticate, authorizeAdmin, createCourse);
 router.put("/:id", authenticate, authorizeAdmin, updateCourse);
 router.delete("/:id", authenticate, authorizeAdmin, deleteCourse);
+
+// ✅ KEEP THIS LAST
+router.get("/:id", getCourseById);
 
 export default router;
