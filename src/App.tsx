@@ -103,7 +103,7 @@ function App() {
                 }
               />
 
-              <Routes>
+              
   <Route
     path="/admin/courses/:id/edit"
     element={
@@ -121,7 +121,7 @@ function App() {
       </ProtectedRoute>
     }
   />
-</Routes>
+
 
 
               <Route
