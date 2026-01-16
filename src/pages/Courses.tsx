@@ -6,7 +6,7 @@ const Courses = () => {
   const courses = [
 
     {
-      _id: "6965e8db86b727c96cdd5f3a",
+      _id: "6969cb9c4e469a00f68b6d3f",
       title: "Elite Options Selling Program",
       level: "Theta Edge",
       duration: "15 Days",
@@ -20,7 +20,7 @@ const Courses = () => {
       popular: false
     },
     {
-      _id: "6965e8db86b727c96cdd5f3b",
+      _id: "6969cb9c4e469a00f68b6d40",
       title: "Algo Trading Mastery Program",
       level: "Theta + Delta Edge",
       duration: "30 Days",
@@ -34,7 +34,7 @@ const Courses = () => {
       popular: true
     },
     {
-      _id: "6965e8db86b727c96cdd5f3c",
+      _id: "6969cb9c4e469a00f68b6d41",
       title: "Options Buying-SL Hunting Mastery Course ",
       level: "Delta Edge",
       duration: "20 Days",

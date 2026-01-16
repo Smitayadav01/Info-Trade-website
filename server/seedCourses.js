@@ -14,7 +14,7 @@ const courses = [
     originalPrice: 12999,
     rating: 4.5,
     students: 20,
-    image: "/courses/options-selling.jpg",
+    image: "options-selling.jpg",
     description:
       "The program covers institutional-level options selling setups with an emphasis on Greeks, volatility analysis, and hedging techniques. Traders will learn how to manage drawdowns, control risk, and maintain consistency across different market cycles.",
     features: [
@@ -67,7 +67,7 @@ const courses = [
     originalPrice: 19999,
     rating: 4.9,
     students: 15,
-    image: "/courses/algo-trading.jpg",
+    image: "algo-trading.jpg",
     description:
       "This course teaches how to design rule-based algorithmic trading strategies from scratch. You will learn to backtest strategies using historical data, optimize performance, and deploy them for live market execution with proper risk controls.",
     features: [
@@ -137,7 +137,7 @@ const courses = [
     originalPrice: 7999,
     rating: 4.7,
     students: 50,
-    image: "/courses/sl-hunting.jpg",
+    image: "sl-hunting.jpg",
     description:
       "This course teaches institutional-style options buying with precise entry and exit rules, focusing on high-momentum trades and optimal risk-to-reward. It also covers SL-hunting setups, helping traders identify liquidity zones, false breakouts, and institutional trap moves for high-probability reversals.",
     features: [

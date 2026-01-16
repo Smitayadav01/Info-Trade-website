@@ -32,6 +32,10 @@ import Cookies from "./pages/Cookies";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCourses from "./pages/admin/AdminCourses";
 import CourseForm from "./pages/admin/CourseForm"; // create / edit course form
+import Notifications from './pages/admin/Notifications';
+import NotificationForm from './pages/admin/NotificationForm';
+import PMSImages from './pages/admin/PMSImages';
+import PMSImageForm from './pages/admin/PMSImageForm';
 
 function App() {
   return (
@@ -106,6 +110,60 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+
+              <Route
+            path="/admin/notifications"
+            element={
+              <ProtectedRoute requireAdmin>
+                <Notifications />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/notifications/new"
+            element={
+              <ProtectedRoute requireAdmin>
+                <NotificationForm />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/notifications/:id"
+            element={
+              <ProtectedRoute requireAdmin>
+                <NotificationForm />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/pms-images"
+            element={
+              <ProtectedRoute requireAdmin>
+                <PMSImages />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/pms-images/new"
+            element={
+              <ProtectedRoute requireAdmin>
+                <PMSImageForm />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/pms-images/:id"
+            element={
+              <ProtectedRoute requireAdmin>
+                <PMSImageForm />
+              </ProtectedRoute>
+            }
+          />
             </Routes>
           </main>
 

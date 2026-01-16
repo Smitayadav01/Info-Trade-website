@@ -2,6 +2,16 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Star, Clock, Users, CheckCircle, Plus, Minus } from "lucide-react";
 import RazorpayEnrollButton from "../components/RazorpayEnrollButton";
+import optionsImg from "../assets/courses/options-selling.jpg";
+import algoImg from "../assets/courses/algo-trading.jpg";
+import slHuntingImg from "../assets/courses/sl-hunting.jpg";
+
+const imageMap: Record<string, string> = {
+  "options-selling.jpg": optionsImg,
+  "algo-trading.jpg": algoImg,
+  "sl-hunting.jpg": slHuntingImg,
+};
+
 
 interface Course {
   _id: string;
@@ -82,10 +92,10 @@ const CourseDetail = () => {
         )}
 
         <img
-          src={course.image}
-          alt={course.title}
-          className="w-full h-[300px] object-cover rounded-xl my-6"
-        />
+  src={imageMap[course.image] || optionsImg}
+  alt={course.title}
+/>
+
 
         {/* Stats */}
         <div className="flex gap-6 text-gray-600">
