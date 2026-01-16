@@ -200,7 +200,7 @@ const CourseDetail = () => {
           {/* Razorpay */}
           <RazorpayEnrollButton
   courseId={course._id}
-  amount={course.price}
+  
 />
         </div>
 
