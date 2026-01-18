@@ -123,7 +123,12 @@ function App() {
     }
   />
 
-<Route path="/admin/course-preview" element={<CoursePreview />} />
+<Route 
+path="/admin/course-preview"
+ element={
+ <CoursePreview />
+ } 
+ />
 
 
               <Route
