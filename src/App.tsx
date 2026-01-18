@@ -37,7 +37,7 @@ import NotificationForm from './pages/admin/NotificationForm';
 import PMSImages from './pages/admin/PMSImages';
 import PMSImageForm from './pages/admin/PMSImageForm';
 import AdminCourseDetails from "./pages/admin/AdminCourseDetails";
-import CoursePreview from "./pages/admin/CoursePreview";
+import CoursePreview from "./pages/admin/CoursePreviewPage";
 
 function App() {
   return (
