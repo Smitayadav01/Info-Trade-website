@@ -168,3 +168,28 @@ export const deleteCourse = async (req, res) => {
     });
   }
 };
+
+// ✅ NEW: Admin can fetch ANY course (even inactive)
+export const getAdminCourseById = async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: "Course not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: course,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error fetching course",
+      error: error.message,
+    });
+  }
+};

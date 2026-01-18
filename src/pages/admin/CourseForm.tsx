@@ -53,9 +53,10 @@ const CourseForm = () => {
   const fetchCourse = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/courses/${id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+  `${import.meta.env.VITE_API_URL}/api/courses/admin/${id}`,
+  { headers: { Authorization: `Bearer ${token}` } }
+);
+
 
       const json = await res.json();
       if (!res.ok) throw new Error(json.message || "Failed to fetch course");
