@@ -139,7 +139,7 @@ const Courses = () => {
                   </td>
                   <td className="px-6 py-4 flex gap-3">
                     <Link
-                      to={`/admin/courses/${course._id}`} // Edit page
+                      to={`/admin/courses/${course._id}/edit`} // Edit page
                       className="text-blue-600 flex items-center gap-1"
                     >
                       <Edit2 size={16} /> Edit

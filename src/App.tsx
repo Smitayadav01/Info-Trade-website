@@ -105,7 +105,7 @@ function App() {
 
               
   <Route
-    path="/admin/courses/:id/edit"
+    path="/admin/courses/:id"
     element={
       <ProtectedRoute requireAdmin>
         <CourseForm />
@@ -114,7 +114,7 @@ function App() {
   />
 
   <Route
-    path="/admin/courses/:id"
+    path="/admin/courses/:id/edit"
     element={
       <ProtectedRoute requireAdmin>
         <AdminCourseDetails />
