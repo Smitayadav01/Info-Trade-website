@@ -120,21 +120,25 @@ const PortfolioDetails = () => {
           </p>
         </div>
 
-        {/* summary Section */}
-        <div className=" p-6 mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Performance Summary
-          </h2>
+       {/* Performance Summary (NEW DESIGN - CENTERED & STYLISH) */}
+<div className="mb-12 text-center">
+  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+    Performance Summary
+  </h2>
 
-          <div className="space-y-4">
-            {portfolio.summary.map((item: string, index: number) => (
-              <div key={index} className="flex items-start gap-3">
-                <CheckCircle className="h-5 w-5 text-green-600 mt-1" />
-                <span className="text-gray-700">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    {portfolio.summary.map((item: string, index: number) => (
+      <div
+        key={index}
+        className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500"
+      >
+        
+        <p className="text-gray-700 font-medium">{item}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
 
 {/* Images Section */}
 {portfolio.image && (
@@ -146,15 +150,18 @@ const PortfolioDetails = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {portfolio.image.map((img: string, index: number) => (
         <div
-          key={index}
-          onClick={() => {
-            setSelectedImage(img);
-            setZoom(1);
-          }}
-          className="cursor-pointer bg-white rounded-xl shadow-md overflow-hidden 
-                     flex items-center justify-center h-[220px] sm:h-[260px] md:h-[300px]
-                     hover:scale-[1.02] transition"
-        >
+  key={index}
+  onClick={() => {
+    setSelectedImage(img);
+    setZoom(1);
+  }}
+  className="cursor-pointer bg-white border border-blue-400 border-spacing-3 rounded-xl overflow-hidden 
+           flex items-center justify-center h-[180px] sm:h-[220px] md:h-[250px]
+           transition p-2"
+
+>
+
+
           <img
             src={img}
             alt={`${portfolio.name} ${index + 1}`}

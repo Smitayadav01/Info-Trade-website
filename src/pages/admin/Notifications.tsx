@@ -53,7 +53,8 @@ const Notifications = () => {
 
       if (!response.ok) throw new Error("Failed to delete notification");
 
-      setNotifications(notifications.filter(n => n._id !== id));
+     await fetchNotifications();
+
     } catch (err: any) {
       alert(err.message);
     }
@@ -155,7 +156,7 @@ const Notifications = () => {
                     <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">Actions</th>
                   </tr>
                 </thead>
-                <tbody divide-y>
+                <tbody className="divide-y">
                   {notifications.map((notification) => (
                     <tr key={notification._id} className="hover:bg-gray-50 transition">
                       <td className="px-6 py-4 text-sm text-gray-900 font-medium">{notification.title}</td>
