@@ -52,3 +52,16 @@
 .animate-slide-up {
   animation: slide-up 0.8s ease-out forwards;
 }
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
