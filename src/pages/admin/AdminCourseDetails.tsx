@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Star, Clock, Users, CheckCircle, Plus, Minus } from "lucide-react";
+import { useAuth } from "../../context/AuthContext"; // import auth for token
 
 interface Course {
   _id: string;
@@ -23,6 +24,7 @@ interface Course {
 
 const AdminCourseDetails = () => {
   const { id } = useParams<{ id: string }>();
+  const { token } = useAuth(); // get token for auth
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +34,10 @@ const AdminCourseDetails = () => {
     const fetchCourse = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/admin/courses/${id}`
+          `${import.meta.env.VITE_API_URL}/api/courses/${id}`, // ✅ backend route
+          {
+            headers: { Authorization: `Bearer ${token}` }, // only if auth required
+          }
         );
 
         const data = await res.json();
@@ -50,7 +55,7 @@ const AdminCourseDetails = () => {
     };
 
     fetchCourse();
-  }, [id]);
+  }, [id, token]);
 
   if (loading) return <p>Loading Admin Course...</p>;
   if (error || !course) return <p className="text-red-600">{error}</p>;
@@ -68,6 +73,11 @@ const AdminCourseDetails = () => {
 
         <div className="mt-6 text-xl font-bold">
           Price: ₹{course.price}
+          {course.originalPrice && (
+            <span className="line-through text-gray-400 ml-2">
+              ₹{course.originalPrice}
+            </span>
+          )}
         </div>
       </div>
     </div>

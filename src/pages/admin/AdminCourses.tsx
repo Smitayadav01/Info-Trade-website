@@ -23,10 +23,11 @@ const Courses = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // -------- FETCH COURSES ----------
   const fetchCourses = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/admin/courses`,
+        `${import.meta.env.VITE_API_URL}/api/courses/admin/all`, // ✅ matches backend
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -36,6 +37,7 @@ const Courses = () => {
 
       const data = await response.json();
       setCourses(data.data);
+      setError(null);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -43,12 +45,13 @@ const Courses = () => {
     }
   };
 
+  // -------- DELETE COURSE ----------
   const deleteCourse = async (id: string) => {
     if (!confirm("Delete this course?")) return;
 
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/admin/courses/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/courses/${id}`, // ✅ matches backend delete route
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
@@ -57,7 +60,7 @@ const Courses = () => {
 
       if (!res.ok) throw new Error("Delete failed");
 
-      setCourses(prev => prev.filter(c => c._id !== id));
+      setCourses((prev) => prev.filter((c) => c._id !== id));
     } catch (err: any) {
       alert(err.message);
     }
@@ -78,7 +81,6 @@ const Courses = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="max-w-7xl mx-auto px-6 py-8">
-
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold">Manage Courses</h1>
           <Link
@@ -111,7 +113,7 @@ const Courses = () => {
             </thead>
 
             <tbody className="divide-y">
-              {courses.map(course => (
+              {courses.map((course) => (
                 <tr key={course._id}>
                   <td className="px-6 py-4 font-medium">{course.title}</td>
                   <td className="px-6 py-4">{course.category}</td>
@@ -137,7 +139,7 @@ const Courses = () => {
                   </td>
                   <td className="px-6 py-4 flex gap-3">
                     <Link
-                      to={`/admin/courses/${course._id}`}
+                      to={`/admin/courses/${course._id}`} // Edit page
                       className="text-blue-600 flex items-center gap-1"
                     >
                       <Edit2 size={16} /> Edit

@@ -5,14 +5,13 @@ type Notification = {
   _id: string;
   title: string;
   message: string;
-  type: 'info' | 'warning' | 'success' | 'error';
-  priority: 'low' | 'medium' | 'high';
+  type: 'webinar-alert' | 'warning';
   isActive: boolean;
   createdAt: string;
 };
 
 const Notifications = () => {
-  const [filter, setFilter] = useState<'all' | 'info' | 'warning' | 'success' | 'error'>('all');
+  const [filter, setFilter] = useState<'all' | 'webinar-alert' | 'warning'>('all');
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -64,25 +63,16 @@ const Notifications = () => {
   const filters = [
     { key: 'all', label: 'All Notifications', count: notifications.length },
     {
-      key: 'info',
-      label: 'Info',
-      count: notifications.filter((n) => n.type === 'info').length,
+      key: 'webinar-alert',
+      label: 'webinar-alert',
+      count: notifications.filter((n) => n.type === 'webinar-alert').length,
     },
     {
       key: 'warning',
       label: 'Warnings',
       count: notifications.filter((n) => n.type === 'warning').length,
     },
-    {
-      key: 'success',
-      label: 'Success',
-      count: notifications.filter((n) => n.type === 'success').length,
-    },
-    {
-      key: 'error',
-      label: 'Errors',
-      count: notifications.filter((n) => n.type === 'error').length,
-    },
+    
   ];
 
   return (
@@ -120,10 +110,9 @@ const Notifications = () => {
                         setFilter(
                           filterOption.key as
                             | 'all'
-                            | 'info'
+                            | 'webinar-alert'
                             | 'warning'
-                            | 'success'
-                            | 'error'
+                          
                         )
                       }
                       className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 flex items-center justify-between ${
@@ -186,9 +175,6 @@ const Notifications = () => {
                           </span>
                           <span className="capitalize px-2 py-1 rounded-full text-xs bg-gray-100">
                             {notification.type}
-                          </span>
-                          <span className="capitalize px-2 py-1 rounded-full text-xs bg-gray-100">
-                            Priority: {notification.priority}
                           </span>
                         </div>
                       </div>

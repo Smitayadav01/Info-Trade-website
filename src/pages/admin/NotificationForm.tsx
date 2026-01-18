@@ -6,8 +6,7 @@ import { ArrowLeft, Save } from "lucide-react";
 interface NotificationForm {
   title: string;
   message: string;
-  type: "info" | "warning" | "success" | "error";
-  priority: "low" | "medium" | "high";
+  type: "webinar-alert" | "warning" ;
   isActive: boolean;
 }
 
@@ -19,8 +18,7 @@ const NotificationForm = () => {
   const [form, setForm] = useState<NotificationForm>({
     title: "",
     message: "",
-    type: "info",
-    priority: "medium",
+    type: "webinar-alert",
     isActive: true,
   });
 
@@ -46,7 +44,6 @@ const NotificationForm = () => {
         title: data.data.title,
         message: data.data.message,
         type: data.data.type,
-        priority: data.data.priority,
         isActive: data.data.isActive,
       });
     } catch (err: any) {
@@ -151,26 +148,12 @@ const NotificationForm = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  <option value="info">Info</option>
+                  <option value="info">webinar-alert</option>
                   <option value="warning">Warning</option>
-                  <option value="success">Success</option>
-                  <option value="error">Error</option>
                 </select>
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
-                <select
-                  name="priority"
-                  value={form.priority}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </select>
-              </div>
+              
             </div>
 
             <div className="flex items-center gap-3">

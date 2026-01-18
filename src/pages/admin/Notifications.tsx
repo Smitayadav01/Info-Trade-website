@@ -7,8 +7,7 @@ interface Notification {
   _id: string;
   title: string;
   message: string;
-  type: "info" | "warning" | "success" | "error";
-  priority: "low" | "medium" | "high";
+  type: "webinar-alert" | "warning" ;
   isActive: boolean;
   createdBy: {
     name: string;
@@ -74,31 +73,15 @@ const Notifications = () => {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "info":
+      case "webinar-alert":
         return "bg-blue-100 text-blue-800";
       case "warning":
         return "bg-yellow-100 text-yellow-800";
-      case "success":
-        return "bg-green-100 text-green-800";
-      case "error":
-        return "bg-red-100 text-red-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
   };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "high":
-        return "bg-red-100 text-red-800";
-      case "medium":
-        return "bg-yellow-100 text-yellow-800";
-      case "low":
-        return "bg-green-100 text-green-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -165,15 +148,10 @@ const Notifications = () => {
                           {notification.type}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getPriorityColor(notification.priority)}`}>
-                          {notification.priority}
-                        </span>
-                      </td>
                       <td className="px-6 py-4 text-sm text-gray-600">{notification.createdBy.name}</td>
                       <td className="px-6 py-4 text-sm flex gap-3">
                         <Link
-                          to={`/admin/notifications/${notification._id}`}
+                          to={`/admin/notifications/${notification._id}/edit`}
                           className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1"
                         >
                           <Edit2 size={16} /> Edit
