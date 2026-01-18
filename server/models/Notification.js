@@ -13,13 +13,8 @@ const notificationSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["info", "warning", "success", "error"],
+      enum: ["webinar-alert", "warning"],
       default: "info",
-    },
-    priority: {
-      type: String,
-      enum: ["low", "medium", "high"],
-      default: "medium",
     },
     isActive: {
       type: Boolean,
