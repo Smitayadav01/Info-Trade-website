@@ -128,29 +128,30 @@ function App() {
   path="/admin/notifications"
   element={
     <ProtectedRoute requireAdmin>
-      <Notifications />
+      <AdminNotifications />
     </ProtectedRoute>
   }
 />
 
 
           <Route
-            path="/admin/notifications/new"
-            element={
-              <ProtectedRoute requireAdmin>
-                <NotificationForm />
-              </ProtectedRoute>
-            }
-          />
+  path="/admin/notifications/new"
+  element={
+    <ProtectedRoute requireAdmin>
+      <NotificationForm />
+    </ProtectedRoute>
+  }
+/>
 
-          <Route
-            path="/admin/notifications/:id"
-            element={
-              <ProtectedRoute requireAdmin>
-                <NotificationForm />
-              </ProtectedRoute>
-            }
-          />
+<Route
+  path="/admin/notifications/:id/edit"
+  element={
+    <ProtectedRoute requireAdmin>
+      <NotificationForm />
+    </ProtectedRoute>
+  }
+/>
+
 
           <Route
             path="/admin/pms-images"
