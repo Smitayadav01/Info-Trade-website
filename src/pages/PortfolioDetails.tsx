@@ -69,8 +69,8 @@ const portfolioData: any = {
     summary: [
       "Average Annual ROI: +100-110%",
       "Max Risk Per Day: 1.5% ",
-      "Capital For Expiry Days: 20L",
-      "Capital For Non-Expiry Days: 20L",
+      "Capital For Expiry Days: 15L",
+      "Capital For Non-Expiry Days: 15L",
       "Historical Max DD: 3-4%",
     ],
     image:[Aggresive1,Aggresive2,Aggresive3],

@@ -167,7 +167,10 @@ const CourseForm = () => {
 
       if (!res.ok) throw new Error("Failed to save course");
 
-      navigate("/admin/courses");
+      const data = await res.json();
+      navigate("/admin/course-preview", {
+  state: { course: data.data },
+});
     } catch (err: any) {
       setError(err.message);
     } finally {

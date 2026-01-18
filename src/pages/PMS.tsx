@@ -26,7 +26,7 @@ const PMS = () => {
       name: "Aggressive Growth",
       risk: "High Risk",
       returns: "100-110% Annual",
-      minInvestment: "₹20 Lakhs",
+      minInvestment: "₹15 Lakhs",
       description: "Maximum growth potential for risk-tolerant investors",
       features: ["Max risk 1.5-2%", "Highest potential returns", "Suitable for risk-tolerance investors", "High volatility"],
       color: "purple"
