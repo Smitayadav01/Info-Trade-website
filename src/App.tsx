@@ -122,13 +122,8 @@ function App() {
       </ProtectedRoute>
     }
   />
+<Route path="/course-preview/:id" element={<CoursePreview />} />
 
-<Route 
-path="/course-preview"
- element={
- <CoursePreview />
- } 
- />
 
 
               <Route

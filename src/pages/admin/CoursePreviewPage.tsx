@@ -1,11 +1,41 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Star, Clock, Users, CheckCircle, Plus, Minus } from "lucide-react";
-import { useState } from "react";
+
 
 const CoursePreview = () => {
-  const location = useLocation();
-  const course = location.state?.course;
-  const [showAllModules, setShowAllModules] = useState(false);
+  const { id } = useParams<{ id: string }>();
+const [course, setCourse] = useState<any>(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState<string | null>(null);
+
+useEffect(() => {
+  const fetchCourse = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/courses/${id}`
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Course not found");
+      }
+
+      setCourse(data.data);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCourse();
+}, [id]);
+
+if (loading) return <p>Loading preview...</p>;
+if (error || !course) return <p className="text-red-600">{error}</p>;
+
 
   if (!course) {
     return (
