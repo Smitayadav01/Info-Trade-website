@@ -124,7 +124,7 @@ function App() {
   />
 
 <Route 
-path="/admin/course-preview"
+path="/course-preview"
  element={
  <CoursePreview />
  } 
