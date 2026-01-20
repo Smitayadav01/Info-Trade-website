@@ -83,10 +83,9 @@ export const getCourseById = async (req, res) => {
  */
 export const createCourse = async (req, res) => {
   try {
-    // Ensure new course is NOT visible to users by default
     const course = await Course.create({
       ...req.body,
-      isActive: false,   // IMPORTANT ✅
+      isActive: true,   // ✅ FIXED
     });
 
     res.status(201).json({
@@ -102,6 +101,7 @@ export const createCourse = async (req, res) => {
     });
   }
 };
+
 
 /**
  * @desc    Update course
