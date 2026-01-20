@@ -21,6 +21,8 @@ import Subscription from "./pages/Subscription";
 import PortfolioDetails from "./pages/PortfolioDetails";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import CoursePreview from "./pages/CoursePreview";
+
 
 // Legal
 import Legal from "./pages/Legal";
@@ -37,7 +39,6 @@ import NotificationForm from './pages/admin/NotificationForm';
 import PMSImages from './pages/admin/PMSImages';
 import PMSImageForm from './pages/admin/PMSImageForm';
 import AdminCourseDetails from "./pages/admin/AdminCourseDetails";
-import CoursePreview from "./pages/admin/CoursePreviewPage";
 
 function App() {
   return (
@@ -62,6 +63,8 @@ function App() {
               <Route path="/courses" element={<Courses />} />
               <Route path="/courses/:id" element={<CourseDetail />} />
               <Route path="/subscription" element={<Subscription />} />
+              <Route path="/course-preview/:id" element={<CoursePreview />} />
+
 
               {/* LEGAL */}
               <Route path="/legal" element={<Legal />} />
@@ -122,9 +125,6 @@ function App() {
       </ProtectedRoute>
     }
   />
-<Route path="/course-preview/:id" element={<CoursePreview />} />
-
-
 
               <Route
   path="/admin/notifications"

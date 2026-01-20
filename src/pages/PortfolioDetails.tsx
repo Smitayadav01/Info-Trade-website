@@ -274,16 +274,16 @@ const PortfolioDetails = () => {
       </p>
 
       <p className="text-sm text-gray-700 mb-5">
-        Please review our{" "}
-        <Link
-          to="/terms"
-          className="text-blue-600 font-medium underline"
-          
-        >
-          Terms & Conditions
-        </Link>{" "}
-        before proceeding.
-      </p>
+  Please review our{" "}
+  <a
+    href="https://www.teztraders.in/terms#:~:text=3,issues"
+    className="text-blue-600 font-medium underline"
+  >
+    Terms & Conditions
+  </a>{" "}
+  before proceeding.
+</p>
+
 
       <div className="flex justify-end gap-3">
         <button

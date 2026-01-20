@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Star, Clock, Users, CheckCircle, Plus, Minus } from "lucide-react";
+import { Star, Clock, Users, CheckCircle, Plus, Minus,MessageCircle } from "lucide-react";
 import RazorpayEnrollButton from "../components/RazorpayEnrollButton";
 import optionsImg from "../assets/courses/options-selling.jpg";
 import algoImg from "../assets/courses/algo-trading.jpg";
@@ -80,6 +80,10 @@ const CourseDetail = () => {
       </div>
     );
   }
+
+  const whatsappLink = `https://wa.me/919453980510?text=Hi,%20I%20am%20interested%20in%20the%20course:%20${encodeURIComponent(
+    course.title
+  )}`;
 
   return (
     <div className="min-h-screen bg-gray-50 py-6">
@@ -188,7 +192,7 @@ const CourseDetail = () => {
           </div>
         )}
 
-        {/* Price & Razorpay */}
+        {/* Price & WhatsApp Button */}
         <div className="sticky bottom-0 bg-white border-t mt-10 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold">
             ₹{course.price.toLocaleString()}
@@ -197,11 +201,15 @@ const CourseDetail = () => {
             </span>
           </div>
 
-          {/* Razorpay */}
-          <RazorpayEnrollButton
-  courseId={course._id}
-  
-/>
+          {/* WHATSAPP BUTTON */}
+          <a
+            href={whatsappLink}
+            target="_self"
+            className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
+          >
+            <MessageCircle className="h-5 w-5" />
+            Enquire on WhatsApp
+          </a>
         </div>
 
       </div>

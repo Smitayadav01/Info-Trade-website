@@ -1,7 +1,8 @@
-import React from 'react';
+import React ,{ useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Shield, Brain, Target, BarChart3, TrendingUp, CheckCircle, LineChart, Activity, DollarSign } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import popupImg from "../assets/Secret2success.jpeg"; 
 
 const Home = () => {
   const words = [
@@ -11,15 +12,31 @@ const Home = () => {
   "Expert PMS Services"
 ];
 
-const [currentWord, setCurrentWord] = React.useState(0);
+const [showPopup, setShowPopup] = useState(false);
+const [showForm, setShowForm] = useState(false);
+const [currentWord, setCurrentWord] = useState(0);
 
-React.useEffect(() => {
-  const interval = setInterval(() => {
-    setCurrentWord((prev) => (prev + 1) % words.length);
-  }, 2500);
+useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 2500);
 
-  return () => clearInterval(interval);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+  const alreadyShown = localStorage.getItem("homePopupShown");
+
+  if (!alreadyShown) {
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+      localStorage.setItem("homePopupShown", "true"); // store flag
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }
 }, []);
+
 
   const { isAuthenticated } = useAuth();
 
@@ -64,6 +81,62 @@ React.useEffect(() => {
 
   return (
     <div className="bg-white">
+       {/* POPUP IMAGE */}
+      {showPopup && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0"
+            onClick={() => setShowPopup(false)}
+          />
+
+          <div className="relative  rounded-xl shadow-xl max-w-lg w-full p-2 z-50">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute -top-2 -right-2 bg-white text-black rounded-full  shadow-md"
+            >
+              ✖
+            </button>
+
+            <img
+              src={popupImg}
+              alt="Offer Popup"
+              className="w-full rounded-lg cursor-pointer"
+              onClick={() => {
+                setShowPopup(false);
+                 setShowForm(true);
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* GOOGLE FORM MODAL */}
+      {showForm && (
+        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0"
+            onClick={() => setShowForm(false)}
+          />
+
+          <div className="relative bg-white rounded-xl shadow-xl max-w-3xl w-full p-4 z-50">
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute -top-3 -right-3 bg-white text-black rounded-full p-2 shadow-md"
+            >
+              ✖
+            </button>
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSdAO4DToruOwsxGNExS-MOuHzCDjgyLLAYD3XUO3oMa5CV-iQ/viewform?embedded=true"
+              width="100%"
+              height="600"
+              frameBorder="0"
+            >
+              Loading…
+            </iframe>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 ">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>

@@ -1,51 +1,42 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Star, Clock, Users, CheckCircle, Plus, Minus } from "lucide-react";
 
-
 const CoursePreview = () => {
   const { id } = useParams<{ id: string }>();
-const [course, setCourse] = useState<any>(null);
-const [loading, setLoading] = useState(true);
-const [error, setError] = useState<string | null>(null);
 
-useEffect(() => {
-  const fetchCourse = async () => {
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/courses/${id}`
-      );
+  const [course, setCourse] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [showAllModules, setShowAllModules] = useState(false); // ✅ ADDED
 
-      const data = await res.json();
+  useEffect(() => {
+    const fetchCourse = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/courses/${id}`
+        );
 
-      if (!res.ok) {
-        throw new Error(data.message || "Course not found");
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "Course not found");
+        }
+
+        setCourse(data.data);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      setCourse(data.data);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchCourse();
+  }, [id]);
 
-  fetchCourse();
-}, [id]);
-
-if (loading) return <p>Loading preview...</p>;
-if (error || !course) return <p className="text-red-600">{error}</p>;
-
-
-  if (!course) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl font-semibold text-red-600">
-          No preview data found
-        </p>
-      </div>
-    );
-  }
+  if (loading) return <p>Loading preview...</p>;
+  if (error || !course)
+    return <p className="text-red-600">{error}</p>;
 
   return (
     <div className="min-h-screen bg-gray-50 py-6">

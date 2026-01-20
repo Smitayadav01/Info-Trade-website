@@ -89,6 +89,17 @@ const Courses = () => {
           >
             <Plus size={18} /> Add Course
           </Link>
+
+  {courses.length > 0 && (
+  <Link
+    to={`/course-preview/${courses[0]._id}`}
+    target="_blank"
+    className="flex items-center gap-2 bg-gray-800 text-white px-5 py-3 rounded-lg"
+  >
+    👁️ View Sample Preview
+  </Link>
+)}
+
         </div>
 
         {error && (
@@ -144,6 +155,14 @@ const Courses = () => {
                     >
                       <Edit2 size={16} /> Edit
                     </Link>
+                    <Link
+  to={`/course-preview/${course._id}`}
+  target="_blank"
+  className="text-green-600 flex items-center gap-1"
+>
+  👁️ Preview
+</Link>
+
                     <button
                       onClick={() => deleteCourse(course._id)}
                       className="text-red-600 flex items-center gap-1"
