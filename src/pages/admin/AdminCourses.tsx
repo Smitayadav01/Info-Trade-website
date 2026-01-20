@@ -165,7 +165,6 @@ const Courses = () => {
                     </Link>
                     <Link
   to={`/course-preview/${course._id}`}
-  target="_blank"
   className="text-green-600 flex items-center gap-1"
 >
   👁️ Preview
