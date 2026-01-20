@@ -25,25 +25,33 @@ const Courses = () => {
 
   // -------- FETCH COURSES ----------
   const fetchCourses = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/courses/admin/all`, // ✅ matches backend
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/courses/admin/all`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
-      if (!response.ok) throw new Error("Failed to fetch courses");
+    if (!response.ok) throw new Error("Failed to fetch courses");
 
-      const data = await response.json();
-      setCourses(data.data);
-      setError(null);
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const data = await response.json();
+
+    // FORCE isActive to true for all courses
+    const activeCourses = data.data.map((course: Course) => ({
+      ...course,
+      isActive: true,
+    }));
+
+    setCourses(activeCourses);
+    setError(null);
+  } catch (err: any) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   // -------- DELETE COURSE ----------
   const deleteCourse = async (id: string) => {

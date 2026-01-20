@@ -39,7 +39,7 @@ const CourseForm = () => {
     features: [""],
     modules: [""],
     faqs: [{ question: "", answer: "" }],
-    isActive: false,
+    isActive: true,
   });
 
   const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ const CourseForm = () => {
       features: json.data.features || [""],
       modules: json.data.modules || [""],
       faqs: json.data.faqs || [{ question: "", answer: "" }],
-      isActive: json.data.isActive ?? false,
+      isActive:true,
     });
   } catch (err: any) {
     setError(err.message);
@@ -331,7 +331,7 @@ const CourseForm = () => {
             </button>
           </div>
 
-          {/* PUBLISH TO USER PAGE */}
+          {/* PUBLISH TO USER PAGE
           <div className="border p-5 rounded-lg bg-gray-50 flex items-center gap-3">
             <input
               type="checkbox"
@@ -343,7 +343,7 @@ const CourseForm = () => {
             <label className="font-medium">
               Show this course on main course page (Publish)
             </label>
-          </div>
+          </div> */}
 
           {/* SUBMIT BUTTON */}
           <button
