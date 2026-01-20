@@ -152,23 +152,24 @@ const CourseForm = () => {
       };
 
       const res = await fetch(
-        id
-          ? `${import.meta.env.VITE_API_URL}/api/courses/${id}`
-          : `${import.meta.env.VITE_API_URL}/api/courses`,
-        {
-          method: id ? "PUT" : "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+  id
+    ? `${import.meta.env.VITE_API_URL}/api/courses/admin/${id}`  // ✅ FIXED
+    : `${import.meta.env.VITE_API_URL}/api/courses`,
+  {
+    method: id ? "PUT" : "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  }
+);
 
       if (!res.ok) throw new Error("Failed to save course");
 
       const data = await res.json();
-      navigate(`/course-preview/${id}`, {
+      navigate("/admin/courses"
+, {
   state: { course: data.data },
 });
     } catch (err: any) {
