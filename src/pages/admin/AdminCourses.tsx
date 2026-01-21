@@ -100,8 +100,7 @@ const Courses = () => {
 
   {courses.length > 0 && (
   <Link
-    to={`/course-preview/${courses[0]._id}`}
-    target="_blank"
+    to={`/course-detail/${courses[0]._id}`}
     className="flex items-center gap-2 bg-gray-800 text-white px-5 py-3 rounded-lg"
   >
     👁️ View Sample Preview
