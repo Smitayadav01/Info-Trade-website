@@ -164,7 +164,7 @@ const Courses = () => {
                       <Edit2 size={16} /> Edit
                     </Link>
                     <Link
-  to={`/course-preview/${course._id}`}
+  to={`/course-detail/${course._id}`}
   className="text-green-600 flex items-center gap-1"
 >
   👁️ Preview

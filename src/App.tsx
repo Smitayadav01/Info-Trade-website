@@ -63,7 +63,7 @@ function App() {
               <Route path="/courses" element={<Courses />} />
               <Route path="/courses/:id" element={<CourseDetail />} />
               <Route path="/subscription" element={<Subscription />} />
-              <Route path="/course-preview/:id" element={<CoursePreview />} />
+              <Route path="/course-detail/:id" element={<CoursePreview />} />
 
 
               {/* LEGAL */}
